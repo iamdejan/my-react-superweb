@@ -65,7 +65,7 @@ function App() {
       <div className="read-the-docs">
         List of links for further learning:
         {referenceList.map(item => (
-          <div key={item.link}><a href={item.link}>{item.text}</a></div>
+          <div key={item.link}><a href={item.link} target="_blank">{item.text}</a></div>
         ))}
       </div>
     </>
