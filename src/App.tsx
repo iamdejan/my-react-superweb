@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if(count % 15 === 0) {
+      console.log(`Current count ${count} is FizzBuzz.`);
+    } else if(count % 5 === 0) {
+      console.log(`Current count ${count} is Buzz.`);
+    } else if(count % 3 === 0) {
+      console.log(`Current count ${count} is Fizz.`);
+    } else {
+      console.log(`Current count: ${count}`);
+    }
+  }, [count]);
 
   return (
     <>
