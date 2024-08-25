@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
+import "./Home.css";
 
 type ReferenceLink = {
   link: string,
@@ -23,7 +23,7 @@ const referenceList: ReferenceLink[] = [
   },
 ];
 
-export default function App(): JSX.Element {
+export default function Home(): JSX.Element {
   const [count, setCount] = useState(1);
   const hasClickedButton = useRef(false);
 
