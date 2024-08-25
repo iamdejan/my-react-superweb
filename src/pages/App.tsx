@@ -23,11 +23,11 @@ const referenceList: ReferenceLink[] = [
   },
 ];
 
-export default function App() {
+export default function App(): JSX.Element {
   const [count, setCount] = useState(1);
   const hasClickedButton = useRef(false);
 
-  function onClick() {
+  function onClick(): void {
     setCount((count) => count+1);
     hasClickedButton.current = true;
   }
