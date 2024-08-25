@@ -28,7 +28,10 @@ export default tseslint.config(
       '@stylistic/js/indent': ['error', 2],
       '@stylistic/js/semi': 'error',
       '@stylistic/js/quotes': ['error', 'double', { "avoidEscape": true }],
-      "@typescript-eslint/explicit-function-return-type": "error"
+      '@stylistic/js/eol-last': 'error',
+      '@stylistic/js/no-multiple-empty-lines': ['error', {"max": 1}],
+      '@stylistic/js/no-tabs': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'error',
     },
   },
 )
