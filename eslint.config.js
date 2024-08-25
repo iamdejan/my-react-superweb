@@ -8,7 +8,7 @@ import stylisticJs from '@stylistic/eslint-plugin-js'
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [js.configs.recommended, ...tseslint.configs.strictTypeChecked],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -27,7 +27,8 @@ export default tseslint.config(
       ],
       '@stylistic/js/indent': ['error', 2],
       '@stylistic/js/semi': 'error',
-      '@stylistic/js/quotes': ['error', 'double', { "avoidEscape": true }]
+      '@stylistic/js/quotes': ['error', 'double', { "avoidEscape": true }],
+      "@typescript-eslint/explicit-function-return-type": "error"
     },
   },
 )
