@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Counter(): JSX.Element {
@@ -9,7 +10,9 @@ export default function Counter(): JSX.Element {
     hasClickedButton.current = true;
   }
 
-  console.log(`Has clicked increment button? ${hasClickedButton.current}`);
+  useEffect(() => {
+    console.log(`Has clicked increment button? ${hasClickedButton.current}`);
+  });
 
   useEffect(() => {
     if(count % 15 === 0) {
@@ -27,13 +30,13 @@ export default function Counter(): JSX.Element {
     <>
       <h1>Counter Page</h1>
       <div className="card">
-        <button onClick={onClick}>
+        <Button variant="outlined" onClick={onClick}>
           count is {count}
-        </button>
+        </Button>
         <p>
-          <button onClick={() => setCount(1)}>
+          <Button variant="outlined" onClick={() => setCount(1)}>
             Reset
-          </button>
+          </Button>
         </p>
       </div>
     </>
