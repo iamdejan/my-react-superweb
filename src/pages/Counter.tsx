@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Counter(): JSX.Element {
@@ -28,17 +28,19 @@ export default function Counter(): JSX.Element {
 
   return (
     <>
-      <h1>Counter Page</h1>
-      <div className="card">
-        <Button variant="outlined" onClick={onClick}>
-          count is {count}
-        </Button>
-        <p>
+      <Typography variant="h3" align="center" marginBottom={3}>Counter Page</Typography>
+      <Grid container maxWidth="xl" spacing={0} direction="column" alignItems="center">
+        <Grid item marginBottom={2}>
+          <Button variant="contained" onClick={onClick}>
+            count is {count}
+          </Button>
+        </Grid>
+        <Grid item>
           <Button variant="outlined" onClick={() => setCount(1)}>
             Reset
           </Button>
-        </p>
-      </div>
+        </Grid>
+      </Grid>
     </>
   );
 }

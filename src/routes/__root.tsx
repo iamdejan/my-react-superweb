@@ -29,7 +29,7 @@ export const Route = createRootRoute({
       <AppBar position="static" sx={{margin:"0", padding:"0"}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             My React Superweb
           </Typography>
           {routeList.map(route => (

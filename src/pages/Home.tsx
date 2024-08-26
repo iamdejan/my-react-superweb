@@ -31,8 +31,8 @@ const referenceList: ReferenceLink[] = [
 
 export default function Home(): JSX.Element {
   return (
-    <Container sx={{ minHeight:"100vh", minWidth:"100%", margin:"0" ,padding:"0" }}>
-      <Typography variant="h5" sx={{my: 2}} align="center">My React Superweb</Typography>
+    <Container sx={{ backgroundColor: "rgba(128,128,128,0.5)", minHeight:"100vh", minWidth:"100%", margin:"0" ,padding:"0" }}>
+      <Typography variant="h5" sx={{py: 2}} align="center">My React Superweb</Typography>
 
       <Typography>
         This is a simple React website to fulfill my utilities, which are:
