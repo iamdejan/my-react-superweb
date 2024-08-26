@@ -1,3 +1,14 @@
+import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
+
+const features: string[] = [
+  "TODO list",
+  "Calculator",
+  "UUID generator",
+  "Kilometer to mile converter",
+  "BMI ideal weight",
+  "Password hasher"
+];
+
 type ReferenceLink = {
   link: string,
   text: string
@@ -20,14 +31,30 @@ const referenceList: ReferenceLink[] = [
 
 export default function Home(): JSX.Element {
   return (
-    <>
-      <h1>My React Superweb</h1>
-      <div className="read-the-docs">
-        List of links for further references:
-        {referenceList.map(item => (
-          <div key={item.link}><a href={item.link} target="_blank">{item.text}</a></div>
+    <Container sx={{ minHeight:"100vh", minWidth:"100%", margin:"0" ,padding:"0" }}>
+      <Typography variant="h5" sx={{my: 2}} align="center">My React Superweb</Typography>
+
+      <Typography>
+        This is a simple React website to fulfill my utilities, which are:
+      </Typography>
+      <List>
+        {features.map(feature => (
+          <ListItem key={feature}>
+            <ListItemText primary={"• "+feature} />
+          </ListItem>
         ))}
-      </div>
-    </>
+      </List>
+
+      <Typography sx={{paddingBottom: 2}}>List of links for further references:</Typography>
+      {referenceList.map(item => (
+        <div key={item.link}>
+          <Link href={item.link}>
+            <Typography sx={{paddingBottom: 1}}>
+              {item.text}
+            </Typography>
+          </Link>
+        </div>
+      ))}
+    </Container>
   );
 }

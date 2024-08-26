@@ -26,14 +26,14 @@ const routeList: RouteLink[] = [
 export const Route = createRootRoute({
   component: () => (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{margin:"0", padding:"0"}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             My React Superweb
           </Typography>
           {routeList.map(route => (
-            <Button variant="text" color="inherit" disableElevation href={route.link}>
+            <Button key={route.link} variant="text" color="inherit" disableElevation href={route.link}>
               {route.title}
             </Button>
           ))}
