@@ -1,21 +1,45 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import AppBar from '@mui/material/AppBar';
+import { Button, Container, Toolbar, Typography } from "@mui/material";
+
+type RouteLink = {
+  link: string,
+  title: string
+};
+
+const routeList: RouteLink[] = [
+  {
+    link: "/",
+    title: "Home"
+  },
+  {
+    link: "/about",
+    title: "About"
+  },
+  {
+    link: "/counter",
+    title: "Counter"
+  }
+];
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div>
-        <Link to="/">
-          Home
-        </Link>{" "}
-        <Link to="/about">
-          About
-        </Link>{" "}
-        <Link to="/counter">
-          Counter
-        </Link>
-      </div>
-      <hr />
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            My React Superweb
+          </Typography>
+          {routeList.map(route => (
+            <Button variant="text" color="inherit" disableElevation href={route.link}>
+              {route.title}
+            </Button>
+          ))}
+          </Toolbar>
+        </Container>
+      </AppBar>
       <Outlet />
       <TanStackRouterDevtools />
     </>
