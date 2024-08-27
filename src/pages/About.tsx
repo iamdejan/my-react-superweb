@@ -1,4 +1,24 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+
+type PaperData = {
+  title: string,
+  text: string
+};
+
+const paperList: PaperData[] = [
+  {
+    title: "Who Am I?",
+    text: "I'm Giovanni Dejan, a backend engineer at a multi-finance company.",
+  },
+  {
+    title: "Why do I learn frontend?",
+    text: "Because I'm bored, that's why. I also want to make myself more marketable in the job market.",
+  },
+  {
+    title: "Who inspired you to learn frontend?",
+    text: "No one, actually. But if there's a trigger, it has to be because of the job market crisis of 2022-2024.",
+  },
+];
 
 export default function About(): JSX.Element {
   return (
@@ -15,10 +35,18 @@ export default function About(): JSX.Element {
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         About This Website
       </Typography>
-      <div>
-        Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper, risus nec tempus tempor, nisi turpis sodales ante, ultricies pellentesque enim orci in quam. Fusce eget quam risus. Etiam vitae diam vitae nibh suscipit sodales. Nunc tincidunt lacus vel magna venenatis, ac ornare enim pellentesque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras vel libero at orci pellentesque posuere vel id sapien. Duis ut porta nibh. Nullam pulvinar, mauris a dapibus sollicitudin, lorem libero pellentesque elit, sit amet consectetur libero neque eu lectus. Curabitur molestie arcu imperdiet sagittis facilisis.
-      </div>
-      {/* TODO: add papers to this page. */}
+      <Grid container maxWidth="100%" rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{xs: 1, sm: 2, md: 3}} alignItems="center" justifyContent="space-evenly">
+        {paperList.map(item => (
+          <Grid key={item.title} item sm={3}>
+            <Paper elevation={4}>
+              <Box p={2}>
+                <Typography variant="h6">{item.title}</Typography>
+                <div>{item.text}</div>
+              </Box>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 }
