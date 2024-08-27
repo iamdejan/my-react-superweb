@@ -1,6 +1,10 @@
 repos:
 - repo: local
   hooks:
+    - id: installdeps
+      name: Install dependencies
+      language: system
+      entry: pnpm run deps
     - id: generateroutes
       name: Generate routes
       language: system

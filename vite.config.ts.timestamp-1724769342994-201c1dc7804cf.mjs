@@ -1,0 +1,14 @@
+// vite.config.ts
+import { defineConfig } from "file:///home/dejan/VSCodeProjects/my-react-superweb/node_modules/.pnpm/vite@5.4.2/node_modules/vite/dist/node/index.js";
+import viteReact from "file:///home/dejan/VSCodeProjects/my-react-superweb/node_modules/.pnpm/@vitejs+plugin-react@4.3.1_vite@5.4.2/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import { TanStackRouterVite } from "file:///home/dejan/VSCodeProjects/my-react-superweb/node_modules/.pnpm/@tanstack+router-plugin@1.51.0_vite@5.4.2/node_modules/@tanstack/router-plugin/dist/esm/vite.js";
+var vite_config_default = defineConfig({
+  plugins: [
+    TanStackRouterVite(),
+    viteReact()
+  ]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvaG9tZS9kZWphbi9WU0NvZGVQcm9qZWN0cy9teS1yZWFjdC1zdXBlcndlYlwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiL2hvbWUvZGVqYW4vVlNDb2RlUHJvamVjdHMvbXktcmVhY3Qtc3VwZXJ3ZWIvdml0ZS5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL2hvbWUvZGVqYW4vVlNDb2RlUHJvamVjdHMvbXktcmVhY3Qtc3VwZXJ3ZWIvdml0ZS5jb25maWcudHNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tIFwidml0ZVwiO1xuaW1wb3J0IHZpdGVSZWFjdCBmcm9tIFwiQHZpdGVqcy9wbHVnaW4tcmVhY3RcIjtcbmltcG9ydCB7IFRhblN0YWNrUm91dGVyVml0ZSB9IGZyb20gXCJAdGFuc3RhY2svcm91dGVyLXBsdWdpbi92aXRlXCI7XG5cbi8vIGh0dHBzOi8vdml0ZWpzLmRldi9jb25maWcvXG5leHBvcnQgZGVmYXVsdCBkZWZpbmVDb25maWcoe1xuICBwbHVnaW5zOiBbXG4gICAgVGFuU3RhY2tSb3V0ZXJWaXRlKCksXG4gICAgdml0ZVJlYWN0KCksXG4gIF0sXG59KTtcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBc1QsU0FBUyxvQkFBb0I7QUFDblYsT0FBTyxlQUFlO0FBQ3RCLFNBQVMsMEJBQTBCO0FBR25DLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzFCLFNBQVM7QUFBQSxJQUNQLG1CQUFtQjtBQUFBLElBQ25CLFVBQVU7QUFBQSxFQUNaO0FBQ0YsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K
