@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000",
-    "build": "tsc -b && vite build",
+    "deps": "rimraf node_modules && pnpm install",
+    "deps:update": "rimraf node_modules && pnpm install && pnpm u --latest",
+    "build": "rimraf build && tsc -b && vite build",
     "lint": "eslint .",
-    "fix-lint": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "generate-routes": "tsr generate",
-    "watch-routes": "tsr watch"
+    "routes:generate": "tsr generate",
+    "routes:watch": "tsr watch"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
