@@ -1,0 +1,15 @@
+repos:
+- repo: local
+  hooks:
+    - id: generateroutes
+      name: Generate routes
+      language: system
+      entry: pnpm run routes:generate
+    - id: runlinter
+      name: Run linter
+      language: system
+      entry: pnpm run lint
+    - id: build
+      name: Build
+      language: system
+      entry: pnpm run build

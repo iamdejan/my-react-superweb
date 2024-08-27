@@ -19,3 +19,4 @@ List of expected features:
     - NPM: `npm i -g rimraf`.
     - PNPM: `pnpm i -g rimraf`.
 3) Install `pnpm` with this command: `npm i -g pnpm`.
+4) Install `pre-commit`: `pip3 install pre-commit`.
