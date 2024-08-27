@@ -31,7 +31,10 @@ export default tseslint.config(
       '@stylistic/js/eol-last': 'error',
       '@stylistic/js/no-multiple-empty-lines': ['error', {"max": 1}],
       '@stylistic/js/no-tabs': 'error',
+      '@typescript-eslint/adjacent-overload-signatures': 'error',
+      '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/no-confusing-non-null-assertion': 'error',
     },
   },
 )
