@@ -37,7 +37,7 @@ export default tseslint.config(
       '@stylistic/js/no-tabs': 'error',
       '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
       '@typescript-eslint/adjacent-overload-signatures': 'error',
-      '@typescript-eslint/array-type': 'error',
+      '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/no-confusing-non-null-assertion': 'error',
     },
