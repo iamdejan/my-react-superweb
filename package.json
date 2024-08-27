@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000",
-    "build": "tsc -b && vite build",
+    "deps": "rimraf node_modules && pnpm install",
+    "deps:update": "rimraf node_modules && pnpm install && pnpm update --latest",
+    "build": "rimraf dist && tsc -b && vite build",
     "lint": "eslint .",
-    "fix-lint": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "generate-routes": "tsr generate",
-    "watch-routes": "tsr watch"
+    "routes:generate": "tsr generate",
+    "routes:watch": "tsr watch"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -33,11 +35,11 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.1",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
-    "eslint-plugin-react-refresh": "^0.4.9",
+    "eslint-plugin-react-hooks": "5.1.0-rc-fb9a90fa48-20240614",
+    "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.3.0",
-    "vite": "^5.4.1"
+    "vite": "^5.4.2"
   }
 }

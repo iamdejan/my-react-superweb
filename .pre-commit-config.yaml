@@ -1,0 +1,23 @@
+repos:
+- repo: local
+  hooks:
+    - id: installdeps
+      name: Install dependencies
+      language: system
+      entry: pnpm run deps
+      pass_filenames: false
+    - id: generateroutes
+      name: Generate routes
+      language: system
+      entry: pnpm run routes:generate
+      pass_filenames: false
+    - id: runlinter
+      name: Run linter
+      language: system
+      entry: pnpm run lint
+      pass_filenames: false
+    - id: build
+      name: Build
+      language: system
+      entry: pnpm run build
+      pass_filenames: false
