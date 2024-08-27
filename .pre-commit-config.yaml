@@ -5,19 +5,19 @@ repos:
       name: Install dependencies
       language: system
       entry: pnpm run deps
-      always_run: true
+      pass_filenames: false
     - id: generateroutes
       name: Generate routes
       language: system
       entry: pnpm run routes:generate
-      always_run: true
+      pass_filenames: false
     - id: runlinter
       name: Run linter
       language: system
       entry: pnpm run lint
-      always_run: true
+      pass_filenames: false
     - id: build
       name: Build
       language: system
       entry: pnpm run build
-      always_run: true
+      pass_filenames: false
