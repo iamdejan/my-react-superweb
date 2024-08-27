@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Counter(): JSX.Element {
@@ -27,8 +27,15 @@ export default function Counter(): JSX.Element {
   }, [count]);
 
   return (
-    <>
-      <Typography variant="h3" align="center" marginBottom={3}>Counter Page</Typography>
+    <Container sx={{
+      backgroundColor: "rgb(255,255,255)",
+      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(220,255,254,1) 100%)",
+      minHeight:"100vh",
+      minWidth:"100%",
+      margin:"0",
+      padding:"0",
+    }}>
+      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter Page</Typography>
       <Grid container maxWidth="xl" spacing={0} direction="column" alignItems="center">
         <Grid item marginBottom={2}>
           <Button variant="contained" onClick={onClick}>
@@ -41,6 +48,6 @@ export default function Counter(): JSX.Element {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Container>
   );
 }
