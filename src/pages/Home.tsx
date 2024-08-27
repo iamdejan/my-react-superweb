@@ -1,7 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./Home.css";
+import { JSX } from "react";
+import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
+
+const features: string[] = [
+  "TODO list",
+  "Calculator",
+  "UUID generator",
+  "Kilometer to mile converter",
+  "BMI ideal weight",
+  "Password hasher"
+];
 
 type ReferenceLink = {
   link: string,
@@ -24,58 +31,38 @@ const referenceList: ReferenceLink[] = [
 ];
 
 export default function Home(): JSX.Element {
-  const [count, setCount] = useState(1);
-  const hasClickedButton = useRef(false);
-
-  function onClick(): void {
-    setCount((count) => count+1);
-    hasClickedButton.current = true;
-  }
-
-  console.log(`Has clicked increment button? ${hasClickedButton.current}`);
-
-  useEffect(() => {
-    if(count % 15 === 0) {
-      console.log(`Current count ${count} is FizzBuzz.`);
-    } else if(count % 5 === 0) {
-      console.log(`Current count ${count} is Buzz.`);
-    } else if(count % 3 === 0) {
-      console.log(`Current count ${count} is Fizz.`);
-    } else {
-      console.log(`Current count: ${count}`);
-    }
-  }, [count]);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={onClick}>
-          count is {count}
-        </button>
-        <p>
-          <button onClick={() => setCount(1)}>
-            Reset
-          </button>
-        </p>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <div className="read-the-docs">
-        List of links for further learning:
-        {referenceList.map(item => (
-          <div key={item.link}><a href={item.link} target="_blank">{item.text}</a></div>
+    <Container sx={{
+      backgroundColor: "rgb(255,255,255)",
+      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,243,250,1) 100%)",
+      minHeight:"100vh",
+      minWidth:"100%",
+      margin:"0",
+      padding:"0",
+    }}>
+      <Typography variant="h4" paddingY={2} align="center">My React Superweb</Typography>
+
+      <Typography>
+        This is a simple React website to fulfill my utilities, which are:
+      </Typography>
+      <List>
+        {features.map(feature => (
+          <ListItem key={feature}>
+            <ListItemText primary={"• "+feature} />
+          </ListItem>
         ))}
-      </div>
-    </>
+      </List>
+
+      <Typography sx={{paddingBottom: 2}}>List of links for further references:</Typography>
+      {referenceList.map(item => (
+        <div key={item.link}>
+          <Link href={item.link}>
+            <Typography sx={{paddingBottom: 1}}>
+              {item.text}
+            </Typography>
+          </Link>
+        </div>
+      ))}
+    </Container>
   );
 }
