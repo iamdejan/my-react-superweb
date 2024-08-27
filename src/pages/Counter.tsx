@@ -36,7 +36,7 @@ export default function Counter(): JSX.Element {
       padding:"0",
     }}>
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter Page</Typography>
-      <Grid container maxWidth="xl" spacing={0} direction="column" alignItems="center">
+      <Grid container maxWidth="100%" spacing={0} direction="column" alignItems="center">
         <Grid item marginBottom={2}>
           <Button variant="contained" onClick={onClick}>
             count is {count}
