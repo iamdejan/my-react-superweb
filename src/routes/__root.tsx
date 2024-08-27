@@ -30,7 +30,7 @@ export const Route = createRootRoute({
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              My React Superweb
+              <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
             </Typography>
             {routeList.map(route => (
               <Button key={route.link} variant="text" color="inherit" disableElevation href={route.link}>

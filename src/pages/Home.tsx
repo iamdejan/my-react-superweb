@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
 
 const features: string[] = [

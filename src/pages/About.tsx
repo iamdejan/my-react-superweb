@@ -1,3 +1,4 @@
+import { JSX } from "react";
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 
 type PaperData = {
