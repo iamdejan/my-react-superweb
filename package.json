@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --port=3000",
     "deps": "rimraf node_modules && pnpm install",
-    "deps:update": "rimraf node_modules && pnpm install && pnpm u --latest",
+    "deps:update": "rimraf node_modules && pnpm install && pnpm update --latest",
     "build": "rimraf build && tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
