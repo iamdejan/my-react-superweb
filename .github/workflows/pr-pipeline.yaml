@@ -19,5 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
           check-latest: false
+      - name: Install PNPM
+        run: 'npm i -g pnpm@9.9.0'
       - name: Pre-commit
         uses: pre-commit/action@v3.0.0
