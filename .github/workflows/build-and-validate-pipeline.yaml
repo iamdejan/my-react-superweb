@@ -1,11 +1,14 @@
-name: PR pipeline
+name: Build and Validate
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  pr_pipeline:
+  build_and_validate_pipeline:
     strategy:
       matrix:
         os: ['ubuntu-22.04', 'ubuntu-24.04']
