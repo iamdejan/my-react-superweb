@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  build_and_validate_pipeline:
+  pipeline:
     strategy:
       matrix:
         os: ['ubuntu-22.04', 'ubuntu-24.04']
@@ -22,10 +22,6 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
           check-latest: false
-      - name: Install pnpm
-        run: 'npm i -g pnpm@9.9.0'
-      - name: Install rimraf
-        run: 'npm i -g rimraf@6.0.1'
       - name: Setup Python 3
         uses: actions/setup-python@v3
       - name: Pre-commit

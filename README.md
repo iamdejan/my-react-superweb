@@ -26,8 +26,10 @@ List of expected features:
 
 We have to install `pre-commit`, as well as setting up the hook so that it can be executed by `git`.
 
-1) Install `pre-commit`: `pip3 install pre-commit`
-2) Ensure that the steps from the file `.pre-commit-config.yaml` are executed **before pushing** the code: `pre-commit install --hook-type pre-commit --hook-type pre-push`
+1) Install `pre-commit`:
+    - Homebrew: `brew install pre-commit`
+    - PIP: `pip3 install pre-commit`
+2) Ensure that the steps from the file `.pre-commit-config.yaml` are executed **before pushing** the code: `pre-commit install --hook-type pre-push`
     - You can change the hook type based on `pre-commit` documentation [here](https://pre-commit.com/#supported-git-hooks).
 
 Why we don't use `husky`? Because, in my opinion, `pre-commit` is easy enough to setup compared to `husky`. All I need to do before pushing the code is to run some validation commands (linter, build, etc.). `pre-commit` makes it easy to automate those validation commands.
