@@ -2,7 +2,7 @@ import { JSX } from "react";
 import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
 
 const features: string[] = [
-  "TODO list",
+  "To-do list",
   "Calculator",
   "UUID generator",
   "Kilometer to mile converter",
