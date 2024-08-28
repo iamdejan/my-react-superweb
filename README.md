@@ -3,8 +3,8 @@
 A dummy project for me to learn React.
 
 List of expected features:
-- calculator
 - to-do list
+- calculator
 - kilometer to mile converter
 - BMI ideal weight
     - See https://bmisite.net/ideal-weight/168cm for reference.
