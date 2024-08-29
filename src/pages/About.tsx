@@ -38,7 +38,7 @@ export default function About(): JSX.Element {
       </Typography>
       <Grid container maxWidth="100%" rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{xs: 1, sm: 2, md: 3}} alignItems="center" justifyContent="space-evenly">
         {paperList.map(item => (
-          <Grid key={item.title} sm={3}>
+          <Grid key={item.title} item sm={3}>
             <Paper elevation={4}>
               <Box p={2}>
                 <Typography variant="h6">{item.title}</Typography>
