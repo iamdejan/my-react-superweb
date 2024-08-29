@@ -1,16 +1,19 @@
-import { Alert, AlertTitle, Container, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
 import { TodoItem, TodoItemSchema } from "../schema/todo-item";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function ToDoList(): JSX.Element {
-  const { register, handleSubmit, formState: {errors} } = useForm<TodoItem>({
+  const { register, handleSubmit, formState: { errors } } = useForm<TodoItem>({
     resolver: zodResolver(TodoItemSchema),
+    mode: "all",
   });
+  const [todoList, setTodoList] = useLocalStorage<TodoItem[]>("todoList", []);
 
   function onSubmit(data: TodoItem): void {
-    console.log(data);
+    setTodoList([...todoList, data]);
   }
 
   return (
@@ -37,17 +40,16 @@ export default function ToDoList(): JSX.Element {
         event.preventDefault();
         void handleSubmit(onSubmit)(event);
       }}>
-        <div>
-          <input {...register("title")} type="text" placeholder="Title" />
-          {errors.title && <span>{errors.title.message}</span>}
-        </div>
+        <Typography variant="h6" align="center" marginTop={3}>
+          Form
+        </Typography>
 
-        <div>
-          <input {...register("description")} type="text" placeholder="Description" />
-          {errors.description && <span>{errors.description.message}</span>}
-        </div>
+        <Stack marginY={4} gap={4}>
+          <TextField {...register("title")} label="Title" error={!!errors.title} helperText={errors.title?.message} />
+          <TextField {...register("description")} label="Description" error={!!errors.description} helperText={errors.description?.message} />
+        </Stack>
 
-        <button type="submit">Add</button>
+        <Button type="submit" variant="contained">Add</Button>
       </form>
     </Container>
   );
