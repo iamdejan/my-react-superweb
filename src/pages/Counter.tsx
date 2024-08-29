@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 export default function Counter(): JSX.Element {
@@ -37,18 +37,14 @@ export default function Counter(): JSX.Element {
       padding:"0",
     }}>
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter Page</Typography>
-      <Grid container maxWidth="100%" spacing={0} direction="column" alignItems="center">
-        <Grid item marginBottom={2}>
-          <Button variant="contained" onClick={onClick}>
-            count is {count}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button variant="outlined" onClick={() => setCount(1)}>
-            Reset
-          </Button>
-        </Grid>
-      </Grid>
+      <Stack gap={2} alignItems="center">
+        <Button variant="contained" onClick={onClick}>
+          count is {count}
+        </Button>
+        <Button variant="outlined" onClick={() => setCount(1)}>
+          Reset
+        </Button>
+      </Stack>
     </Container>
   );
 }
