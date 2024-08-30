@@ -25,8 +25,8 @@ export default function ToDoList(): JSX.Element {
 
   return (
     <Container sx={{
-      backgroundColor: "rgb(255,255,255)",
-      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(234,255,234,1) 100%)",
+      backgroundColor: "rgba(230,230,230,1)",
+      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
       minHeight:"100vh",
       minWidth:"100%",
       margin:"0",
@@ -35,29 +35,52 @@ export default function ToDoList(): JSX.Element {
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         To-Do List
       </Typography>
-      <Alert severity="warning" variant="filled">
+      <Alert severity="warning" variant="filled" sx={{marginX: "auto", maxWidth: "40%"}}>
         <AlertTitle>Be Aware</AlertTitle>
         This to-do list stores the list of to-do activities locally.
         Currently, there's no plan to integrate this feature with database.
       </Alert>
 
+      {/* recommended approach without editing `eslint.config.js`
+      ref: https://github.com/orgs/react-hook-form/discussions/8622#discussioncomment-6305393 */}
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        void handleSubmit(onSubmit)(event);
+      }}>
+        <Stack
+          gap={4}
+          marginTop={3}
+          marginX="auto"
+          padding={2}
+          justifyContent="space-evenly"
+          maxWidth="40%"
+          elevation={2}
+          component={Paper}
+        >
+          <Typography variant="h6" align="center">
+            Form
+          </Typography>
+          <TextField {...register("title")} label="Title" error={!!errors.title} helperText={errors.title?.message} />
+          <TextField {...register("description")} label="Description" error={!!errors.description} helperText={errors.description?.message} />
+          <Button type="submit" variant="contained">Add</Button>
+        </Stack>
+      </form>
+
       <Typography variant="h6" align="center" marginTop={3}>
         To-do List
       </Typography>
-      <TableContainer component={Paper} sx={{marginTop: 3}}>
-        <Table>
+      <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh"}}>
+        <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>No.</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Is completed?</TableCell>
+              <TableCell width="22%">Title</TableCell>
+              <TableCell width="70%">Description</TableCell>
+              <TableCell width="8%">Is completed?</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {todoList.map((todoItem, index) => (
               <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
                 <TableCell>{todoItem.title}</TableCell>
                 <TableCell>{todoItem.description}</TableCell>
                 <TableCell><Checkbox name={index.toString()} checked={todoItem.completed} onChange={onCheckChanged} /></TableCell>
@@ -66,24 +89,6 @@ export default function ToDoList(): JSX.Element {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* recommended approach without editing `eslint.config.js`
-      ref: https://github.com/orgs/react-hook-form/discussions/8622#discussioncomment-6305393 */}
-      <form onSubmit={(event) => {
-        event.preventDefault();
-        void handleSubmit(onSubmit)(event);
-      }}>
-        <Typography variant="h6" align="center" marginTop={3}>
-          Form
-        </Typography>
-
-        <Stack marginY={4} gap={4}>
-          <TextField {...register("title")} label="Title" error={!!errors.title} helperText={errors.title?.message} />
-          <TextField {...register("description")} label="Description" error={!!errors.description} helperText={errors.description?.message} />
-        </Stack>
-
-        <Button type="submit" variant="contained">Add</Button>
-      </form>
     </Container>
   );
 }
