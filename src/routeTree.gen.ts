@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const ToDoListLazyImport = createFileRoute('/to-do-list')()
+const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
@@ -27,6 +28,13 @@ const ToDoListLazyRoute = ToDoListLazyImport.update({
   path: '/to-do-list',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/to-do-list.lazy').then((d) => d.Route))
+
+const DistanceCalculatorLazyRoute = DistanceCalculatorLazyImport.update({
+  path: '/distance-calculator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/distance-calculator.lazy').then((d) => d.Route),
+)
 
 const CounterLazyRoute = CounterLazyImport.update({
   path: '/counter',
@@ -68,6 +76,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CounterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/distance-calculator': {
+      id: '/distance-calculator'
+      path: '/distance-calculator'
+      fullPath: '/distance-calculator'
+      preLoaderRoute: typeof DistanceCalculatorLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/to-do-list': {
       id: '/to-do-list'
       path: '/to-do-list'
@@ -84,6 +99,7 @@ export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   AboutLazyRoute,
   CounterLazyRoute,
+  DistanceCalculatorLazyRoute,
   ToDoListLazyRoute,
 })
 
@@ -98,6 +114,7 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/about",
         "/counter",
+        "/distance-calculator",
         "/to-do-list"
       ]
     },
@@ -109,6 +126,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/counter": {
       "filePath": "counter.lazy.tsx"
+    },
+    "/distance-calculator": {
+      "filePath": "distance-calculator.lazy.tsx"
     },
     "/to-do-list": {
       "filePath": "to-do-list.lazy.tsx"
