@@ -16,6 +16,13 @@ export default function ToDoList(): JSX.Element {
     setTodoList([...todoList, data]);
   }
 
+  function onCheckChanged(event: React.ChangeEvent<HTMLInputElement>): void {
+    const checked = event.target.checked;
+    const index = Number.parseInt(event.target.name);
+    todoList[index].completed = checked;
+    setTodoList([...todoList]);
+  }
+
   return (
     <Container sx={{
       backgroundColor: "rgb(255,255,255)",
@@ -53,7 +60,7 @@ export default function ToDoList(): JSX.Element {
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{todoItem.title}</TableCell>
                 <TableCell>{todoItem.description}</TableCell>
-                <TableCell><Checkbox checked={todoItem.completed} /></TableCell>
+                <TableCell><Checkbox name={index.toString()} checked={todoItem.completed} onChange={onCheckChanged} /></TableCell>
               </TableRow>
             ))}
           </TableBody>
