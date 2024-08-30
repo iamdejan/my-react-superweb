@@ -50,7 +50,7 @@ export default function DistanceCalculator(): JSX.Element {
         break;
       }
       }
-    } catch(e) {
+    } catch(e: unknown) {
       console.log(e);
     }
   }, [selection, kilometerInput, mileInput, nauticalMileInput]);
