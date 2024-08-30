@@ -16,11 +16,17 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const ToDoListLazyImport = createFileRoute('/to-do-list')()
 const CounterLazyImport = createFileRoute('/counter')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const ToDoListLazyRoute = ToDoListLazyImport.update({
+  path: '/to-do-list',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/to-do-list.lazy').then((d) => d.Route))
 
 const CounterLazyRoute = CounterLazyImport.update({
   path: '/counter',
@@ -62,6 +68,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CounterLazyImport
       parentRoute: typeof rootRoute
     }
+    '/to-do-list': {
+      id: '/to-do-list'
+      path: '/to-do-list'
+      fullPath: '/to-do-list'
+      preLoaderRoute: typeof ToDoListLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -71,6 +84,7 @@ export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   AboutLazyRoute,
   CounterLazyRoute,
+  ToDoListLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -83,7 +97,8 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/about",
-        "/counter"
+        "/counter",
+        "/to-do-list"
       ]
     },
     "/": {
@@ -94,6 +109,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/counter": {
       "filePath": "counter.lazy.tsx"
+    },
+    "/to-do-list": {
+      "filePath": "to-do-list.lazy.tsx"
     }
   }
 }

@@ -33,8 +33,8 @@ const referenceList: ReferenceLink[] = [
 export default function Home(): JSX.Element {
   return (
     <Container sx={{
-      backgroundColor: "rgb(255,255,255)",
-      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,243,250,1) 100%)",
+      backgroundColor: "rgba(230,230,230,1)",
+      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
       minHeight:"100vh",
       minWidth:"100%",
       margin:"0",
