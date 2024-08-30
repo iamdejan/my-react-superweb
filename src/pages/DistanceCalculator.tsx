@@ -30,7 +30,7 @@ export default function DistanceCalculator(): JSX.Element {
         }
 
         const parsedNumber = Number.parseFloat(mileInput);
-        setKilometerInput((1.609 * parsedNumber).toPrecision(6));
+        setKilometerInput((1.609344 * parsedNumber).toPrecision(6));
         setNauticalMileInput((0.868976242 * parsedNumber).toPrecision(6));
         break;
       }
