@@ -36,7 +36,7 @@ export default function Home(): JSX.Element {
       backgroundColor: "rgba(230,230,230,1)",
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
       minHeight:"100vh",
-      minWidth:"100%",
+      minWidth:"100vw",
       margin:"0",
       padding:"0",
     }}>

@@ -19,7 +19,7 @@ const routeList: RouteLink[] = [
   },
   {
     link: "/counter",
-    title: "Simple React Demo"
+    title: "Counter"
   },
   {
     link: "/to-do-list",
@@ -28,7 +28,11 @@ const routeList: RouteLink[] = [
   {
     link: "/distance-calculator",
     title: "Distance Calculator"
-  }
+  },
+  {
+    link: "/uuid-generator",
+    title: "UUID Generator"
+  },
 ];
 
 export const Route = createRootRoute({
