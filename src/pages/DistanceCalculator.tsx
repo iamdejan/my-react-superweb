@@ -1,6 +1,8 @@
-import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { Container, FormControl, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
 import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 export default function DistanceCalculator(): JSX.Element {
   const {
@@ -13,6 +15,7 @@ export default function DistanceCalculator(): JSX.Element {
     selection,
     setSelection
   } = useDistanceCalculator();
+  const [, copyToClipboard] = useCopyToClipboard();
 
   function onChangedUnit(event: React.ChangeEvent<HTMLInputElement>): void {
     const distanceUnit = event.target.value as DistanceUnit;
@@ -66,40 +69,85 @@ export default function DistanceCalculator(): JSX.Element {
         </FormControl>
       </Container>
 
-      <Stack gap={2} maxWidth="60%" marginX="auto">
+      <Stack gap={2} maxWidth="60vw" marginX="auto">
         <Typography variant="h6" align="center" marginTop={3}>
           Values
         </Typography>
-        <TextField
-          name={DistanceUnit.Kilometer.toString()}
-          label="Kilometer"
-          disabled={selection !== DistanceUnit.Kilometer}
-          value={kilometerInput}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.preventDefault();
-            setKilometerInput(event.target.value);
-          }}
-        />
-        <TextField
-          name={DistanceUnit.Mile.toString()}
-          label="Mile"
-          disabled={selection !== DistanceUnit.Mile}
-          value={mileInput}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.preventDefault();
-            setMileInput(event.target.value);
-          }}
-        />
-        <TextField
-          name={DistanceUnit.NauticalMile.toString()}
-          label="Nautical Mile"
-          disabled={selection !== DistanceUnit.NauticalMile}
-          value={nauticalMileInput}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.preventDefault();
-            setNauticalMileInput(event.target.value);
-          }}
-        />
+        <Stack direction="row" justifyContent="space-evenly">
+          <TextField
+            name={DistanceUnit.Kilometer.toString()}
+            label="Kilometer"
+            disabled={selection !== DistanceUnit.Kilometer}
+            value={kilometerInput}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              event.preventDefault();
+              setKilometerInput(event.target.value);
+            }}
+            sx={{
+              flexGrow: 1
+            }}
+          />
+          <IconButton
+            size="medium"
+            sx={{
+              maxWidth: "5vw",
+              flexGrow: 1
+            }}
+            onClick={() => void copyToClipboard(kilometerInput)}
+          >
+            <ContentCopyIcon />
+          </IconButton>
+        </Stack>
+        <Stack direction="row" justifyContent="space-evenly">
+          <TextField
+            name={DistanceUnit.Mile.toString()}
+            label="Mile"
+            disabled={selection !== DistanceUnit.Mile}
+            value={mileInput}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              event.preventDefault();
+              setMileInput(event.target.value);
+            }}
+            sx={{
+              flexGrow: 2
+            }}
+          />
+          <IconButton
+            size="medium"
+            sx={{
+              maxWidth: "5vw",
+              flexGrow: 1
+            }}
+            onClick={() => void copyToClipboard(mileInput)}
+          >
+            <ContentCopyIcon />
+          </IconButton>
+        </Stack>
+        <Stack direction="row" justifyContent="space-evenly">
+          <TextField
+            name={DistanceUnit.NauticalMile.toString()}
+            label="Nautical Mile"
+            disabled={selection !== DistanceUnit.NauticalMile}
+            value={nauticalMileInput}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              event.preventDefault();
+              setNauticalMileInput(event.target.value);
+            }}
+            sx={{
+              flexGrow: 2
+            }}
+          />
+          <IconButton
+            size="medium"
+            sx={{
+              maxWidth: "5vw",
+              flexGrow: 1
+            }}
+            onClick={() => void copyToClipboard(nauticalMileInput)}
+          >
+            <ContentCopyIcon />
+          </IconButton>
+        </Stack>
       </Stack>
     </Container>
   );
