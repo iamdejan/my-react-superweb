@@ -1,8 +1,7 @@
-import { Container, FormControl, FormControlLabel, IconButton, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
 import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { useCopyToClipboard } from "@uidotdev/usehooks";
+import CopyToClipboard from "../components/CopyToClipboardButton";
 
 export default function DistanceCalculator(): JSX.Element {
   const {
@@ -15,7 +14,6 @@ export default function DistanceCalculator(): JSX.Element {
     selection,
     setSelection
   } = useDistanceCalculator();
-  const [, copyToClipboard] = useCopyToClipboard();
 
   function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
     const distanceUnit = event.target.value as DistanceUnit;
@@ -87,16 +85,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 1
             }}
           />
-          <IconButton
-            size="medium"
-            sx={{
-              maxWidth: "5vw",
-              flexGrow: 1
-            }}
-            onClick={() => void copyToClipboard(kilometerInput)}
-          >
-            <ContentCopyIcon />
-          </IconButton>
+          <CopyToClipboard input={kilometerInput} />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
           <TextField
@@ -112,16 +101,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 2
             }}
           />
-          <IconButton
-            size="medium"
-            sx={{
-              maxWidth: "5vw",
-              flexGrow: 1
-            }}
-            onClick={() => void copyToClipboard(mileInput)}
-          >
-            <ContentCopyIcon />
-          </IconButton>
+          <CopyToClipboard input={mileInput} />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
           <TextField
@@ -137,16 +117,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 2
             }}
           />
-          <IconButton
-            size="medium"
-            sx={{
-              maxWidth: "5vw",
-              flexGrow: 1
-            }}
-            onClick={() => void copyToClipboard(nauticalMileInput)}
-          >
-            <ContentCopyIcon />
-          </IconButton>
+          <CopyToClipboard input={nauticalMileInput} />
         </Stack>
       </Stack>
     </Container>

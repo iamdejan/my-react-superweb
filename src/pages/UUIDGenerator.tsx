@@ -1,8 +1,5 @@
-import { Alert, Button, Container, Paper, Slider, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import React, { JSX, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { MultiUUIDGenForm, MultiUUIDGenFormSchema } from "../schema/MultipleUUIDGenerationSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const maxCount = 30;
 
@@ -10,19 +7,10 @@ export default function UUIDGenerator(): JSX.Element {
   const [count, setCount] = useState<number>(0);
   const [uuid, setUUID] = useState<string>("");
   const [uuidList, setUUIDList] = useState<string[]>([]);
-  const { register, handleSubmit, formState: { errors }} = useForm<MultiUUIDGenForm>({
-    resolver: zodResolver(MultiUUIDGenFormSchema),
-    mode: "all"
-  });
 
   useEffect(() => {
     setUUID(crypto.randomUUID());
   }, []);
-
-  useEffect(() => {
-    console.log(count);
-    console.log(uuidList);
-  }, [count, uuidList]);
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setCount(value as number);
@@ -36,10 +24,9 @@ export default function UUIDGenerator(): JSX.Element {
     setCount(Number.parseInt(event.target.value));
   }
 
-  function onSubmit(data: MultiUUIDGenForm): void {
-    console.log("data = ", data);
+  function onClick(): void {
     const generatedUUIDs: string[] = [];
-    for(let i = 1; i <= data.count; i++) {
+    for(let i = 1; i <= count; i++) {
       generatedUUIDs.push(crypto.randomUUID());
     }
     setUUIDList(generatedUUIDs);
@@ -76,36 +63,45 @@ export default function UUIDGenerator(): JSX.Element {
           Refresh page to generate new UUID value.
         </Alert>
       </Stack>
-      <form onSubmit={(event) => {
-        event.preventDefault();
-        void handleSubmit(onSubmit)(event);
-      }}>
-        <Stack
-          gap={3}
-          sx={{
-            maxWidth: "50vw",
-            marginX: "auto",
-          }}
-        >
-          <Typography variant="h5" textAlign="center" marginTop={10}>
-            Or, generate multiple UUIDs at the same time
-          </Typography>
-          <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
-            <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxCount} />
-            <TextField
-              {...register("count")}
-              label="Count"
-              value={count}
-              onChange={handleInputUpdate}
-              error={!!errors.count}
-              helperText={!!errors.count && errors.count.message}
-            />
-          </Stack>
-          <Button variant="contained" sx={{ marginX: "auto" }} type="submit">
-            Generate
-          </Button>
+      <Stack
+        gap={3}
+        sx={{
+          maxWidth: "50vw",
+          marginX: "auto",
+        }}
+      >
+        <Typography variant="h5" textAlign="center" marginTop={10}>
+          Or, generate multiple UUIDs at the same time
+        </Typography>
+        <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
+          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxCount} />
+          <TextField
+            label="Count"
+            value={count}
+            onChange={handleInputUpdate}
+          />
         </Stack>
-      </form>
+        <Button variant="contained" sx={{ marginX: "auto" }} type="button" onClick={onClick}>
+          Generate
+        </Button>
+
+        <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh", maxWidth: "30vw", marginX: "auto"}}>
+          <Table stickyHeader size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ textAlign: "center", fontWeight: "650" }}>UUID</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {uuidList.map((uuidValue, index) => (
+                <TableRow key={index}>
+                  <TableCell>{uuidValue}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Stack>
     </Container>
   );
 }
