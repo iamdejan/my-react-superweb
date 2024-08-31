@@ -1,62 +1,24 @@
 import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
-import React, { JSX, useEffect, useState } from "react";
+import React, { JSX } from "react";
+import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
 
 export default function DistanceCalculator(): JSX.Element {
-  const [kilometerInput, setKilometerInput] = useState<string>("");
-  const [mileInput, setMileInput] = useState<string>("");
-  const [nauticalMileInput, setNauticalMileInput] = useState<string>("");
-  const [selection, setSelection] = useState<string>("");
-
-  useEffect(() => {
-    try {
-      switch(selection) {
-      case "kilometer": {
-        if(kilometerInput === "") {
-          setMileInput("");
-          setNauticalMileInput("");
-          break;
-        }
-    
-        const parsedNumber = Number.parseFloat(kilometerInput);
-        setMileInput((0.62 * parsedNumber).toPrecision(6));
-        setNauticalMileInput((0.539957 * parsedNumber).toPrecision(6));
-        break;
-      }
-      case "mile": {
-        if(mileInput === "") {
-          setKilometerInput("");
-          setNauticalMileInput("");
-          break;
-        }
-
-        const parsedNumber = Number.parseFloat(mileInput);
-        setKilometerInput((1.609344 * parsedNumber).toPrecision(6));
-        setNauticalMileInput((0.868976242 * parsedNumber).toPrecision(6));
-        break;
-      }
-      case "nauticalMile": {
-        if(nauticalMileInput === "") {
-          setKilometerInput("");
-          setMileInput("");
-          break;
-        }
-
-        const parsedNumber = Number.parseFloat(nauticalMileInput);
-        setKilometerInput((1.852 * parsedNumber).toPrecision(6));
-        setMileInput((1.15077945 * parsedNumber).toPrecision(6));
-        break;
-      }
-      default: {
-        break;
-      }
-      }
-    } catch(e: unknown) {
-      console.log(e);
-    }
-  }, [selection, kilometerInput, mileInput, nauticalMileInput]);
+  const {
+    kilometerInput,
+    setKilometerInput,
+    mileInput,
+    setMileInput,
+    nauticalMileInput,
+    setNauticalMileInput,
+    selection,
+    setSelection
+  } = useDistanceCalculator();
 
   function onChangedUnit(event: React.ChangeEvent<HTMLInputElement>): void {
-    setSelection(event.target.value);
+    const distanceUnit = event.target.value as DistanceUnit;
+    setSelection(distanceUnit);
+
+    // reset all fields
     setKilometerInput("");
     setMileInput("");
     setNauticalMileInput("");
@@ -82,9 +44,24 @@ export default function DistanceCalculator(): JSX.Element {
             Chosen unit for input
           </Typography>
           <RadioGroup onChange={onChangedUnit}>
-            <FormControlLabel value="kilometer" control={<Radio />} label="Kilometer" />
-            <FormControlLabel value="mile" control={<Radio />} label="Mile" />
-            <FormControlLabel value="nauticalMile" control={<Radio />} label="Nautical mile" />
+            <FormControlLabel
+              value={DistanceUnit.Kilometer.toString()}
+              checked={selection === DistanceUnit.Kilometer}
+              control={<Radio />} 
+              label="Kilometer"
+            />
+            <FormControlLabel 
+              value={DistanceUnit.Mile.toString()}
+              checked={selection === DistanceUnit.Mile}
+              control={<Radio />}
+              label="Mile"
+            />
+            <FormControlLabel
+              value={DistanceUnit.NauticalMile.toString()}
+              checked={selection === DistanceUnit.NauticalMile}
+              control={<Radio />}
+              label="Nautical mile"
+            />
           </RadioGroup>
         </FormControl>
       </Container>
@@ -94,9 +71,9 @@ export default function DistanceCalculator(): JSX.Element {
           Values
         </Typography>
         <TextField
-          name="kilometer"
+          name={DistanceUnit.Kilometer.toString()}
           label="Kilometer"
-          disabled={selection !== "kilometer"}
+          disabled={selection !== DistanceUnit.Kilometer}
           value={kilometerInput}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             event.preventDefault();
@@ -104,9 +81,9 @@ export default function DistanceCalculator(): JSX.Element {
           }}
         />
         <TextField
-          name="mile"
+          name={DistanceUnit.Mile.toString()}
           label="Mile"
-          disabled={selection !== "mile"}
+          disabled={selection !== DistanceUnit.Mile}
           value={mileInput}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             event.preventDefault();
@@ -114,9 +91,9 @@ export default function DistanceCalculator(): JSX.Element {
           }}
         />
         <TextField
-          name="nauticalMile"
+          name={DistanceUnit.NauticalMile.toString()}
           label="Nautical Mile"
-          disabled={selection !== "nauticalMile"}
+          disabled={selection !== DistanceUnit.NauticalMile}
           value={nauticalMileInput}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             event.preventDefault();
