@@ -17,11 +17,11 @@ export default function DistanceCalculator(): JSX.Element {
   } = useDistanceCalculator();
   const [, copyToClipboard] = useCopyToClipboard();
 
-  function onChangedUnit(event: React.ChangeEvent<HTMLInputElement>): void {
+  function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
     const distanceUnit = event.target.value as DistanceUnit;
     setSelection(distanceUnit);
 
-    // reset all fields
+    // reset all fields to prevent infinite render bug
     setKilometerInput("");
     setMileInput("");
     setNauticalMileInput("");
@@ -46,7 +46,7 @@ export default function DistanceCalculator(): JSX.Element {
           <Typography variant="h6" align="center" marginTop={3}>
             Chosen unit for input
           </Typography>
-          <RadioGroup onChange={onChangedUnit}>
+          <RadioGroup onChange={onUnitChanged}>
             <FormControlLabel
               value={DistanceUnit.Kilometer.toString()}
               checked={selection === DistanceUnit.Kilometer}
