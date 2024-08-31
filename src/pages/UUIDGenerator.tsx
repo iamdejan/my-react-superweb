@@ -1,5 +1,6 @@
 import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import React, { JSX, useEffect, useState } from "react";
+import CopyToClipboardButton from "../components/CopyToClipboardButton";
 
 const maxCount = 30;
 
@@ -55,9 +56,12 @@ export default function UUIDGenerator(): JSX.Element {
             paddingY: 1
           }}
         >
-          <Typography variant="h5" fontWeight={600} textAlign="center">
-            {uuid}
-          </Typography>
+          <Stack direction="row" textAlign="center">
+            <Typography variant="h5" fontWeight={600} textAlign="center" flexGrow={1}>
+              {uuid}
+            </Typography>
+            <CopyToClipboardButton input={uuid} />
+          </Stack>
         </Paper>
         <Alert severity="info">
           Refresh page to generate new UUID value.
@@ -85,17 +89,19 @@ export default function UUIDGenerator(): JSX.Element {
           Generate
         </Button>
 
-        <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh", maxWidth: "30vw", marginX: "auto"}}>
+        <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh", maxWidth: "25vw", marginX: "auto"}}>
           <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ textAlign: "center", fontWeight: "650" }}>UUID</TableCell>
+                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "95vw" }}>UUID</TableCell>
+                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "5vw" }}>Copy</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {uuidList.map((uuidValue, index) => (
                 <TableRow key={index}>
                   <TableCell>{uuidValue}</TableCell>
+                  <TableCell><CopyToClipboardButton input={uuidValue} /></TableCell>
                 </TableRow>
               ))}
             </TableBody>

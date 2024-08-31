@@ -1,7 +1,7 @@
 import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
 import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
-import CopyToClipboard from "../components/CopyToClipboardButton";
+import CopyToClipboardButton from "../components/CopyToClipboardButton";
 
 export default function DistanceCalculator(): JSX.Element {
   const {
@@ -85,7 +85,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 1
             }}
           />
-          <CopyToClipboard input={kilometerInput} />
+          <CopyToClipboardButton input={kilometerInput} />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
           <TextField
@@ -101,7 +101,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 2
             }}
           />
-          <CopyToClipboard input={mileInput} />
+          <CopyToClipboardButton input={mileInput} />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
           <TextField
@@ -117,7 +117,7 @@ export default function DistanceCalculator(): JSX.Element {
               flexGrow: 2
             }}
           />
-          <CopyToClipboard input={nauticalMileInput} />
+          <CopyToClipboardButton input={nauticalMileInput} />
         </Stack>
       </Stack>
     </Container>
