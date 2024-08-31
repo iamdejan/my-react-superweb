@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const UuidGeneratorLazyImport = createFileRoute('/uuid-generator')()
 const ToDoListLazyImport = createFileRoute('/to-do-list')()
 const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
@@ -23,6 +24,13 @@ const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const UuidGeneratorLazyRoute = UuidGeneratorLazyImport.update({
+  path: '/uuid-generator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/uuid-generator.lazy').then((d) => d.Route),
+)
 
 const ToDoListLazyRoute = ToDoListLazyImport.update({
   path: '/to-do-list',
@@ -90,6 +98,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToDoListLazyImport
       parentRoute: typeof rootRoute
     }
+    '/uuid-generator': {
+      id: '/uuid-generator'
+      path: '/uuid-generator'
+      fullPath: '/uuid-generator'
+      preLoaderRoute: typeof UuidGeneratorLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -101,6 +116,7 @@ export const routeTree = rootRoute.addChildren({
   CounterLazyRoute,
   DistanceCalculatorLazyRoute,
   ToDoListLazyRoute,
+  UuidGeneratorLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -115,7 +131,8 @@ export const routeTree = rootRoute.addChildren({
         "/about",
         "/counter",
         "/distance-calculator",
-        "/to-do-list"
+        "/to-do-list",
+        "/uuid-generator"
       ]
     },
     "/": {
@@ -132,6 +149,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/to-do-list": {
       "filePath": "to-do-list.lazy.tsx"
+    },
+    "/uuid-generator": {
+      "filePath": "uuid-generator.lazy.tsx"
     }
   }
 }

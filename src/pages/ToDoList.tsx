@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Button, Checkbox, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
-import { TodoItem, TodoItemSchema } from "../schema/todo-item";
+import { TodoItem, TodoItemSchema } from "../schema/TodoItemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
@@ -27,10 +27,10 @@ export default function ToDoList(): JSX.Element {
     <Container sx={{
       backgroundColor: "rgba(230,230,230,1)",
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
-      minHeight:"100vh",
-      minWidth:"100%",
-      margin:"0",
-      paddingBottom:"5rem",
+      minHeight: "100vh",
+      minWidth: "100%",
+      margin: "0",
+      paddingBottom: "5rem",
     }}>
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         To-Do List
@@ -59,8 +59,18 @@ export default function ToDoList(): JSX.Element {
           <Typography variant="h6" align="center">
             Form
           </Typography>
-          <TextField {...register("title")} label="Title" error={!!errors.title} helperText={errors.title?.message} />
-          <TextField {...register("description")} label="Description" error={!!errors.description} helperText={errors.description?.message} />
+          <TextField
+            {...register("title")}
+            label="Title"
+            error={!!errors.title}
+            helperText={errors.title?.message}
+          />
+          <TextField
+            {...register("description")} 
+            label="Description"
+            error={!!errors.description}
+            helperText={errors.description?.message}
+          />
           <Button type="submit" variant="contained">Add</Button>
         </Stack>
       </form>

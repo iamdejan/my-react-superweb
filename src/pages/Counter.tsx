@@ -31,12 +31,12 @@ export default function Counter(): JSX.Element {
     <Container sx={{
       backgroundColor: "rgba(230,230,230,1)",
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
-      minHeight:"100vh",
-      minWidth:"100%",
-      margin:"0",
-      padding:"0",
+      minHeight: "100vh",
+      minWidth: "100%",
+      margin: "0",
+      padding: "0",
     }}>
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter Page</Typography>
+      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter</Typography>
       <Stack gap={2} alignItems="center">
         <Button variant="contained" onClick={onClick}>
           count is {count}
