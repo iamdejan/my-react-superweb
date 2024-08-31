@@ -33,8 +33,8 @@ export default function Counter(): JSX.Element {
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
       minHeight: "100vh",
       minWidth: "100%",
-      margin:"0",
-      padding:"0",
+      margin: "0",
+      padding: "0",
     }}>
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter</Typography>
       <Stack gap={2} alignItems="center">

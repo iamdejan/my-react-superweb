@@ -29,8 +29,8 @@ export default function About(): JSX.Element {
         background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,255,237,1) 100%)",
         minHeight: "100vh",
         minWidth: "100%",
-        margin:"0",
-        padding:"0",
+        margin: "0",
+        padding: "0",
       }}
     >
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>

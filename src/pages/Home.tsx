@@ -37,8 +37,8 @@ export default function Home(): JSX.Element {
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
       minHeight: "100vh",
       minWidth: "100%",
-      margin:"0",
-      padding:"0",
+      margin: "0",
+      padding: "0",
     }}>
       <Typography variant="h4" paddingY={2} align="center">My React Superweb</Typography>
 
