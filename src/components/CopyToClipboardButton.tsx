@@ -7,14 +7,7 @@ export default function CopyToClipboardButton(props: {input: string}): JSX.Eleme
   const [, copyToClipboard] = useCopyToClipboard();
 
   return (
-    <IconButton
-      size="medium"
-      sx={{
-        maxWidth: "5vw",
-        flexGrow: 1
-      }}
-      onClick={() => void copyToClipboard(props.input)}
-    >
+    <IconButton onClick={() => void copyToClipboard(props.input)}>
       <ContentCopyIcon />
     </IconButton>
   );

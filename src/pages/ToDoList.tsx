@@ -27,8 +27,8 @@ export default function ToDoList(): JSX.Element {
     <Container sx={{
       backgroundColor: "rgba(230,230,230,1)",
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
-      minHeight:"100vh",
-      minWidth:"100vw",
+      minHeight: "100vh",
+      minWidth: "100%",
       margin:"0",
       paddingBottom:"5rem",
     }}>

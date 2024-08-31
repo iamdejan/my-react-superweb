@@ -38,7 +38,7 @@ export default function UUIDGenerator(): JSX.Element {
       backgroundColor: "rgba(230,230,230,1)",
       background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
       minHeight: "100vh",
-      minWidth: "100vw",
+      minWidth: "100%",
       paddingBottom: "5rem"
     }}>
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
@@ -64,7 +64,8 @@ export default function UUIDGenerator(): JSX.Element {
           </Stack>
         </Paper>
         <Alert severity="info">
-          Refresh page to generate new UUID value.
+          Refresh page to generate new UUID value.<p />
+          <Button variant="contained" onClick={() => window.location.reload()}>Refresh page</Button>
         </Alert>
       </Stack>
       <Stack
