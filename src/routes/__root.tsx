@@ -24,6 +24,10 @@ const routeList: RouteLink[] = [
   {
     link: "/to-do-list",
     title: "To-Do List",
+  },
+  {
+    link: "/distance-calculator",
+    title: "Distance Calculator"
   }
 ];
 

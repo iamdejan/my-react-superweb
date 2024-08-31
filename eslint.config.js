@@ -29,6 +29,7 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'no-multi-spaces': 'error',
       '@stylistic/js/indent': ['error', 2],
       '@stylistic/js/semi': 'error',
       '@stylistic/js/quotes': ['error', 'double', { "avoidEscape": true }],

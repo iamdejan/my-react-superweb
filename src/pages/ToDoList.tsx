@@ -17,6 +17,8 @@ export default function ToDoList(): JSX.Element {
   }
 
   function onCheckChanged(event: React.ChangeEvent<HTMLInputElement>): void {
+    event.preventDefault();
+
     const checked = event.target.checked;
     const index = Number.parseInt(event.target.name);
     todoList[index].completed = checked;
@@ -52,7 +54,6 @@ export default function ToDoList(): JSX.Element {
           marginTop={3}
           marginX="auto"
           padding={2}
-          justifyContent="space-evenly"
           maxWidth="40%"
           elevation={2}
           component={Paper}

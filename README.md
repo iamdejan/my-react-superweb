@@ -3,13 +3,14 @@
 A dummy project for me to learn React.
 
 List of expected features:
-- to-do list
-- calculator
-- kilometer to mile converter
-- BMI ideal weight
+- [x] to-do list
+- [x] distance converter
+- [ ] UUID generator
+- [ ] BMI ideal weight
     - See https://bmisite.net/ideal-weight/168cm for reference.
-- Password hasher
+- [ ] Password hasher
     - See https://www.lastpass.com/features/password-generator for reference.
+- [ ] calculator
 
 ## Development
 

@@ -49,8 +49,8 @@ importers:
         specifier: ^9.9.1
         version: 9.9.1
       '@stylistic/eslint-plugin-js':
-        specifier: ^2.7.1
-        version: 2.7.1(eslint@9.9.1)
+        specifier: ^2.7.2
+        version: 2.7.2(eslint@9.9.1)
       '@tanstack/router-cli':
         specifier: ^1.51.6
         version: 1.51.6
@@ -641,8 +641,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@stylistic/eslint-plugin-js@2.7.1':
-    resolution: {integrity: sha512-4YgqaPhPV8nMAMWnRz+RB7S/CQh/ximISMj2QJ8HPveUzCqUBkeNV7iB4cggr4pkalcDCsIu0y4LhmrlS1yAgA==}
+  '@stylistic/eslint-plugin-js@2.7.2':
+    resolution: {integrity: sha512-PkwTDduCY6+ILlHNEfVT3BtShrtqrDJmyW3BW53PvCb+SHu7z88iReXbN+/uCr39fcP6qH49RA7RFsKRlpyMEQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
@@ -2076,7 +2076,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.21.2':
     optional: true
 
-  '@stylistic/eslint-plugin-js@2.7.1(eslint@9.9.1)':
+  '@stylistic/eslint-plugin-js@2.7.2(eslint@9.9.1)':
     dependencies:
       '@types/eslint': 9.6.1
       eslint: 9.9.1

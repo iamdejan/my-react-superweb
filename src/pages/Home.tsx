@@ -3,11 +3,11 @@ import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/
 
 const features: string[] = [
   "To-do list",
-  "Calculator",
+  "Distance converter",
   "UUID generator",
-  "Kilometer to mile converter",
   "BMI ideal weight",
-  "Password hasher"
+  "Password hasher",
+  "Calculator"
 ];
 
 type ReferenceLink = {
