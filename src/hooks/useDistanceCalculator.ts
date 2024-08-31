@@ -34,8 +34,10 @@ function handleKilometer(
   }
 
   const parsedNumber = Number.parseFloat(kilometerInput);
-  setMileInput((0.62 * parsedNumber).toPrecision(precision));
-  setNauticalMileInput((0.539957 * parsedNumber).toPrecision(precision));
+  if(!Number.isNaN(parsedNumber)) {
+    setMileInput((0.62 * parsedNumber).toPrecision(precision));
+    setNauticalMileInput((0.539957 * parsedNumber).toPrecision(precision));
+  }
 }
 
 function handleMile(
@@ -50,8 +52,10 @@ function handleMile(
   }
 
   const parsedNumber = Number.parseFloat(mileInput);
-  setKilometerInput((1.609344 * parsedNumber).toPrecision(precision));
-  setNauticalMileInput((0.868976242 * parsedNumber).toPrecision(precision));
+  if(!Number.isNaN(parsedNumber)) {
+    setKilometerInput((1.609344 * parsedNumber).toPrecision(precision));
+    setNauticalMileInput((0.868976242 * parsedNumber).toPrecision(precision));
+  }
 }
 
 function handleNauticalMile(
@@ -66,8 +70,10 @@ function handleNauticalMile(
   }
 
   const parsedNumber = Number.parseFloat(nauticalMileInput);
-  setKilometerInput((1.852 * parsedNumber).toPrecision(precision));
-  setMileInput((1.15077945 * parsedNumber).toPrecision(precision));
+  if(!Number.isNaN(parsedNumber)) {
+    setKilometerInput((1.852 * parsedNumber).toPrecision(precision));
+    setMileInput((1.15077945 * parsedNumber).toPrecision(precision));
+  }
 }
 
 export function useDistanceCalculator(): DistanceCalculatorHookOutput {
