@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
+import { DistanceUnit } from "../enums/DistanceUnit";
 
 const precision: number = 8;
-
-export enum DistanceUnit {
-  Kilometer = "KILOMETER",
-  Mile = "MILE",
-  NauticalMile = "NAUTICAL_MILE"
-}
 
 type DistanceCalculatorHookOutput = {
   kilometerInput: string;
@@ -110,3 +105,5 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
     setSelection
   };
 }
+export { DistanceUnit };
+

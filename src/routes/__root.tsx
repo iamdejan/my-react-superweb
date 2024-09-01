@@ -33,6 +33,10 @@ const routeList: RouteLink[] = [
     link: "/uuid-generator",
     title: "UUID Generator"
   },
+  {
+    link: "/bmi-calculator",
+    title: "BMI Calculator"
+  }
 ];
 
 export const Route = createRootRoute({

@@ -1,18 +1,18 @@
 import { Alert, AlertTitle, Button, Checkbox, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
-import { TodoItem, TodoItemSchema } from "../schema/TodoItemSchema";
+import { ToDoItem, ToDoItemSchema } from "../schema/ToDoItemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function ToDoList(): JSX.Element {
-  const { register, handleSubmit, formState: { errors } } = useForm<TodoItem>({
-    resolver: zodResolver(TodoItemSchema),
+  const { register, handleSubmit, formState: { errors } } = useForm<ToDoItem>({
+    resolver: zodResolver(ToDoItemSchema),
     mode: "all",
   });
-  const [todoList, setTodoList] = useLocalStorage<TodoItem[]>("todoList", []);
+  const [todoList, setTodoList] = useLocalStorage<ToDoItem[]>("todoList", []);
 
-  function onSubmit(data: TodoItem): void {
+  function onSubmit(data: ToDoItem): void {
     setTodoList([...todoList, data]);
   }
 
@@ -43,7 +43,7 @@ export default function ToDoList(): JSX.Element {
 
       {/* recommended approach without editing `eslint.config.js`
       ref: https://github.com/orgs/react-hook-form/discussions/8622#discussioncomment-6305393 */}
-      <form onSubmit={(event) => {
+      <form onSubmit={(event: React.FormEvent<HTMLElement>) => {
         event.preventDefault();
         void handleSubmit(onSubmit)(event);
       }}>

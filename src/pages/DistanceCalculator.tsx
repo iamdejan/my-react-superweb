@@ -1,7 +1,8 @@
 import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
-import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
+import { useDistanceCalculator } from "../hooks/useDistanceCalculator";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
+import { DistanceUnit } from "../enums/DistanceUnit";
 
 export default function DistanceCalculator(): JSX.Element {
   const {

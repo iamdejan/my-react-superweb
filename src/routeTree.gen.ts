@@ -22,6 +22,7 @@ const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
+const BmiCalculatorIndexLazyImport = createFileRoute('/bmi-calculator/')()
 
 // Create/Update Routes
 
@@ -58,6 +59,13 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const BmiCalculatorIndexLazyRoute = BmiCalculatorIndexLazyImport.update({
+  path: '/bmi-calculator/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/bmi-calculator/index.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -105,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UuidGeneratorLazyImport
       parentRoute: typeof rootRoute
     }
+    '/bmi-calculator/': {
+      id: '/bmi-calculator/'
+      path: '/bmi-calculator'
+      fullPath: '/bmi-calculator'
+      preLoaderRoute: typeof BmiCalculatorIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -117,6 +132,7 @@ export const routeTree = rootRoute.addChildren({
   DistanceCalculatorLazyRoute,
   ToDoListLazyRoute,
   UuidGeneratorLazyRoute,
+  BmiCalculatorIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -132,7 +148,8 @@ export const routeTree = rootRoute.addChildren({
         "/counter",
         "/distance-calculator",
         "/to-do-list",
-        "/uuid-generator"
+        "/uuid-generator",
+        "/bmi-calculator/"
       ]
     },
     "/": {
@@ -152,6 +169,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/uuid-generator": {
       "filePath": "uuid-generator.lazy.tsx"
+    },
+    "/bmi-calculator/": {
+      "filePath": "bmi-calculator/index.lazy.tsx"
     }
   }
 }
