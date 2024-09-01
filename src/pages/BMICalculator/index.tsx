@@ -47,7 +47,15 @@ export default function BMICalculatorIndex(): JSX.Element {
   }
 
   function onHeightChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    setHeightInput(Number.parseInt(event.currentTarget.value));
+    if(event.currentTarget.value === "") {
+      setHeightInput(0);
+      return;
+    }
+
+    const parsedNumber = Number.parseInt(event.currentTarget.value);
+    if(!Number.isNaN(parsedNumber)) {
+      setHeightInput(parsedNumber);
+    }
   }
 
   return (

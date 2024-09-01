@@ -71,7 +71,9 @@ const BmiCalculatorIndexLazyRoute = BmiCalculatorIndexLazyImport.update({
 const BmiCalculatorHeightHeightRoute = BmiCalculatorHeightHeightImport.update({
   path: '/bmi-calculator/height/$height',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/bmi-calculator/height/$height.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 

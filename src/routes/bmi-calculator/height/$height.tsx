@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import BMICalculatorDetail from "../../../pages/BMICalculator/detail";
+import { HeightSchema } from "../../../schema/HeightSchema";
 
 export const Route = createFileRoute("/bmi-calculator/height/$height")({
-  component: BMICalculatorDetail
+  loader: ({params: {height}}) => HeightSchema.parse(height)
 });

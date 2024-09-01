@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { getRouteApi } from "@tanstack/react-router";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const route = getRouteApi("/bmi-calculator/height/$height");
 
@@ -14,7 +14,9 @@ export default function BMICalculatorDetail(): JSX.Element {
       minWidth: "100%",
       paddingBottom: "5rem"
     }}>
-      {height}
+      <Typography variant="h5" align="center" marginTop={2} marginBottom={3}>
+        Ideal weight for {height}
+      </Typography>
     </Container>
   );
 }
