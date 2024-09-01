@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 import { BMICalculation, BMICalculationSchema } from "../../schema/BMICalculationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
+import useBMICalculator from "../../hooks/useBMICalculator";
 
 export default function BMICalculatorIndex(): JSX.Element {
-  const [result, setResult] = useState<number>(0);
-  const [resultCategory, setResultCategory] = useState<string>("");
-  const [resultOpen, setResultOpen] = useState<boolean>(false);
+  const {
+    result,
+    setResult,
+    resultCategory,
+    setResultCategory,
+    resultOpen,
+    setResultOpen,
+  } = useBMICalculator();
 
-  const [heightInput, setHeightInput] = useState<number>(0.0);
+  const [heightInput, setHeightInput] = useState<number>(0);
 
   const {handleSubmit, register, formState: {errors}} = useForm<BMICalculation>({
     resolver: zodResolver(BMICalculationSchema),
