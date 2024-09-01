@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as BmiCalculatorHeightHeightImport } from './routes/bmi-calculator/height/$height'
 
 // Create Virtual Routes
 
@@ -67,6 +68,11 @@ const BmiCalculatorIndexLazyRoute = BmiCalculatorIndexLazyImport.update({
   import('./routes/bmi-calculator/index.lazy').then((d) => d.Route),
 )
 
+const BmiCalculatorHeightHeightRoute = BmiCalculatorHeightHeightImport.update({
+  path: '/bmi-calculator/height/$height',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -120,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BmiCalculatorIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/bmi-calculator/height/$height': {
+      id: '/bmi-calculator/height/$height'
+      path: '/bmi-calculator/height/$height'
+      fullPath: '/bmi-calculator/height/$height'
+      preLoaderRoute: typeof BmiCalculatorHeightHeightImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -133,6 +146,7 @@ export const routeTree = rootRoute.addChildren({
   ToDoListLazyRoute,
   UuidGeneratorLazyRoute,
   BmiCalculatorIndexLazyRoute,
+  BmiCalculatorHeightHeightRoute,
 })
 
 /* prettier-ignore-end */
@@ -149,7 +163,8 @@ export const routeTree = rootRoute.addChildren({
         "/distance-calculator",
         "/to-do-list",
         "/uuid-generator",
-        "/bmi-calculator/"
+        "/bmi-calculator/",
+        "/bmi-calculator/height/$height"
       ]
     },
     "/": {
@@ -172,6 +187,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/bmi-calculator/": {
       "filePath": "bmi-calculator/index.lazy.tsx"
+    },
+    "/bmi-calculator/height/$height": {
+      "filePath": "bmi-calculator/height/$height.tsx"
     }
   }
 }

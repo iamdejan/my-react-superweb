@@ -6,13 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function BMICalculatorIndex(): JSX.Element {
+  const [result, setResult] = useState<number>(0);
+  const [resultCategory, setResultCategory] = useState<string>("");
+  const [resultOpen, setResultOpen] = useState<boolean>(false);
+
+  const [heightInput, setHeightInput] = useState<number>(0.0);
+
   const {handleSubmit, register, formState: {errors}} = useForm<BMICalculation>({
     resolver: zodResolver(BMICalculationSchema),
     mode: "onSubmit"
   });
-  const [result, setResult] = useState<number>(0);
-  const [resultCategory, setResultCategory] = useState<string>("");
-  const [resultOpen, setResultOpen] = useState<boolean>(false);
 
   function onSubmit(data: BMICalculation): void {
     const heightMeter = data.height / 100.0;
@@ -35,6 +38,10 @@ export default function BMICalculatorIndex(): JSX.Element {
       newResultCategory = "Obesity class III";
     }
     setResultCategory(newResultCategory);
+  }
+
+  function onHeightChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+    setHeightInput(Number.parseInt(event.currentTarget.value));
   }
 
   return (
@@ -90,7 +97,7 @@ export default function BMICalculatorIndex(): JSX.Element {
             alignItems: "center"
           }}
         >
-          <Typography variant="h6" fontWeight={600} marginTop={3}>Count your Body Mass Index</Typography>
+          <Typography variant="h5" marginTop={3}>Count your BMI</Typography>
           <TextField
             label="Height (in cm)"
             {...register("height")}
@@ -122,6 +129,31 @@ export default function BMICalculatorIndex(): JSX.Element {
           }
         </Stack>
       </form>
+
+      <Stack
+        direction="column"
+        gap={2}
+        sx={{
+          marginTop: 10,
+          marginBottom: 2,
+          alignItems: "center"
+        }}
+      >
+        <Typography variant="h5">
+          Or, find the ideal weight
+        </Typography>
+        <Stack direction="column" gap={2} alignItems="center">
+          <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
+          <Button
+            variant="contained"
+            color="primary"
+            type="button"
+            href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
+          >
+            Find
+          </Button>
+        </Stack>
+      </Stack>
     </Container>
   );
 }
