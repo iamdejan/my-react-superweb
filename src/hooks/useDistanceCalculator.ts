@@ -105,5 +105,3 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
     setSelection
   };
 }
-export { DistanceUnit };
-
