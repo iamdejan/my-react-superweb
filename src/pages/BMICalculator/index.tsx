@@ -115,10 +115,10 @@ export default function BMICalculatorIndex(): JSX.Element {
                 }
               >
                 <AlertTitle>Result</AlertTitle>
-                Your BMI result: <b>{result.toFixed(3)}</b> {resultCategory !== ""? "("+resultCategory+")": ""}
+                Your BMI result: <b>{result.toFixed(3)}</b> {resultCategory}
               </Alert>
             </Collapse>
-            : ""
+            : <></>
           }
         </Stack>
       </form>
