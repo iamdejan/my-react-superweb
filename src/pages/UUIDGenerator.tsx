@@ -1,6 +1,7 @@
 import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import React, { JSX, useEffect, useState } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 const maxCount = 30;
 
@@ -8,6 +9,7 @@ export default function UUIDGenerator(): JSX.Element {
   const [count, setCount] = useState<number>(0);
   const [uuid, setUUID] = useState<string>("");
   const [uuidList, setUUIDList] = useState<string[]>([]);
+  useDocumentTitle("UUID Generator");
 
   useEffect(() => {
     setUUID(crypto.randomUUID());

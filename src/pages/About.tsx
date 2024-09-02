@@ -1,5 +1,6 @@
 import { JSX } from "react";
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 type PaperData = {
   title: string,
@@ -22,6 +23,8 @@ const paperList: PaperData[] = [
 ];
 
 export default function About(): JSX.Element {
+  useDocumentTitle("About");
+
   return (
     <Container
       sx={{

@@ -1,10 +1,12 @@
 import { Alert, AlertTitle, Container } from "@mui/material";
 import { getRouteApi } from "@tanstack/react-router";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 import { JSX } from "react";
 
 const route = getRouteApi("/bmi-calculator/height/$height");
 
 export default function InvalidHeightError(): JSX.Element {
+  useDocumentTitle("BMI Calculator Error");
   const { height } = route.useParams();
   return (
     <Container

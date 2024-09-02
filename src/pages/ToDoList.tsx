@@ -3,7 +3,7 @@ import { JSX } from "react";
 import { useForm } from "react-hook-form";
 import { ToDoItem, ToDoItemSchema } from "../schema/ToDoItemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { useDocumentTitle, useLocalStorage } from "@uidotdev/usehooks";
 
 export default function ToDoList(): JSX.Element {
   const { register, handleSubmit, formState: { errors } } = useForm<ToDoItem>({
@@ -11,6 +11,7 @@ export default function ToDoList(): JSX.Element {
     mode: "all",
   });
   const [todoList, setTodoList] = useLocalStorage<ToDoItem[]>("todoList", []);
+  useDocumentTitle("To-Do List");
 
   function onSubmit(data: ToDoItem): void {
     setTodoList([...todoList, data]);
@@ -78,7 +79,15 @@ export default function ToDoList(): JSX.Element {
       <Typography variant="h6" align="center" marginTop={3}>
         To-do List
       </Typography>
-      <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh"}}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          marginTop: 3,
+          maxHeight: "60vh",
+          maxWidth: "70vw",
+          marginX: "auto",
+        }}
+      >
         <Table size="small">
           <TableHead>
             <TableRow>

@@ -5,6 +5,7 @@ import { BMICalculation, BMICalculationSchema } from "../../schema/BMICalculatio
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
 import useBMICalculator from "../../hooks/useBMICalculator";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function BMICalculatorIndex(): JSX.Element {
   const {
@@ -22,6 +23,8 @@ export default function BMICalculatorIndex(): JSX.Element {
     resolver: zodResolver(BMICalculationSchema),
     mode: "onSubmit"
   });
+
+  useDocumentTitle("BMI Calculator");
 
   function onSubmit(data: BMICalculation): void {
     const heightMeter = data.height / 100.0;
