@@ -1,10 +1,12 @@
 import { JSX } from "react";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function Counter(): JSX.Element {
   const [count, setCount] = useState(1);
   const hasClickedButton = useRef(false);
+  useDocumentTitle("Counter");
 
   function onClick(): void {
     setCount((count) => count+1);

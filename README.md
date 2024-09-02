@@ -6,7 +6,7 @@ List of expected features:
 - [x] to-do list
 - [x] distance converter
 - [x] UUID generator
-- [ ] BMI ideal weight
+- [x] BMI ideal weight
     - See https://bmisite.net/ideal-weight/168cm for reference.
 - [ ] Password hasher
     - See https://www.lastpass.com/features/password-generator for reference.

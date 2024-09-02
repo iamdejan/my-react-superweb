@@ -1,7 +1,9 @@
 import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
-import { DistanceUnit, useDistanceCalculator } from "../hooks/useDistanceCalculator";
+import { useDistanceCalculator } from "../hooks/useDistanceCalculator";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
+import { DistanceUnit } from "../enums/DistanceUnit";
+import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function DistanceCalculator(): JSX.Element {
   const {
@@ -14,6 +16,8 @@ export default function DistanceCalculator(): JSX.Element {
     selection,
     setSelection
   } = useDistanceCalculator();
+
+  useDocumentTitle("Distance Calculator");
 
   function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
     const distanceUnit = event.target.value as DistanceUnit;
