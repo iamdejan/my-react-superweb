@@ -36,6 +36,10 @@ const routeList: RouteLink[] = [
   {
     link: "/bmi-calculator",
     title: "BMI Calculator"
+  },
+  {
+    link: "/password-generator",
+    title: "Password Generator"
   }
 ];
 

@@ -19,6 +19,7 @@ import { Route as BmiCalculatorHeightHeightImport } from './routes/bmi-calculato
 
 const UuidGeneratorLazyImport = createFileRoute('/uuid-generator')()
 const ToDoListLazyImport = createFileRoute('/to-do-list')()
+const PasswordGeneratorLazyImport = createFileRoute('/password-generator')()
 const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
 const AboutLazyImport = createFileRoute('/about')()
@@ -38,6 +39,13 @@ const ToDoListLazyRoute = ToDoListLazyImport.update({
   path: '/to-do-list',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/to-do-list.lazy').then((d) => d.Route))
+
+const PasswordGeneratorLazyRoute = PasswordGeneratorLazyImport.update({
+  path: '/password-generator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/password-generator.lazy').then((d) => d.Route),
+)
 
 const DistanceCalculatorLazyRoute = DistanceCalculatorLazyImport.update({
   path: '/distance-calculator',
@@ -107,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DistanceCalculatorLazyImport
       parentRoute: typeof rootRoute
     }
+    '/password-generator': {
+      id: '/password-generator'
+      path: '/password-generator'
+      fullPath: '/password-generator'
+      preLoaderRoute: typeof PasswordGeneratorLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/to-do-list': {
       id: '/to-do-list'
       path: '/to-do-list'
@@ -145,6 +160,7 @@ export const routeTree = rootRoute.addChildren({
   AboutLazyRoute,
   CounterLazyRoute,
   DistanceCalculatorLazyRoute,
+  PasswordGeneratorLazyRoute,
   ToDoListLazyRoute,
   UuidGeneratorLazyRoute,
   BmiCalculatorIndexLazyRoute,
@@ -163,6 +179,7 @@ export const routeTree = rootRoute.addChildren({
         "/about",
         "/counter",
         "/distance-calculator",
+        "/password-generator",
         "/to-do-list",
         "/uuid-generator",
         "/bmi-calculator/",
@@ -180,6 +197,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/distance-calculator": {
       "filePath": "distance-calculator.lazy.tsx"
+    },
+    "/password-generator": {
+      "filePath": "password-generator.lazy.tsx"
     },
     "/to-do-list": {
       "filePath": "to-do-list.lazy.tsx"
