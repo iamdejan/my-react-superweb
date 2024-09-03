@@ -19,25 +19,25 @@ const symbolCharacters = [
 
 type PasswordGeneratorHookOutput = {
   passwordLength: number,
-  setPasswordLength: (length: number) => void,
+  setPasswordLength: React.Dispatch<React.SetStateAction<number>>,
 
   generatedPassword: string,
-  setGeneratedPassword: (password: string) => void,
+  setGeneratedPassword: React.Dispatch<React.SetStateAction<string>>,
 
   useLowerCase: boolean,
-  setUseLowerCase: (use: boolean) => void,
+  setUseLowerCase: React.Dispatch<React.SetStateAction<boolean>>,
 
   useUpperCase: boolean,
-  setUseUpperCase: (use: boolean) => void,
+  setUseUpperCase: React.Dispatch<React.SetStateAction<boolean>>,
 
   useNumbers: boolean,
-  setUseNumbers: (use: boolean) => void,
+  setUseNumbers: React.Dispatch<React.SetStateAction<boolean>>,
 
   useSymbols: boolean,
-  setUseSymbols: (use: boolean) => void,
+  setUseSymbols: React.Dispatch<React.SetStateAction<boolean>>,
 
   availableCharacters: string[],
-  setAvailableCharacters: (characters: string[]) => void,
+  setAvailableCharacters: React.Dispatch<React.SetStateAction<string[]>>,
 };
 
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
