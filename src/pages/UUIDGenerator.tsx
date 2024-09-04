@@ -19,12 +19,13 @@ export default function UUIDGenerator(): JSX.Element {
     setCount(value as number);
   }
 
-  function handleInputUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
+  function handleTextFieldUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
     if(event.target.value === "") {
       setCount(0);
       return;
     }
-    setCount(Number.parseInt(event.target.value));
+    const parsedInput = Number.parseInt(event.target.value);
+    setCount(Math.min(parsedInput, maxCount));
   }
 
   function onClick(): void {
@@ -85,7 +86,7 @@ export default function UUIDGenerator(): JSX.Element {
           <TextField
             label="Count"
             value={count}
-            onChange={handleInputUpdate}
+            onChange={handleTextFieldUpdate}
           />
         </Stack>
         <Button variant="contained" sx={{ marginX: "auto" }} type="button" onClick={onClick}>

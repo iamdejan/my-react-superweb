@@ -24,6 +24,15 @@ export default function PasswordGenerator(): JSX.Element {
     setPasswordLength(value as number);
   }
 
+  function handleTextFieldUpdate(e: React.ChangeEvent<HTMLInputElement>): void {
+    const value = Number.parseInt(e.target.value);
+    if (Number.isNaN(value)) {
+      setPasswordLength(0);
+    } else {
+      setPasswordLength(Math.min(value, maxPasswordLength));
+    }
+  }
+
   function handleLowerCaseUpdate(): void {
     setUseLowerCase(!useLowerCase);
   }
@@ -64,6 +73,7 @@ export default function PasswordGenerator(): JSX.Element {
           <TextField
             label="Password Length"
             value={passwordLength}
+            onChange={handleTextFieldUpdate}
           />
         </Stack>
       </Stack>
