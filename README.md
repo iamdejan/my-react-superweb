@@ -8,7 +8,7 @@ List of expected features:
 - [x] UUID generator
 - [x] BMI ideal weight
     - See https://bmisite.net/ideal-weight/168cm for reference.
-- [ ] Password hasher
+- [x] Password hasher
     - See https://www.lastpass.com/features/password-generator for reference.
 - [ ] calculator
 
