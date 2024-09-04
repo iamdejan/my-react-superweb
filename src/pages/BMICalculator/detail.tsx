@@ -27,7 +27,7 @@ export default function BMICalculatorDetail(): JSX.Element {
       paddingBottom: "5rem"
     }}>
       <Typography variant="h5" align="center" marginTop={2} marginBottom={3}>
-        Ideal weight for {height}
+        Ideal weight for {height} cm
       </Typography>
       <TableContainer
         component={Paper}

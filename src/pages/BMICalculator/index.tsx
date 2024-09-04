@@ -56,7 +56,7 @@ export default function BMICalculatorIndex(): JSX.Element {
     }
 
     const parsedNumber = Number.parseInt(event.currentTarget.value);
-    if(!Number.isNaN(parsedNumber)) {
+    if(Number.isSafeInteger(parsedNumber)) {
       setHeightInput(parsedNumber);
     }
   }
