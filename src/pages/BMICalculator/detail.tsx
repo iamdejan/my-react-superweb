@@ -66,10 +66,10 @@ export default function BMICalculatorDetail(): JSX.Element {
       >
         Formula:
         <List>
-          <ListItem disablePadding={true}>
+          <ListItem disablePadding>
             <ListItemText primary="• Lower Bound: 18.5 * (height in cm) * (height in cm)" />
           </ListItem>
-          <ListItem disablePadding={true}>
+          <ListItem disablePadding>
             <ListItemText primary="• Upper Bound: 24.99 * (height in cm) * (height in cm)" />
           </ListItem>
         </List>

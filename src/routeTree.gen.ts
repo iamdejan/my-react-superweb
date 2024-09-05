@@ -22,6 +22,7 @@ const ToDoListLazyImport = createFileRoute('/to-do-list')()
 const PasswordGeneratorLazyImport = createFileRoute('/password-generator')()
 const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
+const CalculatorLazyImport = createFileRoute('/calculator')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 const BmiCalculatorIndexLazyImport = createFileRoute('/bmi-calculator/')()
@@ -58,6 +59,11 @@ const CounterLazyRoute = CounterLazyImport.update({
   path: '/counter',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/counter.lazy').then((d) => d.Route))
+
+const CalculatorLazyRoute = CalculatorLazyImport.update({
+  path: '/calculator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/calculator.lazy').then((d) => d.Route))
 
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
@@ -99,6 +105,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorLazyImport
       parentRoute: typeof rootRoute
     }
     '/counter': {
@@ -158,6 +171,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   AboutLazyRoute,
+  CalculatorLazyRoute,
   CounterLazyRoute,
   DistanceCalculatorLazyRoute,
   PasswordGeneratorLazyRoute,
@@ -177,6 +191,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/about",
+        "/calculator",
         "/counter",
         "/distance-calculator",
         "/password-generator",
@@ -191,6 +206,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/about": {
       "filePath": "about.lazy.tsx"
+    },
+    "/calculator": {
+      "filePath": "calculator.lazy.tsx"
     },
     "/counter": {
       "filePath": "counter.lazy.tsx"

@@ -1,18 +1,14 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, FileRoutesByPath, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import AppBar from "@mui/material/AppBar";
 import { Button, Container, Toolbar, Typography } from "@mui/material";
 
 type RouteLink = {
-  link: string,
+  link: keyof FileRoutesByPath,
   title: string
 };
 
 const routeList: RouteLink[] = [
-  {
-    link: "/",
-    title: "Home"
-  },
   {
     link: "/about",
     title: "About"
@@ -34,12 +30,16 @@ const routeList: RouteLink[] = [
     title: "UUID Generator"
   },
   {
-    link: "/bmi-calculator",
+    link: "/bmi-calculator/",
     title: "BMI Calculator"
   },
   {
     link: "/password-generator",
     title: "Password Generator"
+  },
+  {
+    link: "/calculator",
+    title: "Calculator"
   }
 ];
 
@@ -53,7 +53,7 @@ export const Route = createRootRoute({
               <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
             </Typography>
             {routeList.map(route => (
-              <Button key={route.link} variant="text" color="inherit" disableElevation href={route.link}>
+              <Button key={route.link} variant="text" color="inherit" href={route.link}>
                 {route.title}
               </Button>
             ))}

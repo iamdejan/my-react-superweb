@@ -136,7 +136,7 @@ export default function PasswordGenerator(): JSX.Element {
           >
             <Typography variant="h6" marginBottom={2}>Generated Password</Typography>
             <Stack direction="row" marginX="auto" maxWidth="90%">
-              <TextField disabled={true} value={generatedPassword} sx={{flexGrow: 1}} />
+              <TextField disabled value={generatedPassword} sx={{flexGrow: 1}} />
               <CopyToClipboardButton input={generatedPassword} />
             </Stack>
           </Paper>

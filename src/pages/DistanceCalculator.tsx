@@ -85,9 +85,7 @@ export default function DistanceCalculator(): JSX.Element {
               event.preventDefault();
               setKilometerInput(event.target.value);
             }}
-            sx={{
-              flexGrow: 1
-            }}
+            fullWidth
           />
           <CopyToClipboardButton input={kilometerInput} />
         </Stack>
@@ -101,9 +99,7 @@ export default function DistanceCalculator(): JSX.Element {
               event.preventDefault();
               setMileInput(event.target.value);
             }}
-            sx={{
-              flexGrow: 2
-            }}
+            fullWidth
           />
           <CopyToClipboardButton input={mileInput} />
         </Stack>
@@ -117,9 +113,7 @@ export default function DistanceCalculator(): JSX.Element {
               event.preventDefault();
               setNauticalMileInput(event.target.value);
             }}
-            sx={{
-              flexGrow: 2
-            }}
+            fullWidth
           />
           <CopyToClipboardButton input={nauticalMileInput} />
         </Stack>
