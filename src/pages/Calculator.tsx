@@ -1,57 +1,9 @@
 import { Card, CardActionArea, CardContent, Container, Paper, Stack, Typography } from "@mui/material";
-import { JSX, useState } from "react";
-
-const layout = [
-  ["7", "8", "9", "(", ")"],
-  ["4", "5", "6", "*", "/"],
-  ["1", "2", "3", "+", "-"],
-  ["0", "000", ".", "=", "C"],
-];
-const validCharacterSet = new Set(layout.flat());
+import { JSX } from "react";
+import useCalculator, { layout } from "../hooks/useCalculator";
 
 export default function Calculator(): JSX.Element {
-  const [display, setDisplay] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false);
-
-  function calculate(): void {
-    for(const c of display) {
-      if(!validCharacterSet.has(c)) {
-        setDisplay("Invalid input");
-        setIsError(true);
-        return;
-      }
-    }
-
-    try {
-      const result: unknown = eval(display);
-      setDisplay(result as string);
-    } catch(error: unknown) {
-      setDisplay(`Error: ${error as string}`);
-      setIsError(true);
-    }
-  }
-
-  function handleButtonClicked(value: string): void {
-    switch(value) {
-    case "C": {
-      setDisplay("");
-      break;
-    }
-    case "=": {
-      calculate();
-      break;
-    }
-    default: {
-      if(isError) {
-        setIsError(false);
-        setDisplay(value);
-      } else {
-        setDisplay(display + value);
-      }
-      break;
-    }
-    }
-  }
+  const {display, handleButtonClicked} = useCalculator();
 
   return (
     <Container sx={{
