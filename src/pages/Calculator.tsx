@@ -1,14 +1,58 @@
-import { Card, CardActionArea, CardContent, Container, Paper, Stack, TextField, Typography } from "@mui/material";
-import { JSX } from "react";
+import { Card, CardActionArea, CardContent, Container, Paper, Stack, Typography } from "@mui/material";
+import { JSX, useState } from "react";
 
 const layout = [
-  ["7", "8", "9", "%", "√"],
+  ["7", "8", "9", "(", ")"],
   ["4", "5", "6", "*", "/"],
   ["1", "2", "3", "+", "-"],
   ["0", "000", ".", "=", "C"],
 ];
+const validCharacterSet = new Set(layout.flat());
 
 export default function Calculator(): JSX.Element {
+  const [display, setDisplay] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
+
+  function calculate(): void {
+    for(const c of display) {
+      if(!validCharacterSet.has(c)) {
+        setDisplay("Invalid input");
+        setIsError(true);
+        return;
+      }
+    }
+
+    try {
+      const result: unknown = eval(display);
+      setDisplay(result as string);
+    } catch(error: unknown) {
+      setDisplay(`Error: ${error as string}`);
+      setIsError(true);
+    }
+  }
+
+  function handleButtonClicked(value: string): void {
+    switch(value) {
+    case "C": {
+      setDisplay("");
+      break;
+    }
+    case "=": {
+      calculate();
+      break;
+    }
+    default: {
+      if(isError) {
+        setIsError(false);
+        setDisplay(value);
+      } else {
+        setDisplay(display + value);
+      }
+      break;
+    }
+    }
+  }
+
   return (
     <Container sx={{
       backgroundColor: "rgba(230,230,230,1)",
@@ -30,18 +74,41 @@ export default function Calculator(): JSX.Element {
       }}
       >
         <Stack>
-          <TextField fullWidth sx={{marginBottom: 2}} />
+          <Paper
+            elevation={3}
+            variant="outlined"
+            sx={{
+              width: "95%",
+              alignSelf: "center",
+              marginBottom: 2,
+              paddingY: 2,
+              paddingX: 5,
+              textAlign: "right",
+              height: "90px",
+            }}
+          >
+            <Typography variant="h3">{display}</Typography>
+          </Paper>
           <Stack gap={2}>
             {layout.map((row, i) => (
-              <Stack key={i} direction="row" gap={2} justifyContent="space-evenly">
-                {row.map((col, j) => (
-                  <Card key={j} sx={{
-                    minWidth: "15%"
-                  }}>
-                    <CardActionArea>
+              <Stack
+                key={i}
+                direction="row"
+                gap={2}
+                justifyContent="space-evenly"
+              >
+                {row.map((text, j) => (
+                  <Card
+                    key={j}
+                    sx={{
+                      minWidth: "15%",
+                      borderRadius: "2rem"
+                    }}
+                  >
+                    <CardActionArea onClick={() => handleButtonClicked(text)}>
                       <CardContent>
                         <Typography variant="h4" textAlign="center">
-                          {col}
+                          {text}
                         </Typography>
                       </CardContent>
                     </CardActionArea>
