@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { Box, Container, Grid2, Paper, Typography } from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 type PaperData = {
@@ -39,18 +39,29 @@ export default function About(): JSX.Element {
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         About This Website
       </Typography>
-      <Grid container maxWidth="100%" rowSpacing={{xs: 1, sm: 2, md: 3}} columnSpacing={{xs: 1, sm: 2, md: 3}} alignItems="center" justifyContent="space-evenly">
+      <Grid2
+        container
+        maxWidth="100%"
+        rowSpacing={{xs: 1, sm: 2, md: 3}}
+        columnSpacing={{xs: 1, sm: 2, md: 3}}
+        alignItems="center"
+      >
         {paperList.map(item => (
-          <Grid key={item.title} item sm={3}>
+          <Grid2
+            key={item.title}
+            sx={{
+              maxWidth: "30vw"
+            }}
+          >
             <Paper elevation={4}>
               <Box p={2}>
                 <Typography variant="h6">{item.title}</Typography>
                 <div>{item.text}</div>
               </Box>
             </Paper>
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </Container>
   );
 }
