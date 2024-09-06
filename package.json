@@ -8,6 +8,7 @@
     "deps": "pnpm install",
     "deps:update": "pnpm install && pnpm update --latest",
     "build": "rimraf dist && tsc -b && vite build",
+    "build:cloudflare": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
