@@ -14,20 +14,10 @@ export default function DistanceCalculator(): JSX.Element {
     nauticalMileInput,
     setNauticalMileInput,
     selection,
-    setSelection
+    onUnitChanged
   } = useDistanceCalculator();
 
   useDocumentTitle("Distance Calculator");
-
-  function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
-    const distanceUnit = event.target.value as DistanceUnit;
-    setSelection(distanceUnit);
-
-    // reset all fields to prevent infinite render bug
-    setKilometerInput("");
-    setMileInput("");
-    setNauticalMileInput("");
-  }
 
   return (
     <Container sx={{
