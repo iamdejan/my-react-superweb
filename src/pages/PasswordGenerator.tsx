@@ -1,53 +1,23 @@
 import { Checkbox, Collapse, Container, FormControlLabel, Paper, Slider, Stack, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
-import usePasswordGenerator from "../hooks/usePasswordGenerator";
-
-const maxPasswordLength = 30;
+import usePasswordGenerator, { maxPasswordLength } from "../hooks/usePasswordGenerator";
 
 export default function PasswordGenerator(): JSX.Element {
   const {
     passwordLength,
-    setPasswordLength,
     generatedPassword,
     useLowerCase,
-    setUseLowerCase,
     useUpperCase,
-    setUseUpperCase,
     useNumbers,
-    setUseNumbers,
     useSymbols,
-    setUseSymbols,
+    handleScaleUpdate,
+    handleTextFieldUpdate,
+    handleLowerCaseUpdate,
+    handleUpperCaseUpdate,
+    handleNumbersUpdate,
+    handleSymbolsUpdate,
   } = usePasswordGenerator();
-
-  function handleScaleUpdate(_e: Event, value: number | number[]): void {
-    setPasswordLength(value as number);
-  }
-
-  function handleTextFieldUpdate(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = Number.parseInt(e.target.value);
-    if (Number.isNaN(value)) {
-      setPasswordLength(0);
-    } else {
-      setPasswordLength(Math.min(value, maxPasswordLength));
-    }
-  }
-
-  function handleLowerCaseUpdate(): void {
-    setUseLowerCase(!useLowerCase);
-  }
-
-  function handleUpperCaseUpdate(): void {
-    setUseUpperCase(!useUpperCase);
-  }
-
-  function handleNumbersUpdate(): void {
-    setUseNumbers(!useNumbers);
-  }
-
-  function handleSymbolsUpdate(): void {
-    setUseSymbols(!useSymbols);
-  }
 
   return (
     <Container sx={{
