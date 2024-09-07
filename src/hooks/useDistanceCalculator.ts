@@ -6,7 +6,7 @@ const digits: number = 4;
 type DistanceCalculatorHookOutput = {
   kilometerInput: string;
   setKilometerInput: React.Dispatch<React.SetStateAction<string>>;
-  
+
   mileInput: string;
   setMileInput: React.Dispatch<React.SetStateAction<string>>;
 
@@ -14,7 +14,8 @@ type DistanceCalculatorHookOutput = {
   setNauticalMileInput: React.Dispatch<React.SetStateAction<string>>;
 
   selection: DistanceUnit;
-  setSelection: React.Dispatch<React.SetStateAction<DistanceUnit>>;
+
+  onUnitChanged: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function handleKilometer(
@@ -94,6 +95,16 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
     }
   }, [selection, kilometerInput, mileInput, nauticalMileInput]);
 
+  function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
+    const distanceUnit = event.target.value as DistanceUnit;
+    setSelection(distanceUnit);
+
+    // reset all fields to prevent infinite render bug
+    setKilometerInput("");
+    setMileInput("");
+    setNauticalMileInput("");
+  }
+
   return {
     kilometerInput,
     setKilometerInput,
@@ -102,6 +113,6 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
     nauticalMileInput,
     setNauticalMileInput,
     selection,
-    setSelection
+    onUnitChanged
   };
 }

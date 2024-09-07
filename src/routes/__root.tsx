@@ -23,15 +23,15 @@ const routeList: RouteLink[] = [
   },
   {
     link: "/distance-calculator",
-    title: "Distance Calculator"
+    title: "Distance"
   },
   {
     link: "/uuid-generator",
-    title: "UUID Generator"
+    title: "UUID"
   },
   {
     link: "/bmi-calculator/",
-    title: "BMI Calculator"
+    title: "Body Mass Index"
   },
   {
     link: "/password-generator",

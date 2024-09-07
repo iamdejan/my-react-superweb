@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+export const maxPasswordLength = 30;
+
 const lowerCaseAlphabet = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode("a".charCodeAt(0) + i)
 );
@@ -19,25 +21,25 @@ const symbolCharacters = [
 
 type PasswordGeneratorHookOutput = {
   passwordLength: number,
-  setPasswordLength: React.Dispatch<React.SetStateAction<number>>,
 
   generatedPassword: string,
-  setGeneratedPassword: React.Dispatch<React.SetStateAction<string>>,
 
   useLowerCase: boolean,
-  setUseLowerCase: React.Dispatch<React.SetStateAction<boolean>>,
 
   useUpperCase: boolean,
-  setUseUpperCase: React.Dispatch<React.SetStateAction<boolean>>,
 
   useNumbers: boolean,
-  setUseNumbers: React.Dispatch<React.SetStateAction<boolean>>,
 
   useSymbols: boolean,
-  setUseSymbols: React.Dispatch<React.SetStateAction<boolean>>,
 
   availableCharacters: string[],
-  setAvailableCharacters: React.Dispatch<React.SetStateAction<string[]>>,
+
+  handleScaleUpdate: (_e: Event, value: number | number[]) => void,
+  handleTextFieldUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  handleLowerCaseUpdate: () => void,
+  handleUpperCaseUpdate: () => void,
+  handleNumbersUpdate: () => void,
+  handleSymbolsUpdate: () => void,
 };
 
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
@@ -85,20 +87,48 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     setAvailableCharacters(characters);
   }, [useLowerCase, useUpperCase, useNumbers, useSymbols]);
 
+  function handleScaleUpdate(_e: Event, value: number | number[]): void {
+    setPasswordLength(value as number);
+  }
+
+  function handleTextFieldUpdate(e: React.ChangeEvent<HTMLInputElement>): void {
+    const value = Number.parseInt(e.target.value);
+    if (Number.isNaN(value)) {
+      setPasswordLength(0);
+    } else {
+      setPasswordLength(Math.min(value, maxPasswordLength));
+    }
+  }
+
+  function handleLowerCaseUpdate(): void {
+    setUseLowerCase(!useLowerCase);
+  }
+
+  function handleUpperCaseUpdate(): void {
+    setUseUpperCase(!useUpperCase);
+  }
+
+  function handleNumbersUpdate(): void {
+    setUseNumbers(!useNumbers);
+  }
+
+  function handleSymbolsUpdate(): void {
+    setUseSymbols(!useSymbols);
+  }
+
   return {
     passwordLength,
-    setPasswordLength,
     generatedPassword,
-    setGeneratedPassword,
     useLowerCase,
-    setUseLowerCase,
     useUpperCase,
-    setUseUpperCase,
     useNumbers,
-    setUseNumbers,
     useSymbols,
-    setUseSymbols,
     availableCharacters,
-    setAvailableCharacters,
+    handleScaleUpdate,
+    handleTextFieldUpdate,
+    handleLowerCaseUpdate,
+    handleUpperCaseUpdate,
+    handleNumbersUpdate,
+    handleSymbolsUpdate,
   };
 }
