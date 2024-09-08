@@ -93,7 +93,15 @@ export default function UUIDGenerator(): JSX.Element {
           Generate
         </Button>
 
-        <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh", maxWidth: "25vw", marginX: "auto"}}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            marginTop: 3,
+            maxHeight: "60vh",
+            maxWidth: "35vw",
+            marginX: "auto"
+          }}
+        >
           <Table stickyHeader size="small">
             <TableHead>
               <TableRow>

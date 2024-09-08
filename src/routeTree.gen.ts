@@ -18,6 +18,7 @@ import { Route as BmiCalculatorHeightHeightImport } from './routes/bmi-calculato
 // Create Virtual Routes
 
 const UuidGeneratorLazyImport = createFileRoute('/uuid-generator')()
+const UlidGeneratorLazyImport = createFileRoute('/ulid-generator')()
 const ToDoListLazyImport = createFileRoute('/to-do-list')()
 const PasswordGeneratorLazyImport = createFileRoute('/password-generator')()
 const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
@@ -34,6 +35,13 @@ const UuidGeneratorLazyRoute = UuidGeneratorLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/uuid-generator.lazy').then((d) => d.Route),
+)
+
+const UlidGeneratorLazyRoute = UlidGeneratorLazyImport.update({
+  path: '/ulid-generator',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/ulid-generator.lazy').then((d) => d.Route),
 )
 
 const ToDoListLazyRoute = ToDoListLazyImport.update({
@@ -142,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToDoListLazyImport
       parentRoute: typeof rootRoute
     }
+    '/ulid-generator': {
+      id: '/ulid-generator'
+      path: '/ulid-generator'
+      fullPath: '/ulid-generator'
+      preLoaderRoute: typeof UlidGeneratorLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/uuid-generator': {
       id: '/uuid-generator'
       path: '/uuid-generator'
@@ -176,6 +191,7 @@ export const routeTree = rootRoute.addChildren({
   DistanceCalculatorLazyRoute,
   PasswordGeneratorLazyRoute,
   ToDoListLazyRoute,
+  UlidGeneratorLazyRoute,
   UuidGeneratorLazyRoute,
   BmiCalculatorIndexLazyRoute,
   BmiCalculatorHeightHeightRoute,
@@ -196,6 +212,7 @@ export const routeTree = rootRoute.addChildren({
         "/distance-calculator",
         "/password-generator",
         "/to-do-list",
+        "/ulid-generator",
         "/uuid-generator",
         "/bmi-calculator/",
         "/bmi-calculator/height/$height"
@@ -221,6 +238,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/to-do-list": {
       "filePath": "to-do-list.lazy.tsx"
+    },
+    "/ulid-generator": {
+      "filePath": "ulid-generator.lazy.tsx"
     },
     "/uuid-generator": {
       "filePath": "uuid-generator.lazy.tsx"

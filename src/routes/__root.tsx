@@ -30,6 +30,10 @@ const routeList: RouteLink[] = [
     title: "UUID"
   },
   {
+    link: "/ulid-generator",
+    title: "ULID"
+  },
+  {
     link: "/bmi-calculator/",
     title: "Body Mass Index"
   },
