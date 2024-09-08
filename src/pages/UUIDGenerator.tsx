@@ -2,7 +2,7 @@ import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, Table
 import { JSX } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
 import { useDocumentTitle } from "@uidotdev/usehooks";
-import useUUIDGenerator, { maxCount } from "../hooks/useUUIDGenerator";
+import useUUIDGenerator, { maxUUIDCount } from "../hooks/useUUIDGenerator";
 
 export default function UUIDGenerator(): JSX.Element {
   const { 
@@ -62,8 +62,9 @@ export default function UUIDGenerator(): JSX.Element {
           Or, generate multiple UUIDs at the same time
         </Typography>
         <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
-          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxCount} />
+          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxUUIDCount} />
           <TextField
+            type="number"
             label="Count"
             value={count}
             onChange={handleTextFieldUpdate}

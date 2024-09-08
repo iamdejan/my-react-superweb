@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const maxCount = 30;
+export const maxUUIDCount = 30;
 
 type UUIDGeneratorHookOutput = {
   uuid: string;
@@ -31,7 +31,7 @@ export default function useUUIDGenerator(): UUIDGeneratorHookOutput {
       return;
     }
     const parsedInput = Number.parseInt(event.target.value);
-    setCount(Math.min(parsedInput, maxCount));
+    setCount(Math.min(parsedInput, maxUUIDCount));
   }
 
   function onGenerateButtonClick(): void {
