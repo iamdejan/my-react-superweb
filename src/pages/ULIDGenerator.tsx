@@ -1,4 +1,4 @@
-import { Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
 import { monotonicFactory } from "ulidx";
@@ -44,6 +44,23 @@ export default function ULIDGenerator(): JSX.Element {
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         ULID Generator
       </Typography>
+      <Alert
+        severity="info"
+        sx={{
+          maxWidth: "50vw",
+          marginX: "auto",
+          marginTop: 2,
+          marginBottom: 7
+        }}
+      >
+        <AlertTitle><b>What is ULID?</b></AlertTitle>
+        ULID (Universally Unique Lexicographically Sortable Identifier) is a 26-character string (128 bits)
+        consisting of a timestamp component and a random component, both base32 encoded.
+        The timestamp component provides millisecond precision,
+        while the random component ensures uniqueness.
+        Unlike traditional UUIDs, ULIDs can be monotonically ordered and sorted,
+        making them particularly useful in applications where data needs to be sorted by time.
+      </Alert>
       <Stack
         gap={3}
         sx={{
