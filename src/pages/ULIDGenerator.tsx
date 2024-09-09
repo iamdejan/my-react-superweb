@@ -1,37 +1,16 @@
 import { Alert, AlertTitle, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
-import { JSX, useEffect, useState } from "react";
+import { JSX } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
-import { monotonicFactory } from "ulidx";
-
-const maxULIDCount = 30;
-const ulid = monotonicFactory();
+import useULIDGenerator, { maxULIDCount } from "../hooks/useULIDGenerator";
 
 export default function ULIDGenerator(): JSX.Element {
-  const [count, setCount] = useState<number>(0);
-  const [ulidList, setULIDList] = useState<string[]>([]);
-  const [seed, setSeed] = useState<number>(new Date().getTime());
-
-  useEffect(() => {
-    const generatedULIDs: string[] = [];
-    for(let i = 1; i <= count; i++) {
-      const generatedULID = ulid(seed);
-      generatedULIDs.push(generatedULID);
-    }
-    setULIDList(generatedULIDs);
-  }, [seed, count]);
-
-  function handleScaleUpdate(_e: Event, value: number | number[]): void {
-    setCount(value as number);
-  }
-
-  function handleTextFieldUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
-    if(event.target.value === "") {
-      setCount(0);
-      return;
-    }
-    const parsedInput = Number.parseInt(event.target.value);
-    setCount(Math.min(parsedInput, maxULIDCount));
-  }
+  const {
+    count,
+    ulidList,
+    handleScaleUpdate,
+    handleTextFieldUpdate,
+    refreshSeed
+  } = useULIDGenerator();
 
   return(
     <Container sx={{
@@ -81,7 +60,7 @@ export default function ULIDGenerator(): JSX.Element {
           variant="contained"
           sx={{ marginX: "auto" }}
           type="button"
-          onClick={() => setSeed(new Date().getTime())}
+          onClick={refreshSeed}
         >
           Refresh Seed
         </Button>
