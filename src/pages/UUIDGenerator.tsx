@@ -1,40 +1,20 @@
 import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
-import React, { JSX, useEffect, useState } from "react";
+import { JSX } from "react";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
 import { useDocumentTitle } from "@uidotdev/usehooks";
-
-const maxCount = 30;
+import useUUIDGenerator, { maxUUIDCount } from "../hooks/useUUIDGenerator";
 
 export default function UUIDGenerator(): JSX.Element {
-  const [count, setCount] = useState<number>(0);
-  const [uuid, setUUID] = useState<string>("");
-  const [uuidList, setUUIDList] = useState<string[]>([]);
+  const { 
+    uuid,
+    count,
+    uuidList,
+    handleScaleUpdate,
+    handleTextFieldUpdate,
+    onGenerateButtonClick,
+  } = useUUIDGenerator();
+
   useDocumentTitle("UUID Generator");
-
-  useEffect(() => {
-    setUUID(crypto.randomUUID());
-  }, []);
-
-  function handleScaleUpdate(_e: Event, value: number | number[]): void {
-    setCount(value as number);
-  }
-
-  function handleTextFieldUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
-    if(event.target.value === "") {
-      setCount(0);
-      return;
-    }
-    const parsedInput = Number.parseInt(event.target.value);
-    setCount(Math.min(parsedInput, maxCount));
-  }
-
-  function onClick(): void {
-    const generatedUUIDs: string[] = [];
-    for(let i = 1; i <= count; i++) {
-      generatedUUIDs.push(crypto.randomUUID());
-    }
-    setUUIDList(generatedUUIDs);
-  }
 
   return(
     <Container sx={{
@@ -82,18 +62,32 @@ export default function UUIDGenerator(): JSX.Element {
           Or, generate multiple UUIDs at the same time
         </Typography>
         <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
-          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxCount} />
+          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxUUIDCount} />
           <TextField
+            type="number"
             label="Count"
             value={count}
             onChange={handleTextFieldUpdate}
           />
         </Stack>
-        <Button variant="contained" sx={{ marginX: "auto" }} type="button" onClick={onClick}>
+        <Button
+          variant="contained"
+          sx={{ marginX: "auto" }}
+          type="button"
+          onClick={onGenerateButtonClick}
+        >
           Generate
         </Button>
 
-        <TableContainer component={Paper} sx={{marginTop: 3, maxHeight: "60vh", maxWidth: "25vw", marginX: "auto"}}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            marginTop: 3,
+            maxHeight: "60vh",
+            maxWidth: "35vw",
+            marginX: "auto"
+          }}
+        >
           <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
