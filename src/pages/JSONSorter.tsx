@@ -1,4 +1,4 @@
-import { Button, Container, TextareaAutosize, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { JSX } from "react";
 import useJSONSorter from "../hooks/useJSONSorter";
 
@@ -18,9 +18,17 @@ export default function JSONSorter(): JSX.Element {
         JSON Recursive Sorter
       </Typography>
       <Container sx={{
-        margin: 2
+        width: "90vw",
+        height: "50vh",
+        marginX: "auto",
       }}>
-        <TextareaAutosize minRows={50} cols={190} value={text} onChange={handleTextAreaChanged} />
+        <textarea style={{
+          width: "100%",
+          height: "100%",
+          fontSize: "1rem",
+        }}
+        onChange={handleTextAreaChanged}
+        value={text} />
       </Container>
       <Container
         sx={{
@@ -34,6 +42,9 @@ export default function JSONSorter(): JSX.Element {
           fullWidth
           onClick={handleSortButtonClicked}
           type="button"
+          sx={{
+            marginTop: 5
+          }}
         >
           Sort
         </Button>
