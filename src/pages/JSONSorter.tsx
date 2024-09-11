@@ -1,23 +1,9 @@
 import { Button, Container, TextareaAutosize, Typography } from "@mui/material";
-import {JSX, useState} from "react";
-import stringify from "json-stable-stringify";
-import sortKeysRecursive from "sort-keys-recursive";
+import { JSX } from "react";
+import useJSONSorter from "../hooks/useJSONSorter";
 
 export default function JSONSorter(): JSX.Element {
-  const [text, setText] = useState<string>("");
-
-  function handleTextAreaChanged(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-    setText(e.target.value);
-  }
-
-  function handleSortButtonClicked(): void {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedData = JSON.parse(text);
-
-    const sortedData = sortKeysRecursive(parsedData) as unknown;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    setText(stringify(sortedData, {space: "\t"}) as string);
-  }
+  const { text, handleTextAreaChanged, handleSortButtonClicked } = useJSONSorter();
 
   return (
     <Container sx={{
