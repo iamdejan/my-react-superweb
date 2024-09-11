@@ -44,6 +44,10 @@ const routeList: RouteLink[] = [
   {
     link: "/calculator",
     title: "Calculator"
+  },
+  {
+    link: "/json-sorter",
+    title: "JSON Sorter"
   }
 ];
 
