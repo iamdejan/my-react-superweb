@@ -21,6 +21,7 @@ const UuidGeneratorLazyImport = createFileRoute('/uuid-generator')()
 const UlidGeneratorLazyImport = createFileRoute('/ulid-generator')()
 const ToDoListLazyImport = createFileRoute('/to-do-list')()
 const PasswordGeneratorLazyImport = createFileRoute('/password-generator')()
+const JsonSorterLazyImport = createFileRoute('/json-sorter')()
 const DistanceCalculatorLazyImport = createFileRoute('/distance-calculator')()
 const CounterLazyImport = createFileRoute('/counter')()
 const CalculatorLazyImport = createFileRoute('/calculator')()
@@ -55,6 +56,11 @@ const PasswordGeneratorLazyRoute = PasswordGeneratorLazyImport.update({
 } as any).lazy(() =>
   import('./routes/password-generator.lazy').then((d) => d.Route),
 )
+
+const JsonSorterLazyRoute = JsonSorterLazyImport.update({
+  path: '/json-sorter',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/json-sorter.lazy').then((d) => d.Route))
 
 const DistanceCalculatorLazyRoute = DistanceCalculatorLazyImport.update({
   path: '/distance-calculator',
@@ -136,6 +142,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DistanceCalculatorLazyImport
       parentRoute: typeof rootRoute
     }
+    '/json-sorter': {
+      id: '/json-sorter'
+      path: '/json-sorter'
+      fullPath: '/json-sorter'
+      preLoaderRoute: typeof JsonSorterLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/password-generator': {
       id: '/password-generator'
       path: '/password-generator'
@@ -189,6 +202,7 @@ export const routeTree = rootRoute.addChildren({
   CalculatorLazyRoute,
   CounterLazyRoute,
   DistanceCalculatorLazyRoute,
+  JsonSorterLazyRoute,
   PasswordGeneratorLazyRoute,
   ToDoListLazyRoute,
   UlidGeneratorLazyRoute,
@@ -210,6 +224,7 @@ export const routeTree = rootRoute.addChildren({
         "/calculator",
         "/counter",
         "/distance-calculator",
+        "/json-sorter",
         "/password-generator",
         "/to-do-list",
         "/ulid-generator",
@@ -232,6 +247,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/distance-calculator": {
       "filePath": "distance-calculator.lazy.tsx"
+    },
+    "/json-sorter": {
+      "filePath": "json-sorter.lazy.tsx"
     },
     "/password-generator": {
       "filePath": "password-generator.lazy.tsx"
