@@ -20,8 +20,7 @@ export default function JSONSorter(): JSX.Element {
       <Container sx={{
         width: "90vw",
         height: "50vh",
-        marginX: "auto",
-        alignItems: "center"
+        marginX: "auto"
       }}>
         <FormControlLabel
           control={<Switch />}
@@ -29,7 +28,8 @@ export default function JSONSorter(): JSX.Element {
             maxWidth: "fit-content",
             marginX: "auto",
             justifyContent: "center",
-            display: "flex"
+            display: "flex",
+            marginBottom: 2
           }}
           label="Sort arrays"
           checked={sortArrays}
