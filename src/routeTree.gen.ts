@@ -196,20 +196,131 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
-  AboutLazyRoute,
-  CalculatorLazyRoute,
-  CounterLazyRoute,
-  DistanceCalculatorLazyRoute,
-  JsonSorterLazyRoute,
-  PasswordGeneratorLazyRoute,
-  ToDoListLazyRoute,
-  UlidGeneratorLazyRoute,
-  UuidGeneratorLazyRoute,
-  BmiCalculatorIndexLazyRoute,
-  BmiCalculatorHeightHeightRoute,
-})
+export interface FileRoutesByFullPath {
+  '/': typeof IndexLazyRoute
+  '/about': typeof AboutLazyRoute
+  '/calculator': typeof CalculatorLazyRoute
+  '/counter': typeof CounterLazyRoute
+  '/distance-calculator': typeof DistanceCalculatorLazyRoute
+  '/json-sorter': typeof JsonSorterLazyRoute
+  '/password-generator': typeof PasswordGeneratorLazyRoute
+  '/to-do-list': typeof ToDoListLazyRoute
+  '/ulid-generator': typeof UlidGeneratorLazyRoute
+  '/uuid-generator': typeof UuidGeneratorLazyRoute
+  '/bmi-calculator': typeof BmiCalculatorIndexLazyRoute
+  '/bmi-calculator/height/$height': typeof BmiCalculatorHeightHeightRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexLazyRoute
+  '/about': typeof AboutLazyRoute
+  '/calculator': typeof CalculatorLazyRoute
+  '/counter': typeof CounterLazyRoute
+  '/distance-calculator': typeof DistanceCalculatorLazyRoute
+  '/json-sorter': typeof JsonSorterLazyRoute
+  '/password-generator': typeof PasswordGeneratorLazyRoute
+  '/to-do-list': typeof ToDoListLazyRoute
+  '/ulid-generator': typeof UlidGeneratorLazyRoute
+  '/uuid-generator': typeof UuidGeneratorLazyRoute
+  '/bmi-calculator': typeof BmiCalculatorIndexLazyRoute
+  '/bmi-calculator/height/$height': typeof BmiCalculatorHeightHeightRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexLazyRoute
+  '/about': typeof AboutLazyRoute
+  '/calculator': typeof CalculatorLazyRoute
+  '/counter': typeof CounterLazyRoute
+  '/distance-calculator': typeof DistanceCalculatorLazyRoute
+  '/json-sorter': typeof JsonSorterLazyRoute
+  '/password-generator': typeof PasswordGeneratorLazyRoute
+  '/to-do-list': typeof ToDoListLazyRoute
+  '/ulid-generator': typeof UlidGeneratorLazyRoute
+  '/uuid-generator': typeof UuidGeneratorLazyRoute
+  '/bmi-calculator/': typeof BmiCalculatorIndexLazyRoute
+  '/bmi-calculator/height/$height': typeof BmiCalculatorHeightHeightRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/calculator'
+    | '/counter'
+    | '/distance-calculator'
+    | '/json-sorter'
+    | '/password-generator'
+    | '/to-do-list'
+    | '/ulid-generator'
+    | '/uuid-generator'
+    | '/bmi-calculator'
+    | '/bmi-calculator/height/$height'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/about'
+    | '/calculator'
+    | '/counter'
+    | '/distance-calculator'
+    | '/json-sorter'
+    | '/password-generator'
+    | '/to-do-list'
+    | '/ulid-generator'
+    | '/uuid-generator'
+    | '/bmi-calculator'
+    | '/bmi-calculator/height/$height'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/calculator'
+    | '/counter'
+    | '/distance-calculator'
+    | '/json-sorter'
+    | '/password-generator'
+    | '/to-do-list'
+    | '/ulid-generator'
+    | '/uuid-generator'
+    | '/bmi-calculator/'
+    | '/bmi-calculator/height/$height'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexLazyRoute: typeof IndexLazyRoute
+  AboutLazyRoute: typeof AboutLazyRoute
+  CalculatorLazyRoute: typeof CalculatorLazyRoute
+  CounterLazyRoute: typeof CounterLazyRoute
+  DistanceCalculatorLazyRoute: typeof DistanceCalculatorLazyRoute
+  JsonSorterLazyRoute: typeof JsonSorterLazyRoute
+  PasswordGeneratorLazyRoute: typeof PasswordGeneratorLazyRoute
+  ToDoListLazyRoute: typeof ToDoListLazyRoute
+  UlidGeneratorLazyRoute: typeof UlidGeneratorLazyRoute
+  UuidGeneratorLazyRoute: typeof UuidGeneratorLazyRoute
+  BmiCalculatorIndexLazyRoute: typeof BmiCalculatorIndexLazyRoute
+  BmiCalculatorHeightHeightRoute: typeof BmiCalculatorHeightHeightRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexLazyRoute: IndexLazyRoute,
+  AboutLazyRoute: AboutLazyRoute,
+  CalculatorLazyRoute: CalculatorLazyRoute,
+  CounterLazyRoute: CounterLazyRoute,
+  DistanceCalculatorLazyRoute: DistanceCalculatorLazyRoute,
+  JsonSorterLazyRoute: JsonSorterLazyRoute,
+  PasswordGeneratorLazyRoute: PasswordGeneratorLazyRoute,
+  ToDoListLazyRoute: ToDoListLazyRoute,
+  UlidGeneratorLazyRoute: UlidGeneratorLazyRoute,
+  UuidGeneratorLazyRoute: UuidGeneratorLazyRoute,
+  BmiCalculatorIndexLazyRoute: BmiCalculatorIndexLazyRoute,
+  BmiCalculatorHeightHeightRoute: BmiCalculatorHeightHeightRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
