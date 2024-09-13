@@ -1,9 +1,9 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, FormControlLabel, Switch, Typography } from "@mui/material";
 import { JSX } from "react";
 import useJSONSorter from "../hooks/useJSONSorter";
 
 export default function JSONSorter(): JSX.Element {
-  const { text, handleTextAreaChanged, handleSortButtonClicked } = useJSONSorter();
+  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged: handleSortArraysSwitchChanged } = useJSONSorter();
 
   return (
     <Container sx={{
@@ -20,8 +20,21 @@ export default function JSONSorter(): JSX.Element {
       <Container sx={{
         width: "90vw",
         height: "50vh",
-        marginX: "auto",
+        marginX: "auto"
       }}>
+        <FormControlLabel
+          control={<Switch />}
+          sx={{
+            maxWidth: "fit-content",
+            marginX: "auto",
+            justifyContent: "center",
+            display: "flex",
+            marginBottom: 2
+          }}
+          label="Sort arrays"
+          checked={sortArrays}
+          onChange={handleSortArraysSwitchChanged}
+        />
         <textarea style={{
           width: "100%",
           height: "100%",
@@ -33,18 +46,16 @@ export default function JSONSorter(): JSX.Element {
       <Container
         sx={{
           maxWidth: "30vw",
-          marginX: "auto"
+          marginX: "auto",
+          marginTop: 10
         }}
       >
         <Button
           variant="contained"
           color="primary"
           fullWidth
-          onClick={handleSortButtonClicked}
+          onClick={() => void handleSortButtonClicked()}
           type="button"
-          sx={{
-            marginTop: 5
-          }}
         >
           Sort
         </Button>
