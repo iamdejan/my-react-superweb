@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
-import useULIDGenerator, { maxULIDCount } from "./useULIDGenerator";
+import useULIDGenerator, { maxULIDCount } from "./hooks";
 
 export default function ULIDGenerator(): JSX.Element {
   const {
