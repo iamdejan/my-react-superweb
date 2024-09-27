@@ -157,7 +157,13 @@ export default function UUIDGenerator(): JSX.Element {
                   >
                     {uuidValue}
                   </TableCell>
-                  <TableCell><CopyToClipboardButton input={uuidValue} /></TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                    }}
+                  >
+                    <CopyToClipboardButton input={uuidValue} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
