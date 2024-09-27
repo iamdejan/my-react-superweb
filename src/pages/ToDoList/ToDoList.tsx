@@ -42,7 +42,8 @@ export default function ToDoList(): JSX.Element {
         sx={{
           marginX: "auto",
           maxWidth: {
-            lg: "40%",
+            sm: "70%",
+            md: "50%",
           }
         }}
       >
@@ -66,7 +67,8 @@ export default function ToDoList(): JSX.Element {
             marginX: "auto",
             padding: 2,
             maxWidth: {
-              lg: "40%",
+              sm: "70%",
+              md: "50%",
             },
           }}
         >
@@ -98,7 +100,8 @@ export default function ToDoList(): JSX.Element {
           marginTop: 3,
           maxHeight: "60vh",
           maxWidth: {
-            lg: "70vw",
+            md: "80%",
+            lg: "70%",
           },
           marginX: "auto",
         }}
