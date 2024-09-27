@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Button, Checkbox, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
-import { ToDoItem, ToDoItemSchema } from "../schema/ToDoItemSchema";
+import { ToDoItem, ToDoItemSchema } from "../../schema/ToDoItemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDocumentTitle, useLocalStorage } from "@uidotdev/usehooks";
 
