@@ -1,7 +1,7 @@
 import { Checkbox, Collapse, Container, FormControlLabel, Paper, Slider, Stack, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
-import CopyToClipboardButton from "../components/CopyToClipboardButton";
-import usePasswordGenerator, { maxPasswordLength } from "../hooks/usePasswordGenerator";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
+import usePasswordGenerator, { maxPasswordLength } from "./hooks";
 
 export default function PasswordGenerator(): JSX.Element {
   const {
@@ -34,7 +34,12 @@ export default function PasswordGenerator(): JSX.Element {
       <Stack
         gap={3}
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            xs: "85%",
+            sm: "80%",
+            md: "70%",
+            lg: "50%",
+          },
           marginX: "auto",
         }}
       >
@@ -52,7 +57,12 @@ export default function PasswordGenerator(): JSX.Element {
         direction="column"
         gap={1}
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            xs: "85%",
+            sm: "80%",
+            md: "70%",
+            lg: "50%",
+          },
           marginX: "auto",
           marginBottom: 3,
         }}
@@ -88,7 +98,12 @@ export default function PasswordGenerator(): JSX.Element {
       <Stack
         gap={3}
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            xs: "85%",
+            sm: "80%",
+            md: "70%",
+            lg: "50%",
+          },
           marginX: "auto",
         }}
       >
@@ -106,7 +121,7 @@ export default function PasswordGenerator(): JSX.Element {
           >
             <Typography variant="h6" marginBottom={2}>Generated Password</Typography>
             <Stack direction="row" marginX="auto" maxWidth="90%">
-              <TextField disabled value={generatedPassword} sx={{flexGrow: 1}} />
+              <TextField disabled value={generatedPassword} fullWidth />
               <CopyToClipboardButton input={generatedPassword} />
             </Stack>
           </Paper>
