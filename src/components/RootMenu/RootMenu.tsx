@@ -1,7 +1,6 @@
 import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography } from "@mui/material";
 import { FileRoutesByPath, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { JSX, useState } from "react";
+import { JSX, lazy, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { grey } from "@mui/material/colors";
 
@@ -53,6 +52,15 @@ const routeList: RouteLink[] = [
   }
 ];
 
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? (): null => null // Render nothing in production
+    : lazy(() =>
+      import("@tanstack/router-devtools").then((res) => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    );
+
 export default function RootMenu(): JSX.Element {
   const [open, setOpen] = useState(false);
 
@@ -74,19 +82,20 @@ export default function RootMenu(): JSX.Element {
       <Drawer open={open} onClose={() => setOpen(false)}>
         <List>
           {routeList.map((route) => (
-            <ListItem key={route.link}>
-              <Typography
-                component="a"
-                href={route.link}
-                sx={{
-                  textDecoration: "none",
-                  boxShadow: "none",
-                  color: "inherit",
-                  "&:hover": {
-                    backgroundColor: grey[200],
-                  }
-                }}
-              >
+            <ListItem
+              key={route.link}
+              sx={{
+                textDecoration: "none",
+                boxShadow: "none",
+                color: "inherit",
+                "&:hover": {
+                  backgroundColor: grey[200],
+                }
+              }}
+              component="a"
+              href={route.link}
+            >
+              <Typography>
                 {route.title}
               </Typography>
             </ListItem>
