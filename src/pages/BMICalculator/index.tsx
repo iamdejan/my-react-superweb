@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { BMICalculation, BMICalculationSchema } from "../../schema/BMICalculationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
-import useBMICalculator from "../../hooks/useBMICalculator";
+import useBMICalculator from "./hooks";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function BMICalculatorIndex(): JSX.Element {

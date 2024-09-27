@@ -1,8 +1,8 @@
 import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
-import { useDistanceCalculator } from "../hooks/useDistanceCalculator";
-import CopyToClipboardButton from "../components/CopyToClipboardButton";
-import { DistanceUnit } from "../enums/DistanceUnit";
+import { useDistanceCalculator } from "./hooks";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
+import { DistanceUnit } from "../../enums/DistanceUnit";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function DistanceCalculator(): JSX.Element {
@@ -61,11 +61,20 @@ export default function DistanceCalculator(): JSX.Element {
         </FormControl>
       </Container>
 
-      <Stack gap={2} maxWidth="60vw" marginX="auto">
+      <Stack
+        sx={{
+          gap: 2,
+          maxWidth: {
+            sm: "80%",
+            md: "60%"
+          },
+          marginX: "auto",
+        }}
+      >
         <Typography variant="h6" align="center" marginTop={3}>
           Values
         </Typography>
-        <Stack direction="row" justifyContent="space-evenly">
+        <Stack direction="row">
           <TextField
             name={DistanceUnit.Kilometer.toString()}
             label="Kilometer"
@@ -79,7 +88,7 @@ export default function DistanceCalculator(): JSX.Element {
           />
           <CopyToClipboardButton input={kilometerInput} />
         </Stack>
-        <Stack direction="row" justifyContent="space-evenly">
+        <Stack direction="row">
           <TextField
             name={DistanceUnit.Mile.toString()}
             label="Mile"
@@ -93,7 +102,7 @@ export default function DistanceCalculator(): JSX.Element {
           />
           <CopyToClipboardButton input={mileInput} />
         </Stack>
-        <Stack direction="row" justifyContent="space-evenly">
+        <Stack direction="row">
           <TextField
             name={DistanceUnit.NauticalMile.toString()}
             label="Nautical Mile"

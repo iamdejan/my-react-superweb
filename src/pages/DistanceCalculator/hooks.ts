@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DistanceUnit } from "../enums/DistanceUnit";
+import { DistanceUnit } from "../../enums/DistanceUnit";
 
 const digits: number = 4;
 
