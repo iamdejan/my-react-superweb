@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
-import CopyToClipboardButton from "../components/CopyToClipboardButton";
-import useULIDGenerator, { maxULIDCount } from "../hooks/useULIDGenerator";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
+import useULIDGenerator, { maxULIDCount } from "./useULIDGenerator";
 
 export default function ULIDGenerator(): JSX.Element {
   const {
@@ -26,7 +26,11 @@ export default function ULIDGenerator(): JSX.Element {
       <Alert
         severity="info"
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            sm: "75%",
+            md: "60%",
+            lg: "50%",
+          },
           marginX: "auto",
           marginTop: 2,
           marginBottom: 7
@@ -43,7 +47,9 @@ export default function ULIDGenerator(): JSX.Element {
       <Stack
         gap={3}
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            lg: "50vw"
+          },
           marginX: "auto",
         }}
       >
@@ -68,23 +74,69 @@ export default function ULIDGenerator(): JSX.Element {
           component={Paper}
           sx={{
             marginTop: 3,
-            maxHeight: "60vh",
-            maxWidth: "35vw",
+            maxHeight: {
+              sm: "60vh"
+            },
+            maxWidth: {
+              xs: "80vw",
+              sm: "65vw",
+              md: "50vw",
+              lg: "40vw"
+            },
             marginX: "auto"
           }}
         >
           <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "95vw" }}>ULID</TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "5vw" }}>Copy</TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "650",
+                    maxWidth: {
+                      sm: "60vw",
+                      md: "95vw",
+                    },
+                  }}
+                >
+                  ULID
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "650",
+                    maxWidth: {
+                      sm: "40vw",
+                      lg: "5vw"
+                    },
+                  }}
+                >
+                  Copy
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {ulidList.map((ulidValue, index) => (
                 <TableRow key={index}>
-                  <TableCell>{ulidValue}</TableCell>
-                  <TableCell><CopyToClipboardButton input={ulidValue} /></TableCell>
+                  <TableCell
+                    sx={{
+                      fontSize: {
+                        xs: "0.8rem",
+                        sm: "0.85rem",
+                        md: "0.9rem",
+                        lg: "1rem",
+                      }
+                    }}
+                  >
+                    {ulidValue}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                    }}
+                  >
+                    <CopyToClipboardButton input={ulidValue} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
