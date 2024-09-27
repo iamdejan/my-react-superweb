@@ -1,8 +1,8 @@
 import { Alert, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
-import CopyToClipboardButton from "../components/CopyToClipboardButton";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 import { useDocumentTitle } from "@uidotdev/usehooks";
-import useUUIDGenerator, { maxUUIDCount } from "../hooks/useUUIDGenerator";
+import useUUIDGenerator, { maxUUIDCount } from "./hooks";
 
 export default function UUIDGenerator(): JSX.Element {
   const { 
@@ -28,19 +28,32 @@ export default function UUIDGenerator(): JSX.Element {
         UUID Generator
       </Typography>
       <Stack
-        gap={3}
         sx={{
-          maxWidth: "40vw",
+          gap: 3,
+          maxWidth: {
+            sm: "65%",
+            md: "50%",
+            lg: "40%",
+          },
           marginX: "auto"
         }}>
         <Paper
           elevation={1}
           sx={{
-            paddingY: 1
+            padding: 2,
           }}
         >
-          <Stack direction="row" textAlign="center">
-            <Typography variant="h5" fontWeight={600} textAlign="center" flexGrow={1}>
+          <Stack direction="row" alignItems="center">
+            <Typography
+              fontSize={{
+                xs: "0.9rem",
+                md: "1.2rem",
+                lg: "1.3rem",
+              }}
+              fontWeight="550"
+              textAlign="center"
+              flexGrow={1}
+            >
               {uuid}
             </Typography>
             <CopyToClipboardButton input={uuid} />
@@ -54,7 +67,9 @@ export default function UUIDGenerator(): JSX.Element {
       <Stack
         gap={3}
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            lg: "50%"
+          },
           marginX: "auto",
         }}
       >
@@ -83,22 +98,65 @@ export default function UUIDGenerator(): JSX.Element {
           component={Paper}
           sx={{
             marginTop: 3,
-            maxHeight: "60vh",
-            maxWidth: "35vw",
+            maxHeight: {
+              sm: "60vh"
+            },
+            maxWidth: {
+              xs: "80vw",
+              sm: "65vw",
+              md: "50vw",
+              lg: "40vw"
+            },
             marginX: "auto"
           }}
         >
-          <Table stickyHeader size="small">
+          <Table
+            stickyHeader
+            size="small"
+          >
             <TableHead>
               <TableRow>
-                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "95vw" }}>UUID</TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "650", maxWidth: "5vw" }}>Copy</TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "650",
+                    maxWidth: {
+                      sm: "60vw",
+                      md: "95vw",
+                    },
+                  }}
+                >
+                  UUID
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "650",
+                    maxWidth: {
+                      sm: "40vw",
+                      lg: "5vw"
+                    },
+                  }}
+                >
+                  Copy
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {uuidList.map((uuidValue, index) => (
                 <TableRow key={index}>
-                  <TableCell>{uuidValue}</TableCell>
+                  <TableCell
+                    sx={{
+                      fontSize: {
+                        xs: "0.75rem",
+                        sm: "0.8rem",
+                        md: "0.9rem",
+                        lg: "1rem",
+                      }
+                    }}
+                  >
+                    {uuidValue}
+                  </TableCell>
                   <TableCell><CopyToClipboardButton input={uuidValue} /></TableCell>
                 </TableRow>
               ))}
