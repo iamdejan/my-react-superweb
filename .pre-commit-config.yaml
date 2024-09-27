@@ -16,7 +16,7 @@ repos:
       - id: install-pnpm
         name: Install pnpm
         language: system
-        entry: npm i -g pnpm@9.10.0
+        entry: npm i -g pnpm@9.11.0
         pass_filenames: false
       - id: install-dependencies
         name: Install dependencies
