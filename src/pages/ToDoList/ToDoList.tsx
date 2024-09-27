@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, Button, Checkbox, Container, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
-import { ToDoItem, ToDoItemSchema } from "../schema/ToDoItemSchema";
+import { ToDoItem, ToDoItemSchema } from "../../schema/ToDoItemSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDocumentTitle, useLocalStorage } from "@uidotdev/usehooks";
 
@@ -36,7 +36,17 @@ export default function ToDoList(): JSX.Element {
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         To-Do List
       </Typography>
-      <Alert severity="warning" variant="filled" sx={{marginX: "auto", maxWidth: "40%"}}>
+      <Alert
+        severity="warning"
+        variant="filled"
+        sx={{
+          marginX: "auto",
+          maxWidth: {
+            sm: "70%",
+            md: "50%",
+          }
+        }}
+      >
         <AlertTitle>Be Aware</AlertTitle>
         This to-do list stores the list of to-do activities locally.
         Currently, there's no plan to integrate this feature with database.
@@ -49,13 +59,18 @@ export default function ToDoList(): JSX.Element {
         void handleSubmit(onSubmit)(event);
       }}>
         <Stack
-          gap={4}
-          marginTop={3}
-          marginX="auto"
-          padding={2}
-          maxWidth="40%"
           elevation={2}
           component={Paper}
+          sx={{
+            gap: 4,
+            marginTop: 3,
+            marginX: "auto",
+            padding: 2,
+            maxWidth: {
+              sm: "70%",
+              md: "50%",
+            },
+          }}
         >
           <Typography variant="h6" align="center">
             Form
@@ -84,7 +99,10 @@ export default function ToDoList(): JSX.Element {
         sx={{
           marginTop: 3,
           maxHeight: "60vh",
-          maxWidth: "70vw",
+          maxWidth: {
+            md: "80%",
+            lg: "70%",
+          },
           marginX: "auto",
         }}
       >
