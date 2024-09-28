@@ -6,7 +6,7 @@ import { JSX } from "react";
 const route = getRouteApi("/bmi-calculator/height/$height");
 
 export default function InvalidHeightError(): JSX.Element {
-  useDocumentTitle("BMI Calculator Error");
+  useDocumentTitle("Invalid Height Error");
   const { height } = route.useParams();
   return (
     <Container
@@ -18,12 +18,30 @@ export default function InvalidHeightError(): JSX.Element {
       }}
     >
       <Alert severity="error" sx={{
-        maxWidth: "40vw",
+        maxWidth: {
+          sm: "75vw",
+          md: "60vw",
+          lg: "45vw",
+        },
         marginX: "auto",
-        fontSize: "15pt",
+        fontSize: {
+          sm: "12pt",
+          md: "14pt",
+          lg: "15pt",
+        },
         fontWeight: 650,
       }}>
-        <AlertTitle fontSize="17pt"><b>Error!</b></AlertTitle>
+        <AlertTitle
+          sx={{
+            fontSize: {
+              sm: "14pt",
+              md: "16pt",
+              lg: "17pt",
+            }
+          }}
+        >
+          <b>Error!</b>
+        </AlertTitle>
         Invalid height of {height}. It should be in the format of: number + "cm".<br />
         Example: 165cm.
       </Alert>
