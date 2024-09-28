@@ -33,7 +33,11 @@ export default function BMICalculatorDetail(): JSX.Element {
         component={Paper}
         sx={{
           marginY: 2,
-          maxWidth: "30vw",
+          maxWidth: {
+            sm: "60vw",
+            md: "40vw",
+            lg: "30vw",
+          },
           marginX: "auto",
         }}
       >
@@ -60,7 +64,11 @@ export default function BMICalculatorDetail(): JSX.Element {
         sx={{
           padding: 3,
           marginY: 2,
-          maxWidth: "30vw",
+          maxWidth: {
+            sm: "60vw",
+            md: "40vw",
+            lg: "30vw",
+          },
           marginX: "auto",
         }}
       >

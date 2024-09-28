@@ -81,7 +81,11 @@ export default function BMICalculatorIndex(): JSX.Element {
         severity="info"
         variant="filled"
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            sm: "70vw",
+            md: "50vw",
+            lg: "40vw",
+          },
           marginX: "auto",
           marginY: 2
         }}
@@ -93,7 +97,11 @@ export default function BMICalculatorIndex(): JSX.Element {
         severity="warning"
         variant="filled"
         sx={{
-          maxWidth: "50vw",
+          maxWidth: {
+            sm: "70vw",
+            md: "50vw",
+            lg: "40vw",
+          },
           marginX: "auto",
           marginY: 2
         }}
@@ -107,14 +115,25 @@ export default function BMICalculatorIndex(): JSX.Element {
         void handleSubmit(onSubmit)(event);
       }}>
         <Stack
-          direction="column"
-          gap={2}
           sx={{
-            marginY: 2,
-            alignItems: "center"
+            gap: 2,
+            marginY: 4,
+            maxWidth: {
+              sm: "70vw",
+              md: "50vw",
+              lg: "40vw",
+            },
+            marginX: "auto",
           }}
         >
-          <Typography variant="h5" marginTop={3}>Count your BMI</Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center"
+            }}
+          >
+            Count your BMI
+          </Typography>
           <TextField
             label="Height (in cm)"
             {...register("height")}
@@ -148,28 +167,30 @@ export default function BMICalculatorIndex(): JSX.Element {
       </form>
 
       <Stack
-        direction="column"
         gap={2}
         sx={{
-          marginTop: 10,
+          marginTop: 8,
           marginBottom: 2,
-          alignItems: "center"
+          maxWidth: {
+            sm: "70vw",
+            md: "50vw",
+            lg: "40vw",
+          },
+          marginX: "auto",
         }}
       >
-        <Typography variant="h5">
+        <Typography variant="h5" textAlign="center">
           Or, find the ideal weight
         </Typography>
-        <Stack direction="column" gap={2} alignItems="center">
-          <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
-          <Button
-            variant="contained"
-            color="primary"
-            type="button"
-            href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
-          >
-            Find
-          </Button>
-        </Stack>
+        <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
+        <Button
+          variant="contained"
+          color="primary"
+          type="button"
+          href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
+        >
+          Find
+        </Button>
       </Stack>
     </Container>
   );
