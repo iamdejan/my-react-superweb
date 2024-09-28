@@ -1,6 +1,6 @@
 import { Button, Container, FormControlLabel, Switch, Typography } from "@mui/material";
 import { JSX } from "react";
-import useJSONSorter from "../../hooks/useJSONSorter";
+import useJSONSorter from "./hooks";
 
 export default function JSONSorter(): JSX.Element {
   const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged: handleSortArraysSwitchChanged } = useJSONSorter();
