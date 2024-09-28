@@ -67,7 +67,7 @@ export default function RootMenu(): JSX.Element {
   return (
     <>
       <AppBar position="static" sx={{margin:"0", padding:"0"}}>
-        <Container maxWidth="xl">
+        <Container maxWidth={false}>
           <Toolbar disableGutters>
             <Button color="inherit" onClick={() => setOpen(true)}>
               <MenuIcon />
