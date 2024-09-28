@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent, Container, Paper, Stack, Typography } from "@mui/material";
 import { JSX } from "react";
-import useCalculator, { layout } from "../hooks/useCalculator";
+import useCalculator, { layout } from "./hooks";
 
 export default function Calculator(): JSX.Element {
   const {display, handleButtonClicked} = useCalculator();
@@ -31,35 +31,80 @@ export default function Calculator(): JSX.Element {
             variant="outlined"
             sx={{
               width: "95%",
-              alignSelf: "center",
+              alignContent: "center",
               marginBottom: 2,
-              paddingY: 2,
-              paddingX: 5,
+              paddingY: {
+                xs: 0.5,
+                sm: 0.75,
+                md: 1,
+                lg: 2
+              },
+              paddingX: {
+                xs: 1,
+                md: 3,
+                lg: 5,
+              },
               textAlign: "right",
-              height: "90px",
+              height: {
+                xs: "50px",
+                sm: "60px",
+                md: "70px",
+                lg: "90px",
+              },
             }}
           >
-            <Typography variant="h3">{display}</Typography>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.5rem",
+                  md: "1.75rem",
+                  lg: "2.5rem",
+                }
+              }}
+            >
+              {display}
+            </Typography>
           </Paper>
           <Stack gap={2}>
             {layout.map((row, i) => (
               <Stack
                 key={i}
                 direction="row"
-                gap={2}
+                gap={{
+                  sm: 1,
+                  lg: 2
+                }}
                 justifyContent="space-evenly"
               >
                 {row.map((text, j) => (
                   <Card
                     key={j}
                     sx={{
-                      minWidth: "15%",
-                      borderRadius: "2rem"
+                      minWidth: {
+                        xs: "10%",
+                        sm: "15%",
+                      },
+                      borderRadius: {
+                        xs: "0.5rem",
+                        sm: "1rem",
+                        md: "1.5rem",
+                        lg: "2rem",
+                      }
                     }}
                   >
                     <CardActionArea onClick={() => handleButtonClicked(text)}>
                       <CardContent>
-                        <Typography variant="h4" textAlign="center">
+                        <Typography
+                          textAlign="center"
+                          sx={{
+                            fontSize: {
+                              xs: "0.7rem",
+                              sm: "1rem",
+                              lg: "1.5rem",
+                            },
+                          }}
+                        >
                           {text}
                         </Typography>
                       </CardContent>

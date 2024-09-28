@@ -6,7 +6,7 @@ export const layout = [
   ["1", "2", "3", "+", "-"],
   ["0", "000", ".", "=", "C"],
 ];
-export const validCharacterSet = new Set(layout.flat());
+export const validCharacterSet = new Set<string>(layout.flat());
 
 type CalculatorHookOutput = {
   display: string;
