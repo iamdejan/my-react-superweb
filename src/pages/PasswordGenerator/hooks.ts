@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { isStateChanged } from "../../utils/hooks";
 
 export const maxPasswordLength = 30;
 
@@ -21,18 +22,12 @@ const symbolCharacters = [
 
 type PasswordGeneratorHookOutput = {
   passwordLength: number,
-
   generatedPassword: string,
 
   useLowerCase: boolean,
-
   useUpperCase: boolean,
-
   useNumbers: boolean,
-
   useSymbols: boolean,
-
-  availableCharacters: string[],
 
   handleScaleUpdate: (_e: Event, value: number | number[]) => void,
   handleTextFieldUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -45,32 +40,43 @@ type PasswordGeneratorHookOutput = {
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
   // password generator configurations
   const [passwordLength, setPasswordLength] = useState<number>(0);
+  const [prevPasswordLength, setPrevPasswordLength] = useState<number>(0);
+
   const [generatedPassword, setGeneratedPassword] = useState<string>("");
 
   // password character's configurations
   const [useLowerCase, setUseLowerCase] = useState<boolean>(true);
+  const [prevUseLowerCase, setPrevUseLowerCase] = useState<boolean>(true);
+
   const [useUpperCase, setUseUpperCase] = useState<boolean>(true);
+  const [prevUseUpperCase, setPrevUseUpperCase] = useState<boolean>(true);
+
   const [useNumbers, setUseNumbers] = useState<boolean>(true);
+  const [prevUseNumbers, setPrevUseNumbers] = useState<boolean>(true);
+
   const [useSymbols, setUseSymbols] = useState<boolean>(true);
-  const [availableCharacters, setAvailableCharacters] = useState<string[]>([]);
+  const [prevUseSymbols, setPrevUseSymbols] = useState<boolean>(true);
 
-  useEffect(() => {
-    let pwd = "";
-    if(passwordLength === 0 || availableCharacters.length === 0) {
-      setGeneratedPassword("");
-      return;
-    }
+  const retriggerIfChanged: () => boolean = useCallback<() => boolean>(() => {
+    return isStateChanged(prevUseLowerCase, useLowerCase) ||
+      isStateChanged(prevUseUpperCase, useUpperCase) ||
+      isStateChanged(prevUseNumbers, useNumbers) ||
+      isStateChanged(prevUseSymbols, useSymbols) ||
+      isStateChanged(prevPasswordLength, passwordLength);
+  }, [
+    prevUseLowerCase,
+    prevUseNumbers,
+    prevUseSymbols,
+    prevUseUpperCase,
+    useLowerCase,
+    useNumbers,
+    useSymbols,
+    useUpperCase,
+    prevPasswordLength,
+    passwordLength
+  ]);
 
-    for(let i = 0; i < passwordLength; i++) {
-      const randomIndex = Math.round(Math.random() * (availableCharacters.length - 1));
-      const randomChar = availableCharacters[randomIndex];
-      pwd += randomChar;
-    }
-
-    setGeneratedPassword(pwd);
-  }, [passwordLength, availableCharacters]);
-
-  useEffect(() => {
+  if(retriggerIfChanged()) {
     let characters: string[] = [];
     if (useLowerCase) {
       characters = characters.concat(lowerCaseAlphabet);
@@ -84,8 +90,26 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     if (useSymbols) {
       characters = characters.concat(symbolCharacters);
     }
-    setAvailableCharacters(characters);
-  }, [useLowerCase, useUpperCase, useNumbers, useSymbols]);
+
+    if(passwordLength === 0 || characters.length === 0) {
+      setGeneratedPassword("");
+    } else {
+      let pwd = "";
+      for(let i = 0; i < passwordLength; i++) {
+        const randomIndex = Math.round(Math.random() * (characters.length - 1));
+        const randomChar = characters[randomIndex];
+        pwd += randomChar;
+      }
+  
+      setGeneratedPassword(pwd);
+    }
+
+    setPrevUseLowerCase(useLowerCase);
+    setPrevUseUpperCase(useUpperCase);
+    setPrevUseNumbers(useNumbers);
+    setPrevUseSymbols(useSymbols);
+    setPrevPasswordLength(passwordLength);
+  };
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setPasswordLength(value as number);
@@ -123,7 +147,6 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     useUpperCase,
     useNumbers,
     useSymbols,
-    availableCharacters,
     handleScaleUpdate,
     handleTextFieldUpdate,
     handleLowerCaseUpdate,

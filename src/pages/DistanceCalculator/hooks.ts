@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { DistanceUnit } from "../../enums/DistanceUnit";
+import { isStateChanged } from "../../utils/hooks";
 
 const digits: number = 4;
 
@@ -72,10 +73,6 @@ function handleNauticalMile(
   }
 }
 
-function isStateChanged<T>(previous: T, current: T): boolean {
-  return previous !== current;
-}
-
 export function useDistanceCalculator(): DistanceCalculatorHookOutput {
   const [kilometerInput, setKilometerInput] = useState<string>("");
   const [prevKilometerInput, setPrevKilometerInput] = useState<string>("");
@@ -89,7 +86,7 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
   const [selection, setSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
   const [prevSelection, setPrevSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
 
-  const retriggerRender: () => boolean = useCallback(() => {
+  const retriggerRender: () => boolean = useCallback<() => boolean>(() => {
     return isStateChanged(prevKilometerInput, kilometerInput) ||
       isStateChanged(prevMileInput, mileInput) ||
       isStateChanged(prevNauticalMileInput, nauticalMileInput) ||
