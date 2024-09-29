@@ -38,11 +38,12 @@ type PasswordGeneratorHookOutput = {
 };
 
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
+  // generated password
+  const [generatedPassword, setGeneratedPassword] = useState<string>("");
+
   // password generator configurations
   const [passwordLength, setPasswordLength] = useState<number>(0);
-  const [prevPasswordLength, setPrevPasswordLength] = useState<number>(0);
-
-  const [generatedPassword, setGeneratedPassword] = useState<string>("");
+  const { previous: prevPasswordLength, updatePrevious: updatePrevPasswordLength } = usePrevious<number>(passwordLength);
 
   // password character's configurations
   const [useLowerCase, setUseLowerCase] = useState<boolean>(true);
@@ -108,7 +109,7 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     updatePrevUseUpperCase();
     updatePrevUseNumbers();
     updatePrevUseSymbols();
-    setPrevPasswordLength(passwordLength);
+    updatePrevPasswordLength();
   };
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
