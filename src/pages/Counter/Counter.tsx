@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { Button, Container, Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 export default function Counter(): JSX.Element {
@@ -13,21 +13,17 @@ export default function Counter(): JSX.Element {
     hasClickedButton.current = true;
   }
 
-  useEffect(() => {
-    console.log(`Has clicked increment button? ${hasClickedButton.current.toString()}`);
-  });
+  console.log(`Has clicked increment button? ${hasClickedButton.current.toString()}`);
 
-  useEffect(() => {
-    if(count % 15 === 0) {
-      console.log(`Current count ${count.toString()} is FizzBuzz.`);
-    } else if(count % 5 === 0) {
-      console.log(`Current count ${count.toString()} is Buzz.`);
-    } else if(count % 3 === 0) {
-      console.log(`Current count ${count.toString()} is Fizz.`);
-    } else {
-      console.log(`Current count: ${count.toString()}`);
-    }
-  }, [count]);
+  if(count % 15 === 0) {
+    console.log(`Current count ${count.toString()} is FizzBuzz.`);
+  } else if(count % 5 === 0) {
+    console.log(`Current count ${count.toString()} is Buzz.`);
+  } else if(count % 3 === 0) {
+    console.log(`Current count ${count.toString()} is Fizz.`);
+  } else {
+    console.log(`Current count: ${count.toString()}`);
+  }
 
   return (
     <Container sx={{

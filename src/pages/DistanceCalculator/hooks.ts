@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { DistanceUnit } from "../../enums/DistanceUnit";
 
 const digits: number = 4;
@@ -72,13 +72,40 @@ function handleNauticalMile(
   }
 }
 
+function isStateChanged<T>(previous: T, current: T): boolean {
+  return previous !== current;
+}
+
 export function useDistanceCalculator(): DistanceCalculatorHookOutput {
   const [kilometerInput, setKilometerInput] = useState<string>("");
-  const [mileInput, setMileInput] = useState<string>("");
-  const [nauticalMileInput, setNauticalMileInput] = useState<string>("");
-  const [selection, setSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
+  const [prevKilometerInput, setPrevKilometerInput] = useState<string>("");
 
-  useEffect(() => {
+  const [mileInput, setMileInput] = useState<string>("");
+  const [prevMileInput, setPrevMileInput] = useState<string>("");
+
+  const [nauticalMileInput, setNauticalMileInput] = useState<string>("");
+  const [prevNauticalMileInput, setPrevNauticalMileInput] = useState<string>("");
+
+  const [selection, setSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
+  const [prevSelection, setPrevSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
+
+  const retriggerRender: () => boolean = useCallback(() => {
+    return isStateChanged(prevKilometerInput, kilometerInput) ||
+      isStateChanged(prevMileInput, mileInput) ||
+      isStateChanged(prevNauticalMileInput, nauticalMileInput) ||
+      isStateChanged(prevSelection, selection);
+  }, [
+    prevKilometerInput,
+    kilometerInput,
+    prevMileInput,
+    mileInput,
+    prevNauticalMileInput,
+    nauticalMileInput,
+    prevSelection,
+    selection,
+  ]);
+
+  if(retriggerRender()) {
     switch(selection) {
     case DistanceUnit.Kilometer: {
       handleKilometer(kilometerInput, setMileInput, setNauticalMileInput);
@@ -93,7 +120,11 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
       break;
     }
     }
-  }, [selection, kilometerInput, mileInput, nauticalMileInput]);
+    setPrevSelection(selection);
+    setPrevKilometerInput(kilometerInput);
+    setPrevMileInput(mileInput);
+    setPrevNauticalMileInput(nauticalMileInput);
+  }
 
   function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {
     const distanceUnit = event.target.value as DistanceUnit;
