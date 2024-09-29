@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { monotonicFactory } from "ulidx";
+import { isStateChanged, usePrevious } from "../../utils/hooks";
 
 export const maxULIDCount = 30;
 const ulid = monotonicFactory();
@@ -14,18 +15,31 @@ type ULIDGeneratorHookOutput = {
 };
 
 export default function useULIDGenerator(): ULIDGeneratorHookOutput {
-  const [count, setCount] = useState<number>(0);
-  const [ulidList, setULIDList] = useState<string[]>([]);
   const [seed, setSeed] = useState<number>(new Date().getTime());
+  const { previous: prevSeed, updatePrevious: updatePrevSeed } = usePrevious<number>(seed);
 
-  useEffect(() => {
+  const [count, setCount] = useState<number>(0);
+  const { previous: prevCount, updatePrevious: updatePrevCount} = usePrevious<number>(count);
+
+  // generated ULID list
+  const [ulidList, setULIDList] = useState<string[]>([]);
+
+  const shouldRetrigger: () => boolean = useCallback<() => boolean>(() => {
+    return isStateChanged(prevSeed, seed) ||
+      isStateChanged(prevCount, count);
+  }, [prevSeed, seed, prevCount, count]);
+
+  if(shouldRetrigger()) {
     const generatedULIDs: string[] = [];
     for(let i = 1; i <= count; i++) {
       const generatedULID = ulid(seed);
       generatedULIDs.push(generatedULID);
     }
     setULIDList(generatedULIDs);
-  }, [seed, count]);
+
+    updatePrevSeed();
+    updatePrevCount();
+  }
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setCount(value as number);

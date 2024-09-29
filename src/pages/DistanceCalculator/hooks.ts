@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { DistanceUnit } from "../../enums/DistanceUnit";
-import { isStateChanged } from "../../utils/hooks";
+import { isStateChanged, usePrevious } from "../../utils/hooks";
 
 const digits: number = 4;
 
@@ -75,18 +75,18 @@ function handleNauticalMile(
 
 export function useDistanceCalculator(): DistanceCalculatorHookOutput {
   const [kilometerInput, setKilometerInput] = useState<string>("");
-  const [prevKilometerInput, setPrevKilometerInput] = useState<string>("");
+  const {previous: prevKilometerInput, updatePrevious: updatePrevKilometerInput} = usePrevious<string>(kilometerInput);
 
   const [mileInput, setMileInput] = useState<string>("");
-  const [prevMileInput, setPrevMileInput] = useState<string>("");
+  const {previous: prevMileInput, updatePrevious: updatePrevMileInput} = usePrevious<string>(mileInput);
 
   const [nauticalMileInput, setNauticalMileInput] = useState<string>("");
-  const [prevNauticalMileInput, setPrevNauticalMileInput] = useState<string>("");
+  const {previous: prevNauticalMileInput, updatePrevious: updatePrevNauticalMileInput} = usePrevious<string>(nauticalMileInput);
 
   const [selection, setSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
-  const [prevSelection, setPrevSelection] = useState<DistanceUnit>(DistanceUnit.Kilometer);
+  const {previous: prevSelection, updatePrevious: updatePrevSelection} = usePrevious<DistanceUnit>(selection);
 
-  const retriggerRender: () => boolean = useCallback<() => boolean>(() => {
+  const shouldRetrigger: () => boolean = useCallback<() => boolean>(() => {
     return isStateChanged(prevKilometerInput, kilometerInput) ||
       isStateChanged(prevMileInput, mileInput) ||
       isStateChanged(prevNauticalMileInput, nauticalMileInput) ||
@@ -102,7 +102,7 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
     selection,
   ]);
 
-  if(retriggerRender()) {
+  if(shouldRetrigger()) {
     switch(selection) {
     case DistanceUnit.Kilometer: {
       handleKilometer(kilometerInput, setMileInput, setNauticalMileInput);
@@ -117,10 +117,10 @@ export function useDistanceCalculator(): DistanceCalculatorHookOutput {
       break;
     }
     }
-    setPrevSelection(selection);
-    setPrevKilometerInput(kilometerInput);
-    setPrevMileInput(mileInput);
-    setPrevNauticalMileInput(nauticalMileInput);
+    updatePrevSelection();
+    updatePrevKilometerInput();
+    updatePrevMileInput();
+    updatePrevNauticalMileInput();
   }
 
   function onUnitChanged(event: React.ChangeEvent<HTMLInputElement>): void {

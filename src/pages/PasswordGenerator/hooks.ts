@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { isStateChanged } from "../../utils/hooks";
+import { isStateChanged, usePrevious } from "../../utils/hooks";
 
 export const maxPasswordLength = 30;
 
@@ -46,18 +46,18 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
 
   // password character's configurations
   const [useLowerCase, setUseLowerCase] = useState<boolean>(true);
-  const [prevUseLowerCase, setPrevUseLowerCase] = useState<boolean>(true);
+  const { previous: prevUseLowerCase, updatePrevious: updatePrevUseLowerCase } = usePrevious<boolean>(useLowerCase);
 
   const [useUpperCase, setUseUpperCase] = useState<boolean>(true);
-  const [prevUseUpperCase, setPrevUseUpperCase] = useState<boolean>(true);
+  const { previous: prevUseUpperCase, updatePrevious: updatePrevUseUpperCase } = usePrevious<boolean>(useUpperCase);
 
   const [useNumbers, setUseNumbers] = useState<boolean>(true);
-  const [prevUseNumbers, setPrevUseNumbers] = useState<boolean>(true);
+  const { previous: prevUseNumbers, updatePrevious: updatePrevUseNumbers } = usePrevious<boolean>(useNumbers);
 
   const [useSymbols, setUseSymbols] = useState<boolean>(true);
-  const [prevUseSymbols, setPrevUseSymbols] = useState<boolean>(true);
+  const { previous: prevUseSymbols, updatePrevious: updatePrevUseSymbols } = usePrevious<boolean>(useSymbols);
 
-  const retriggerIfChanged: () => boolean = useCallback<() => boolean>(() => {
+  const shouldRetrigger: () => boolean = useCallback<() => boolean>(() => {
     return isStateChanged(prevUseLowerCase, useLowerCase) ||
       isStateChanged(prevUseUpperCase, useUpperCase) ||
       isStateChanged(prevUseNumbers, useNumbers) ||
@@ -76,7 +76,7 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     passwordLength
   ]);
 
-  if(retriggerIfChanged()) {
+  if(shouldRetrigger()) {
     let characters: string[] = [];
     if (useLowerCase) {
       characters = characters.concat(lowerCaseAlphabet);
@@ -104,10 +104,10 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
       setGeneratedPassword(pwd);
     }
 
-    setPrevUseLowerCase(useLowerCase);
-    setPrevUseUpperCase(useUpperCase);
-    setPrevUseNumbers(useNumbers);
-    setPrevUseSymbols(useSymbols);
+    updatePrevUseLowerCase();
+    updatePrevUseUpperCase();
+    updatePrevUseNumbers();
+    updatePrevUseSymbols();
     setPrevPasswordLength(passwordLength);
   };
 
