@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { monotonicFactory } from "ulidx";
 
 export const maxULIDCount = 30;
@@ -14,17 +14,16 @@ type ULIDGeneratorHookOutput = {
 };
 
 export default function useULIDGenerator(): ULIDGeneratorHookOutput {
-  const [count, setCount] = useState<number>(0);
-  const [ulidList, setULIDList] = useState<string[]>([]);
   const [seed, setSeed] = useState<number>(new Date().getTime());
+  const [count, setCount] = useState<number>(0);
 
-  useEffect(() => {
+  const ulidList: string[] = useMemo<string[]>(() => {
     const generatedULIDs: string[] = [];
     for(let i = 1; i <= count; i++) {
       const generatedULID = ulid(seed);
       generatedULIDs.push(generatedULID);
     }
-    setULIDList(generatedULIDs);
+    return generatedULIDs;
   }, [seed, count]);
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {

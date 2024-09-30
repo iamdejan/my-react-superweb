@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 export const maxPasswordLength = 30;
 
@@ -21,18 +21,12 @@ const symbolCharacters = [
 
 type PasswordGeneratorHookOutput = {
   passwordLength: number,
-
   generatedPassword: string,
 
-  useLowerCase: boolean,
-
-  useUpperCase: boolean,
-
-  useNumbers: boolean,
-
-  useSymbols: boolean,
-
-  availableCharacters: string[],
+  withLowerCase: boolean,
+  withUpperCase: boolean,
+  withNumbers: boolean,
+  withSymbols: boolean,
 
   handleScaleUpdate: (_e: Event, value: number | number[]) => void,
   handleTextFieldUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -45,47 +39,41 @@ type PasswordGeneratorHookOutput = {
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
   // password generator configurations
   const [passwordLength, setPasswordLength] = useState<number>(0);
-  const [generatedPassword, setGeneratedPassword] = useState<string>("");
 
   // password character's configurations
-  const [useLowerCase, setUseLowerCase] = useState<boolean>(true);
-  const [useUpperCase, setUseUpperCase] = useState<boolean>(true);
-  const [useNumbers, setUseNumbers] = useState<boolean>(true);
-  const [useSymbols, setUseSymbols] = useState<boolean>(true);
-  const [availableCharacters, setAvailableCharacters] = useState<string[]>([]);
+  const [withLowerCase, setWithLowerCase] = useState<boolean>(true);
+  const [withUpperCase, setWithUpperCase] = useState<boolean>(true);
+  const [withNumbers, setWithNumbers] = useState<boolean>(true);
+  const [withSymbols, setWithSymbols] = useState<boolean>(true);
 
-  useEffect(() => {
-    let pwd = "";
-    if(passwordLength === 0 || availableCharacters.length === 0) {
-      setGeneratedPassword("");
-      return;
+  const generatedPassword: string = useMemo<string>(() => {
+    let characters: string[] = [];
+    if (withLowerCase) {
+      characters = characters.concat(lowerCaseAlphabet);
+    }
+    if (withUpperCase) {
+      characters = characters.concat(upperCaseAlphabet);
+    }
+    if (withNumbers) {
+      characters = characters.concat(numberCharacters);
+    }
+    if (withSymbols) {
+      characters = characters.concat(symbolCharacters);
     }
 
+    if(passwordLength === 0 || characters.length === 0) {
+      return "";
+    }
+
+    let pwd = "";
     for(let i = 0; i < passwordLength; i++) {
-      const randomIndex = Math.round(Math.random() * (availableCharacters.length - 1));
-      const randomChar = availableCharacters[randomIndex];
+      const randomIndex = Math.round(Math.random() * (characters.length - 1));
+      const randomChar = characters[randomIndex];
       pwd += randomChar;
     }
 
-    setGeneratedPassword(pwd);
-  }, [passwordLength, availableCharacters]);
-
-  useEffect(() => {
-    let characters: string[] = [];
-    if (useLowerCase) {
-      characters = characters.concat(lowerCaseAlphabet);
-    }
-    if (useUpperCase) {
-      characters = characters.concat(upperCaseAlphabet);
-    }
-    if (useNumbers) {
-      characters = characters.concat(numberCharacters);
-    }
-    if (useSymbols) {
-      characters = characters.concat(symbolCharacters);
-    }
-    setAvailableCharacters(characters);
-  }, [useLowerCase, useUpperCase, useNumbers, useSymbols]);
+    return pwd;
+  }, [passwordLength, withLowerCase, withNumbers, withSymbols, withUpperCase]);
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setPasswordLength(value as number);
@@ -101,29 +89,28 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
   }
 
   function handleLowerCaseUpdate(): void {
-    setUseLowerCase(!useLowerCase);
+    setWithLowerCase(!withLowerCase);
   }
 
   function handleUpperCaseUpdate(): void {
-    setUseUpperCase(!useUpperCase);
+    setWithUpperCase(!withUpperCase);
   }
 
   function handleNumbersUpdate(): void {
-    setUseNumbers(!useNumbers);
+    setWithNumbers(!withNumbers);
   }
 
   function handleSymbolsUpdate(): void {
-    setUseSymbols(!useSymbols);
+    setWithSymbols(!withSymbols);
   }
 
   return {
     passwordLength,
     generatedPassword,
-    useLowerCase,
-    useUpperCase,
-    useNumbers,
-    useSymbols,
-    availableCharacters,
+    withLowerCase: withLowerCase,
+    withUpperCase: withUpperCase,
+    withNumbers: withNumbers,
+    withSymbols: withSymbols,
     handleScaleUpdate,
     handleTextFieldUpdate,
     handleLowerCaseUpdate,
