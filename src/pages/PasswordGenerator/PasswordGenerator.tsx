@@ -7,10 +7,10 @@ export default function PasswordGenerator(): JSX.Element {
   const {
     passwordLength,
     generatedPassword,
-    useLowerCase,
-    useUpperCase,
-    useNumbers,
-    useSymbols,
+    withLowerCase,
+    withUpperCase,
+    withNumbers,
+    withSymbols,
     handleScaleUpdate,
     handleTextFieldUpdate,
     handleLowerCaseUpdate,
@@ -71,25 +71,25 @@ export default function PasswordGenerator(): JSX.Element {
       >
         <FormControlLabel
           control={<Checkbox />}
-          checked={useLowerCase}
+          checked={withLowerCase}
           onChange={handleLowerCaseUpdate}
           label="Lower Case"
         />
         <FormControlLabel
           control={<Checkbox />}
-          checked={useUpperCase}
+          checked={withUpperCase}
           onChange={handleUpperCaseUpdate}
           label="Upper Case"
         />
         <FormControlLabel
           control={<Checkbox />}
-          checked={useNumbers}
+          checked={withNumbers}
           onChange={handleNumbersUpdate}
           label="Numbers"
         />
         <FormControlLabel 
           control={<Checkbox />} 
-          checked={useSymbols} 
+          checked={withSymbols} 
           onChange={handleSymbolsUpdate} 
           label="Symbols"
         />
