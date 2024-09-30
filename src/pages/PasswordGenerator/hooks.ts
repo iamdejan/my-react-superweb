@@ -1,5 +1,4 @@
-import { useCallback, useState } from "react";
-import { isStateChanged, usePrevious } from "../../utils/hooks";
+import { useMemo, useState } from "react";
 
 export const maxPasswordLength = 30;
 
@@ -38,46 +37,16 @@ type PasswordGeneratorHookOutput = {
 };
 
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
-  // generated password
-  const [generatedPassword, setGeneratedPassword] = useState<string>("");
-
   // password generator configurations
   const [passwordLength, setPasswordLength] = useState<number>(0);
-  const { previous: prevPasswordLength, updatePrevious: updatePrevPasswordLength } = usePrevious<number>(passwordLength);
 
   // password character's configurations
   const [useLowerCase, setUseLowerCase] = useState<boolean>(true);
-  const { previous: prevUseLowerCase, updatePrevious: updatePrevUseLowerCase } = usePrevious<boolean>(useLowerCase);
-
   const [useUpperCase, setUseUpperCase] = useState<boolean>(true);
-  const { previous: prevUseUpperCase, updatePrevious: updatePrevUseUpperCase } = usePrevious<boolean>(useUpperCase);
-
   const [useNumbers, setUseNumbers] = useState<boolean>(true);
-  const { previous: prevUseNumbers, updatePrevious: updatePrevUseNumbers } = usePrevious<boolean>(useNumbers);
-
   const [useSymbols, setUseSymbols] = useState<boolean>(true);
-  const { previous: prevUseSymbols, updatePrevious: updatePrevUseSymbols } = usePrevious<boolean>(useSymbols);
 
-  const shouldRetrigger: () => boolean = useCallback<() => boolean>(() => {
-    return isStateChanged(prevUseLowerCase, useLowerCase) ||
-      isStateChanged(prevUseUpperCase, useUpperCase) ||
-      isStateChanged(prevUseNumbers, useNumbers) ||
-      isStateChanged(prevUseSymbols, useSymbols) ||
-      isStateChanged(prevPasswordLength, passwordLength);
-  }, [
-    prevUseLowerCase,
-    prevUseNumbers,
-    prevUseSymbols,
-    prevUseUpperCase,
-    useLowerCase,
-    useNumbers,
-    useSymbols,
-    useUpperCase,
-    prevPasswordLength,
-    passwordLength
-  ]);
-
-  if(shouldRetrigger()) {
+  const generatedPassword: string = useMemo<string>(() => {
     let characters: string[] = [];
     if (useLowerCase) {
       characters = characters.concat(lowerCaseAlphabet);
@@ -93,24 +62,18 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     }
 
     if(passwordLength === 0 || characters.length === 0) {
-      setGeneratedPassword("");
-    } else {
-      let pwd = "";
-      for(let i = 0; i < passwordLength; i++) {
-        const randomIndex = Math.round(Math.random() * (characters.length - 1));
-        const randomChar = characters[randomIndex];
-        pwd += randomChar;
-      }
-  
-      setGeneratedPassword(pwd);
+      return "";
     }
 
-    updatePrevUseLowerCase();
-    updatePrevUseUpperCase();
-    updatePrevUseNumbers();
-    updatePrevUseSymbols();
-    updatePrevPasswordLength();
-  };
+    let pwd = "";
+    for(let i = 0; i < passwordLength; i++) {
+      const randomIndex = Math.round(Math.random() * (characters.length - 1));
+      const randomChar = characters[randomIndex];
+      pwd += randomChar;
+    }
+
+    return pwd;
+  }, [passwordLength, useLowerCase, useNumbers, useSymbols, useUpperCase]);
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setPasswordLength(value as number);
