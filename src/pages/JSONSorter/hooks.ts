@@ -48,6 +48,6 @@ export default function useJSONSorter(): JSONSorterHookOutput {
     sortArrays,
     handleTextAreaChanged,
     handleSortButtonClicked,
-    handleSortArraysSwitchChanged: handleSortArraysSwitchChanged
+    handleSortArraysSwitchChanged
   };
 }
