@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Box, Container, Grid2, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 type PaperData = {
@@ -26,42 +26,45 @@ export default function About(): JSX.Element {
   useDocumentTitle("About");
 
   return (
-    <Container
-      sx={{
+    <Paper
+      sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
         background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,255,237,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
         minHeight: "100vh",
         minWidth: "100%",
         margin: "0",
         padding: "0",
-      }}
+      })}
     >
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         About This Website
       </Typography>
-      <Grid2
-        container
-        maxWidth="100%"
-        rowSpacing={{xs: 1, sm: 2, md: 3}}
-        columnSpacing={{xs: 1, sm: 2, md: 3}}
-        alignItems="center"
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "2rem",
+          padding: "1rem",
+        }}
       >
-        {paperList.map(item => (
-          <Grid2
+        {paperList.map((item) => (
+          <Paper
             key={item.title}
+            elevation={4}
             sx={{
-              maxWidth: "30vw"
+              padding: 2,
+              minHeight: "8rem",
             }}
           >
-            <Paper elevation={4}>
-              <Box p={2}>
-                <Typography variant="h6">{item.title}</Typography>
-                <div>{item.text}</div>
-              </Box>
-            </Paper>
-          </Grid2>
+            <Typography variant="h6">{item.title}</Typography>
+            <div>{item.text}</div>
+          </Paper>
         ))}
-      </Grid2>
-    </Container>
+      </div>
+    </Paper>
   );
 }
