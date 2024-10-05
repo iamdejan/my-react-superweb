@@ -1,6 +1,6 @@
-import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography, Divider, Switch, useColorScheme } from "@mui/material";
 import { FileRoutesByPath, Outlet } from "@tanstack/react-router";
-import { JSX, lazy, useState } from "react";
+import React, { JSX, lazy, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { grey } from "@mui/material/colors";
 
@@ -61,8 +61,24 @@ const TanStackRouterDevtools =
       })),
     );
 
-export default function RootMenu(): JSX.Element {
+export default function RootMenu(): JSX.Element|null {
   const [open, setOpen] = useState(false);
+  const { mode, setMode } = useColorScheme();
+  if (!mode) {
+    return null;
+  }
+
+  function handleThemeChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+    if(checked) {
+      setMode("dark");
+    } else {
+      setMode("light");
+    }
+  }
+
+  const modeDisplay = mode.charAt(0).toUpperCase() + mode.substring(1);
 
   return (
     <>
@@ -100,6 +116,12 @@ export default function RootMenu(): JSX.Element {
               </Typography>
             </ListItem>
           ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem>
+            <Switch onChange={handleThemeChange} checked={mode === "dark"} /> {modeDisplay}
+          </ListItem>
         </List>
       </Drawer>
       <TanStackRouterDevtools />
