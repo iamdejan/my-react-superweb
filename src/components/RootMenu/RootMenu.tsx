@@ -1,9 +1,15 @@
-import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography, Divider } from "@mui/material";
+import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography, Divider, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { FileRoutesByPath, Outlet } from "@tanstack/react-router";
 import { JSX, lazy, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { grey } from "@mui/material/colors";
 import ThemeSwitch from "../ThemeSwitch";
+
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
 
 type RouteLink = {
   link: keyof FileRoutesByPath,
@@ -67,49 +73,53 @@ export default function RootMenu(): JSX.Element|null {
 
   return (
     <>
-      <AppBar position="static" sx={{margin:"0", padding:"0"}}>
-        <Container maxWidth={false}>
-          <Toolbar disableGutters>
-            <Button color="inherit" onClick={() => setOpen(true)}>
-              <MenuIcon />
-            </Button>
-            <Typography variant="h5" component="div" sx={{ marginLeft: "auto" }}>
-              <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
-            </Typography>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Outlet />
-      <Drawer open={open} onClose={() => setOpen(false)}>
-        <List>
-          {routeList.map((route) => (
-            <ListItem
-              key={route.link}
-              sx={{
-                textDecoration: "none",
-                boxShadow: "none",
-                color: "inherit",
-                "&:hover": {
-                  backgroundColor: grey[200],
-                }
-              }}
-              component="a"
-              href={route.link}
-            >
-              <Typography>
-                {route.title}
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <AppBar position="static" sx={{margin:"0", padding:"0"}}>
+          <Container maxWidth={false}>
+            <Toolbar disableGutters>
+              <Button color="inherit" onClick={() => setOpen(true)}>
+                <MenuIcon />
+              </Button>
+              <Typography variant="h5" component="div" sx={{ marginLeft: "auto" }}>
+                <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
               </Typography>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        <Outlet />
+        <Drawer open={open} onClose={() => setOpen(false)}>
+          <List>
+            {routeList.map((route) => (
+              <ListItem
+                key={route.link}
+                sx={{
+                  textDecoration: "none",
+                  boxShadow: "none",
+                  color: "inherit",
+                  "&:hover": {
+                    backgroundColor: grey[200],
+                  }
+                }}
+                component="a"
+                href={route.link}
+              >
+                <Typography>
+                  {route.title}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            <ListItem>
+              <ThemeSwitch />
             </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          <ListItem>
-            <ThemeSwitch />
-          </ListItem>
-        </List>
-      </Drawer>
-      <TanStackRouterDevtools />
+          </List>
+        </Drawer>
+        <TanStackRouterDevtools />
+      </ThemeProvider>
+      
     </>
   );
 }
