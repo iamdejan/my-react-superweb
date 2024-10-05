@@ -93,14 +93,17 @@ export default function RootMenu(): JSX.Element|null {
             {routeList.map((route) => (
               <ListItem
                 key={route.link}
-                sx={{
+                sx={(theme) => ({
                   textDecoration: "none",
                   boxShadow: "none",
                   color: "inherit",
                   "&:hover": {
                     backgroundColor: grey[200],
+                    ...theme.applyStyles("dark", {
+                      backgroundColor: grey[900],
+                    })
                   }
-                }}
+                })}
                 component="a"
                 href={route.link}
               >
@@ -119,7 +122,6 @@ export default function RootMenu(): JSX.Element|null {
         </Drawer>
         <TanStackRouterDevtools />
       </ThemeProvider>
-      
     </>
   );
 }
