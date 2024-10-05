@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { getRouteApi } from "@tanstack/react-router";
-import { Container, List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 const digits = 3;
@@ -19,14 +19,20 @@ export default function BMICalculatorDetail(): JSX.Element {
   useDocumentTitle(`Ideal weight for ${height.toString()} cm`);
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      paddingBottom: "5rem"
-    }}>
-      <Typography variant="h5" align="center" marginTop={2} marginBottom={3}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        paddingBottom: "5rem"
+      })}
+    >
+      <Typography variant="h5" align="center" paddingTop={2} paddingBottom={3}>
         Ideal weight for {height} cm
       </Typography>
       <TableContainer
@@ -82,6 +88,6 @@ export default function BMICalculatorDetail(): JSX.Element {
           </ListItem>
         </List>
       </Paper>
-    </Container>
+    </Paper>
   );
 }

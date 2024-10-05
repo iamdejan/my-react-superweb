@@ -10,7 +10,6 @@ export const validCharacterSet = new Set<string>(layout.flat());
 
 type CalculatorHookOutput = {
   display: string;
-  isError: boolean;
   handleButtonClicked: (value: string) => void;
 };
 
@@ -60,7 +59,6 @@ export default function useCalculator(): CalculatorHookOutput {
 
   return {
     display,
-    isError,
     handleButtonClicked,
   };
 }

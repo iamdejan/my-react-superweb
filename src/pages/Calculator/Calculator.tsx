@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, Container, Paper, Stack, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Paper, Stack, Typography } from "@mui/material";
 import { JSX } from "react";
 import useCalculator, { layout } from "./hooks";
 
@@ -6,24 +6,34 @@ export default function Calculator(): JSX.Element {
   const {display, handleButtonClicked} = useCalculator();
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      margin: "0",
-      paddingBottom: "5rem"
-    }}>
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        margin: "0",
+        paddingBottom: "5rem"
+      })}
+    >
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         Calculator
       </Typography>
 
-      <Paper sx={{
-        maxWidth: "75%",
-        marginX: "auto",
-        padding: 3,
-        backgroundColor: "rgba(255,255,255,0.5)",
-      }}
+      <Paper 
+        sx={(theme) => ({
+          maxWidth: "75%",
+          marginX: "auto",
+          padding: 3,
+          backgroundColor: "rgba(255,255,255,0.5)",
+          ...theme.applyStyles("dark", {
+            backgroundColor: "rgba(50,50,50,1)",
+          })
+        })}
       >
         <Stack>
           <Paper
@@ -54,14 +64,17 @@ export default function Calculator(): JSX.Element {
             }}
           >
             <Typography
-              sx={{
+              sx={(theme) => ({
                 fontSize: {
                   xs: "1rem",
                   sm: "1.5rem",
                   md: "1.75rem",
                   lg: "2.5rem",
-                }
-              }}
+                },
+                ...theme.applyStyles("dark", {
+                  color: "yellow"
+                })
+              })}
             >
               {display}
             </Typography>
@@ -116,6 +129,6 @@ export default function Calculator(): JSX.Element {
           </Stack>
         </Stack>
       </Paper>
-    </Container>
+    </Paper>
   );
 }

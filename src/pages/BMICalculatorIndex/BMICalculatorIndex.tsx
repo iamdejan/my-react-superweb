@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Button, Collapse, Container, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Collapse, IconButton, Paper, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BMICalculation, BMICalculationSchema } from "../../schema/BMICalculationSchema";
@@ -62,13 +62,19 @@ export default function BMICalculatorIndex(): JSX.Element {
   }
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      paddingBottom: "5rem"
-    }}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        paddingBottom: "5rem"
+      })}
+    >
       <Typography
         variant="h4"
         align="center"
@@ -192,6 +198,6 @@ export default function BMICalculatorIndex(): JSX.Element {
           Find
         </Button>
       </Stack>
-    </Container>
+    </Paper>
   );
 }

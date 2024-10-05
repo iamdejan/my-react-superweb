@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Container, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Link, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 
 const features: string[] = [
   "To-do list",
@@ -32,14 +32,20 @@ const referenceList: ReferenceLink[] = [
 
 export default function Home(): JSX.Element {
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      margin: 0,
-      padding: 1,
-    }}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        margin: 0,
+        padding: 1,
+      })}
+    >
       <Typography variant="h4" paddingY={2} align="center">My React Superweb</Typography>
 
       <Typography>
@@ -63,6 +69,6 @@ export default function Home(): JSX.Element {
           </Link>
         </div>
       ))}
-    </Container>
+    </Paper>
   );
 }

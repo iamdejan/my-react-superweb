@@ -1,4 +1,4 @@
-import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { Container, FormControl, FormControlLabel, Paper, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
 import React, { JSX } from "react";
 import { useDistanceCalculator } from "./hooks";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
@@ -20,15 +20,21 @@ export default function DistanceCalculator(): JSX.Element {
   useDocumentTitle("Distance Calculator");
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      margin: "0",
-      paddingBottom: "5rem"
-    }}>
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        margin: "0",
+        paddingBottom: "5rem"
+      })}
+    >
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         Distance Calculator
       </Typography>
       <Container sx={{
@@ -117,6 +123,6 @@ export default function DistanceCalculator(): JSX.Element {
           <CopyToClipboardButton input={nauticalMileInput} />
         </Stack>
       </Stack>
-    </Container>
+    </Paper>
   );
 }

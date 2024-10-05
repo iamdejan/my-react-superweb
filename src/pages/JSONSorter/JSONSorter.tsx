@@ -1,20 +1,48 @@
-import { Button, Container, FormControlLabel, Switch, Typography } from "@mui/material";
-import { JSX } from "react";
+import { Button, Container, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
+import { CSSProperties, JSX } from "react";
 import useJSONSorter from "./hooks";
 
-export default function JSONSorter(): JSX.Element {
-  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged: handleSortArraysSwitchChanged } = useJSONSorter();
+function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
+  let defaultProperties: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    fontSize: "1rem"
+  };
+
+  if(mode === "dark") {
+    defaultProperties = {
+      ...defaultProperties,
+      backgroundColor: "rgba(35,35,35,1)",
+      color: "yellow"
+    };
+  }
+
+  return defaultProperties;
+}
+
+export default function JSONSorter(): JSX.Element|null {
+  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged } = useJSONSorter();
+  const { mode } = useColorScheme();
+  if (!mode) {
+    return null;
+  }
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,230,194,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      margin: "0",
-      paddingBottom: "5rem",
-    }}>
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,230,194,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        margin: "0",
+        paddingBottom: "5rem",
+      })}
+    >
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         JSON Recursive Sorter
       </Typography>
       <Container sx={{
@@ -35,13 +63,11 @@ export default function JSONSorter(): JSX.Element {
           checked={sortArrays}
           onChange={handleSortArraysSwitchChanged}
         />
-        <textarea style={{
-          width: "100%",
-          height: "100%",
-          fontSize: "1rem",
-        }}
-        onChange={handleTextAreaChanged}
-        value={text} />
+        <textarea
+          style={textareaStyle(mode)}
+          onChange={handleTextAreaChanged}
+          value={text}
+        />
       </Container>
       <Container
         sx={{
@@ -60,7 +86,6 @@ export default function JSONSorter(): JSX.Element {
           Sort
         </Button>
       </Container>
-      
-    </Container>
+    </Paper>
   );
 }
