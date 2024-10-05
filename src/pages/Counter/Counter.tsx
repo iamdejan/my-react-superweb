@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Paper, Stack, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
@@ -26,14 +26,20 @@ export default function Counter(): JSX.Element {
   }
 
   return (
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      margin: "0",
-      padding: "0",
-    }}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        margin: "0",
+        padding: "0",
+      })}
+    >
       <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter</Typography>
       <Stack gap={2} alignItems="center">
         <Button variant="contained" onClick={onClick}>
@@ -43,6 +49,6 @@ export default function Counter(): JSX.Element {
           Reset
         </Button>
       </Stack>
-    </Container>
+    </Paper>
   );
 }
