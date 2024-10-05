@@ -1,9 +1,31 @@
-import { Button, Container, FormControlLabel, Paper, Switch, Typography } from "@mui/material";
-import { JSX } from "react";
+import { Button, Container, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
+import { CSSProperties, JSX } from "react";
 import useJSONSorter from "./hooks";
 
-export default function JSONSorter(): JSX.Element {
-  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged: handleSortArraysSwitchChanged } = useJSONSorter();
+function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
+  let defaultProperties: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    fontSize: "1rem"
+  };
+
+  if(mode === "dark") {
+    defaultProperties = {
+      ...defaultProperties,
+      backgroundColor: "rgba(35,35,35,1)",
+      color: "yellow"
+    };
+  }
+
+  return defaultProperties;
+}
+
+export default function JSONSorter(): JSX.Element|null {
+  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged } = useJSONSorter();
+  const { mode } = useColorScheme();
+  if (!mode) {
+    return null;
+  }
 
   return (
     <Paper
@@ -41,15 +63,11 @@ export default function JSONSorter(): JSX.Element {
           checked={sortArrays}
           onChange={handleSortArraysSwitchChanged}
         />
-        <textarea style={{
-          width: "100%",
-          height: "100%",
-          fontSize: "1rem",
-          backgroundColor: "rgba(35,35,35,1)",
-          color: "yellow"
-        }}
-        onChange={handleTextAreaChanged}
-        value={text} />
+        <textarea
+          style={textareaStyle(mode)}
+          onChange={handleTextAreaChanged}
+          value={text}
+        />
       </Container>
       <Container
         sx={{
