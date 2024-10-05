@@ -39,7 +39,7 @@ export default function ToDoList(): JSX.Element {
         paddingBottom: "5rem",
       })}
     >
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         To-Do List
       </Typography>
       <Alert

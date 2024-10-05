@@ -40,7 +40,7 @@ export default function About(): JSX.Element {
         padding: "0",
       })}
     >
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         About This Website
       </Typography>
       <div

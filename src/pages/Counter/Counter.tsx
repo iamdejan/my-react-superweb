@@ -40,7 +40,7 @@ export default function Counter(): JSX.Element {
         padding: "0",
       })}
     >
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>Counter</Typography>
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>Counter</Typography>
       <Stack gap={2} alignItems="center">
         <Button variant="contained" onClick={onClick}>
           count is {count}

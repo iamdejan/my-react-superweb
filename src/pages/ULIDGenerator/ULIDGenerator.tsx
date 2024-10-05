@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Button, Container, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { JSX } from "react";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 import useULIDGenerator, { maxULIDCount } from "./hooks";
@@ -13,14 +13,20 @@ export default function ULIDGenerator(): JSX.Element {
   } = useULIDGenerator();
 
   return(
-    <Container sx={{
-      backgroundColor: "rgba(230,230,230,1)",
-      background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
-      minHeight: "100vh",
-      minWidth: "100%",
-      paddingBottom: "5rem"
-    }}>
-      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: "rgba(230,230,230,1)",
+        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+        }),
+        minHeight: "100vh",
+        minWidth: "100%",
+        paddingBottom: "5rem"
+      })}
+    >
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         ULID Generator
       </Typography>
       <Alert
@@ -143,6 +149,6 @@ export default function ULIDGenerator(): JSX.Element {
           </Table>
         </TableContainer>
       </Stack>
-    </Container>
+    </Paper>
   );
 }
