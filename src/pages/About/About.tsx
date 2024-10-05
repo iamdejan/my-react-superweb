@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 type PaperData = {
@@ -19,6 +19,10 @@ const paperList: PaperData[] = [
   {
     title: "Who inspired you to learn frontend?",
     text: "No one, actually. But if there's a trigger, it has to be because of the job market crisis of 2022-2024.",
+  },
+  {
+    title: "Why frontend and not AI?",
+    text: "Well, because I'm not intereseted in managing data sets. I used to practice on Kaggle, but not anymore. I've forgotten those stuffs.",
   },
 ];
 
@@ -43,11 +47,19 @@ export default function About(): JSX.Element {
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         About This Website
       </Typography>
-      <div
-        style={{
+      <Box
+        sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "2rem",
+          gridTemplateColumns: {
+            xs: "repeat(1, 1fr)",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(4, 1fr)"
+          },
+          gap: {
+            xs: "0.8rem",
+            sm: "1.1rem",
+            md: "1.5rem",
+          },
           padding: "1rem",
         }}
       >
@@ -56,7 +68,11 @@ export default function About(): JSX.Element {
             key={item.title}
             elevation={4}
             sx={{
-              padding: 2,
+              padding: {
+                xs: 1,
+                sm: 1.5,
+                md: 2,
+              },
               minHeight: "8rem",
             }}
           >
@@ -64,7 +80,7 @@ export default function About(): JSX.Element {
             <div>{item.text}</div>
           </Paper>
         ))}
-      </div>
+      </Box>
     </Paper>
   );
 }
