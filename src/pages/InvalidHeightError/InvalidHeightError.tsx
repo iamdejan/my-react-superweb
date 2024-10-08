@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Container } from "@mui/material";
+import { Alert, AlertTitle, Paper } from "@mui/material";
 import { getRouteApi } from "@tanstack/react-router";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 import { JSX } from "react";
@@ -9,13 +9,16 @@ export default function InvalidHeightError(): JSX.Element {
   useDocumentTitle("Invalid Height Error");
   const { height } = route.useParams();
   return (
-    <Container
-      sx={{
+    <Paper
+      sx={(theme) => ({
         minWidth: "100vw",
         minHeight: "100vh",
         justifyContent: "center",
         alignContent: "center",
-      }}
+        ...theme.applyStyles("dark", {
+          backgroundColor: "rgba(17,17,17,1)",
+        }),
+      })}
     >
       <Alert severity="error" sx={{
         maxWidth: {
@@ -45,6 +48,6 @@ export default function InvalidHeightError(): JSX.Element {
         Invalid height of {height}. It should be in the format of: number + "cm".<br />
         Example: 165cm.
       </Alert>
-    </Container>
+    </Paper>
   );
 }
