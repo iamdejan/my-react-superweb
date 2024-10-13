@@ -2,8 +2,8 @@ import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography,
 import { FileRoutesByPath, Outlet } from "@tanstack/react-router";
 import { JSX, lazy, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { grey } from "@mui/material/colors";
 import ThemeSwitch from "../ThemeSwitch";
+import DrawerLink from "../DrawerLink";
 
 const theme = createTheme({
   colorSchemes: {
@@ -91,26 +91,7 @@ export default function RootMenu(): JSX.Element|null {
         <Drawer open={open} onClose={() => setOpen(false)}>
           <List>
             {routeList.map((route) => (
-              <ListItem
-                key={route.link}
-                sx={(theme) => ({
-                  textDecoration: "none",
-                  boxShadow: "none",
-                  color: "inherit",
-                  "&:hover": {
-                    backgroundColor: grey[200],
-                    ...theme.applyStyles("dark", {
-                      backgroundColor: grey[900],
-                    })
-                  }
-                })}
-                component="a"
-                href={route.link}
-              >
-                <Typography>
-                  {route.title}
-                </Typography>
-              </ListItem>
+              <DrawerLink key={route.link} title={route.title} to={route.link} />
             ))}
           </List>
           <Divider />
