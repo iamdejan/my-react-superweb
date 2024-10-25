@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
 import useBMICalculator from "./hooks";
 import { useDocumentTitle } from "@uidotdev/usehooks";
+import ButtonLink from "../../components/ButtonLink/ButtonLink";
 
 export default function BMICalculatorIndex(): JSX.Element {
   const {
@@ -189,14 +190,13 @@ export default function BMICalculatorIndex(): JSX.Element {
           Or, find the ideal weight
         </Typography>
         <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
-        <Button
+        <ButtonLink
           variant="contained"
           color="primary"
-          type="button"
+          type="a"
           href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
-        >
-          Find
-        </Button>
+          text="Find"
+        />
       </Stack>
     </Paper>
   );

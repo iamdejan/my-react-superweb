@@ -37,7 +37,6 @@ function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
   return properties;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const differ: Differ = new Differ({
   detectCircular: true,
   showModifications: true,
@@ -60,7 +59,6 @@ export default function JSONCompare(): JSX.Element|null {
     const beforeObject = JSON.parse(before) as unknown;
     const afterObject = JSON.parse(after) as unknown;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     setDiffResult(differ.diff(beforeObject, afterObject));
   }
 
