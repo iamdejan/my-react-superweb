@@ -16,6 +16,7 @@ import { Route as UlidGeneratorImport } from './routes/ulid-generator'
 import { Route as ToDoListImport } from './routes/to-do-list'
 import { Route as PasswordGeneratorImport } from './routes/password-generator'
 import { Route as JsonSorterImport } from './routes/json-sorter'
+import { Route as JsonCompareImport } from './routes/json-compare'
 import { Route as DistanceCalculatorImport } from './routes/distance-calculator'
 import { Route as CounterImport } from './routes/counter'
 import { Route as CalculatorImport } from './routes/calculator'
@@ -27,6 +28,7 @@ import { Route as BmiCalculatorHeightHeightImport } from './routes/bmi-calculato
 // Create/Update Routes
 
 const UuidGeneratorRoute = UuidGeneratorImport.update({
+  id: '/uuid-generator',
   path: '/uuid-generator',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -34,6 +36,7 @@ const UuidGeneratorRoute = UuidGeneratorImport.update({
 )
 
 const UlidGeneratorRoute = UlidGeneratorImport.update({
+  id: '/ulid-generator',
   path: '/ulid-generator',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -41,11 +44,13 @@ const UlidGeneratorRoute = UlidGeneratorImport.update({
 )
 
 const ToDoListRoute = ToDoListImport.update({
+  id: '/to-do-list',
   path: '/to-do-list',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/to-do-list.lazy').then((d) => d.Route))
 
 const PasswordGeneratorRoute = PasswordGeneratorImport.update({
+  id: '/password-generator',
   path: '/password-generator',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -53,11 +58,19 @@ const PasswordGeneratorRoute = PasswordGeneratorImport.update({
 )
 
 const JsonSorterRoute = JsonSorterImport.update({
+  id: '/json-sorter',
   path: '/json-sorter',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/json-sorter.lazy').then((d) => d.Route))
 
+const JsonCompareRoute = JsonCompareImport.update({
+  id: '/json-compare',
+  path: '/json-compare',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/json-compare.lazy').then((d) => d.Route))
+
 const DistanceCalculatorRoute = DistanceCalculatorImport.update({
+  id: '/distance-calculator',
   path: '/distance-calculator',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -65,26 +78,31 @@ const DistanceCalculatorRoute = DistanceCalculatorImport.update({
 )
 
 const CounterRoute = CounterImport.update({
+  id: '/counter',
   path: '/counter',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/counter.lazy').then((d) => d.Route))
 
 const CalculatorRoute = CalculatorImport.update({
+  id: '/calculator',
   path: '/calculator',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/calculator.lazy').then((d) => d.Route))
 
 const AboutRoute = AboutImport.update({
+  id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 const BmiCalculatorIndexRoute = BmiCalculatorIndexImport.update({
+  id: '/bmi-calculator/',
   path: '/bmi-calculator/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -92,6 +110,7 @@ const BmiCalculatorIndexRoute = BmiCalculatorIndexImport.update({
 )
 
 const BmiCalculatorHeightHeightRoute = BmiCalculatorHeightHeightImport.update({
+  id: '/bmi-calculator/height/$height',
   path: '/bmi-calculator/height/$height',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
@@ -135,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/distance-calculator'
       fullPath: '/distance-calculator'
       preLoaderRoute: typeof DistanceCalculatorImport
+      parentRoute: typeof rootRoute
+    }
+    '/json-compare': {
+      id: '/json-compare'
+      path: '/json-compare'
+      fullPath: '/json-compare'
+      preLoaderRoute: typeof JsonCompareImport
       parentRoute: typeof rootRoute
     }
     '/json-sorter': {
@@ -197,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/calculator': typeof CalculatorRoute
   '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
+  '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/to-do-list': typeof ToDoListRoute
@@ -212,6 +239,7 @@ export interface FileRoutesByTo {
   '/calculator': typeof CalculatorRoute
   '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
+  '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/to-do-list': typeof ToDoListRoute
@@ -228,6 +256,7 @@ export interface FileRoutesById {
   '/calculator': typeof CalculatorRoute
   '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
+  '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/to-do-list': typeof ToDoListRoute
@@ -245,6 +274,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/counter'
     | '/distance-calculator'
+    | '/json-compare'
     | '/json-sorter'
     | '/password-generator'
     | '/to-do-list'
@@ -259,6 +289,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/counter'
     | '/distance-calculator'
+    | '/json-compare'
     | '/json-sorter'
     | '/password-generator'
     | '/to-do-list'
@@ -273,6 +304,7 @@ export interface FileRouteTypes {
     | '/calculator'
     | '/counter'
     | '/distance-calculator'
+    | '/json-compare'
     | '/json-sorter'
     | '/password-generator'
     | '/to-do-list'
@@ -289,6 +321,7 @@ export interface RootRouteChildren {
   CalculatorRoute: typeof CalculatorRoute
   CounterRoute: typeof CounterRoute
   DistanceCalculatorRoute: typeof DistanceCalculatorRoute
+  JsonCompareRoute: typeof JsonCompareRoute
   JsonSorterRoute: typeof JsonSorterRoute
   PasswordGeneratorRoute: typeof PasswordGeneratorRoute
   ToDoListRoute: typeof ToDoListRoute
@@ -304,6 +337,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorRoute: CalculatorRoute,
   CounterRoute: CounterRoute,
   DistanceCalculatorRoute: DistanceCalculatorRoute,
+  JsonCompareRoute: JsonCompareRoute,
   JsonSorterRoute: JsonSorterRoute,
   PasswordGeneratorRoute: PasswordGeneratorRoute,
   ToDoListRoute: ToDoListRoute,
@@ -330,6 +364,7 @@ export const routeTree = rootRoute
         "/calculator",
         "/counter",
         "/distance-calculator",
+        "/json-compare",
         "/json-sorter",
         "/password-generator",
         "/to-do-list",
@@ -353,6 +388,9 @@ export const routeTree = rootRoute
     },
     "/distance-calculator": {
       "filePath": "distance-calculator.tsx"
+    },
+    "/json-compare": {
+      "filePath": "json-compare.tsx"
     },
     "/json-sorter": {
       "filePath": "json-sorter.tsx"

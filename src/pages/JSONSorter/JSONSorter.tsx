@@ -3,21 +3,21 @@ import { CSSProperties, JSX } from "react";
 import useJSONSorter from "./hooks";
 
 function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
-  let defaultProperties: CSSProperties = {
+  let properties: CSSProperties = {
     width: "100%",
     height: "100%",
     fontSize: "1rem"
   };
 
   if(mode === "dark") {
-    defaultProperties = {
-      ...defaultProperties,
+    properties = {
+      ...properties,
       backgroundColor: "rgba(35,35,35,1)",
       color: "yellow"
     };
   }
 
-  return defaultProperties;
+  return properties;
 }
 
 export default function JSONSorter(): JSX.Element|null {
@@ -31,10 +31,8 @@ export default function JSONSorter(): JSX.Element|null {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,230,194,1) 100%)",
         ...theme.applyStyles("dark", {
-          backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          backgroundColor: "rgba(80,80,80,1)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
