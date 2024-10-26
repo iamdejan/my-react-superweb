@@ -1,8 +1,9 @@
 import { Box, Button, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
-import { CSSProperties, JSX, useMemo, useState } from "react";
-import { Differ, DiffResult, Viewer } from "json-diff-kit";
+import { CSSProperties, JSX } from "react";
+import { Viewer } from "json-diff-kit";
 
 import "json-diff-kit/dist/viewer.css";
+import useJSONCompare from "./hooks";
 
 function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
   let properties: CSSProperties = {
@@ -38,44 +39,18 @@ function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
   return properties;
 }
 
-const emptyDiffResult: readonly [DiffResult[], DiffResult[]] = [[], []];
-
 export default function JSONCompare(): JSX.Element|null {
-  const [before, setBefore] = useState<string>("{\"a\":\"b\",\"c\":0.2,\"numbers\":[4,3,2]}");
-  const [after, setAfter] = useState<string>("{\"c\": 0.2, \"b\": \"a\",\"numbers\":[1,2,3]}");
-
-  const [keepOrderInArrays, setKeepOrderInArrays] = useState<boolean>(false);
-  const [diffResult, setDiffResult] = useState<readonly [DiffResult[], DiffResult[]]>(emptyDiffResult);
-
-  const differ: Differ = useMemo<Differ>(() => {
-    return new Differ({
-      detectCircular: true,
-      showModifications: true,
-      arrayDiffMethod: keepOrderInArrays? "lcs": "unorder-lcs",
-      recursiveEqual: true
-    });
-  }, [keepOrderInArrays]);
-
-  function handleSortArrayChange(): void {
-    setKeepOrderInArrays(!keepOrderInArrays);
-    setDiffResult(emptyDiffResult);
-  }
-
-  function compareJSON(): void {
-    if(!before || !after) {
-      setDiffResult(emptyDiffResult);
-      return;
-    }
-    
-    const beforeObject = JSON.parse(before) as unknown;
-    const afterObject = JSON.parse(after) as unknown;
-
-    setDiffResult(differ.diff(beforeObject, afterObject));
-  }
-
-  function resetDiffResult(): void {
-    setDiffResult(emptyDiffResult);
-  }
+  const {
+    before,
+    setBefore,
+    after,
+    setAfter,
+    keepOrderInArrays,
+    handleKeepOrderChange,
+    compareJSON,
+    diffResult,
+    resetDiffResult
+  } = useJSONCompare();
 
   const { mode } = useColorScheme();
   if (!mode) {
@@ -120,7 +95,7 @@ export default function JSONCompare(): JSX.Element|null {
           }}
           label={"Keep order in arrays? "+(keepOrderInArrays? "Yes": "No")}
           checked={keepOrderInArrays}
-          onChange={handleSortArrayChange}
+          onChange={handleKeepOrderChange}
         />
         <Box sx={{
           display: "flex",
