@@ -66,20 +66,15 @@ export default function JSONSorter(): JSX.Element|null {
           onChange={handleTextAreaChanged}
           value={text}
         />
-      </Container>
-      <Container
-        sx={{
-          maxWidth: "30vw",
-          marginX: "auto",
-          marginTop: 10
-        }}
-      >
         <Button
           variant="contained"
           color="primary"
           fullWidth
           onClick={() => void handleSortButtonClicked()}
           type="button"
+          sx={{
+            marginTop: "2rem"
+          }}
         >
           Sort
         </Button>

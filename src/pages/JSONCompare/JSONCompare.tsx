@@ -1,12 +1,12 @@
-import { Alert, Button, Container, Paper, Typography, useColorScheme } from "@mui/material";
-import { CSSProperties, JSX, useState } from "react";
+import { Box, Button, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
+import { CSSProperties, JSX, useMemo, useState } from "react";
 import { Differ, DiffResult, Viewer } from "json-diff-kit";
 
 import "json-diff-kit/dist/viewer.css";
 
 function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
   let properties: CSSProperties = {
-    width: "46%",
+    width: "50%",
     height: "100%",
     fontSize: "1rem"
   };
@@ -24,7 +24,8 @@ function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
 
 function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
   let properties: CSSProperties = {
-    width: "100%"
+    width: "100%",
+    marginTop: "2rem"
   };
 
   if(mode === "dark") {
@@ -37,22 +38,32 @@ function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
   return properties;
 }
 
-const differ: Differ = new Differ({
-  detectCircular: true,
-  showModifications: true,
-  arrayDiffMethod: "unorder-lcs",
-  recursiveEqual: true
-});
+const emptyDiffResult: readonly [DiffResult[], DiffResult[]] = [[], []];
 
 export default function JSONCompare(): JSX.Element|null {
-  const [before, setBefore] = useState<string>("{\"a\": \"b\", \"c\": \"c\"}");
-  const [after, setAfter] = useState<string>("{\"c\": \"c\", \"b\": \"a\"}");
+  const [before, setBefore] = useState<string>("{\"a\":\"b\",\"c\":0.2,\"numbers\":[4,3,2]}");
+  const [after, setAfter] = useState<string>("{\"c\": 0.2, \"b\": \"a\",\"numbers\":[1,2,3]}");
 
-  const [diffResult, setDiffResult] = useState<readonly [DiffResult[], DiffResult[]]>([[], []]);
+  const [keepOrderInArrays, setKeepOrderInArrays] = useState<boolean>(false);
+  const [diffResult, setDiffResult] = useState<readonly [DiffResult[], DiffResult[]]>(emptyDiffResult);
+
+  const differ: Differ = useMemo<Differ>(() => {
+    return new Differ({
+      detectCircular: true,
+      showModifications: true,
+      arrayDiffMethod: keepOrderInArrays? "lcs": "unorder-lcs",
+      recursiveEqual: true
+    });
+  }, [keepOrderInArrays]);
+
+  function handleSortArrayChange(): void {
+    setKeepOrderInArrays(!keepOrderInArrays);
+    setDiffResult(emptyDiffResult);
+  }
 
   function compareJSON(): void {
     if(!before || !after) {
-      setDiffResult([[], []]);
+      setDiffResult(emptyDiffResult);
       return;
     }
     
@@ -60,6 +71,10 @@ export default function JSONCompare(): JSX.Element|null {
     const afterObject = JSON.parse(after) as unknown;
 
     setDiffResult(differ.diff(beforeObject, afterObject));
+  }
+
+  function resetDiffResult(): void {
+    setDiffResult(emptyDiffResult);
   }
 
   const { mode } = useColorScheme();
@@ -83,57 +98,78 @@ export default function JSONCompare(): JSX.Element|null {
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         JSON Compare
       </Typography>
-      <Alert severity="info" sx={{margin: "1rem", justifySelf: "center"}}>
-        You don't need to sort the JSON. It will be sorted automatically.
-      </Alert>
-      <Container sx={{
-        display: "flex",
-        width: "90vw",
-        height: "50vh",
-        marginX: "auto",
-        gap: {
-          sm: "1rem",
-          md: "2rem"
-        },
-        justifyContent: "center",
-      }}>
-        <textarea
-          style={textareaStyle(mode)}
-          name="before"
-          placeholder="Before"
-          value={before}
-          onChange={(event) => setBefore(event.target.value)}
-        />
-        <textarea
-          style={textareaStyle(mode)}
-          name="after"
-          placeholder="After"
-          value={after}
-          onChange={(event) => setAfter(event.target.value)}
-        />
-      </Container>
-      <Container
+      <Box
         sx={{
-          maxWidth: "30vw",
+          maxWidth: {
+            xs: "95%",
+            sm: "90%",
+            md: "75%"
+          },
           marginX: "auto",
-          marginTop: 10
+          alignItems: "center"
         }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          type="button"
-          onClick={compareJSON}
+        <FormControlLabel
+          control={<Switch />}
+          sx={{
+            maxWidth: "fit-content",
+            marginX: "auto",
+            justifyContent: "center",
+            display: "flex",
+            marginBottom: 2
+          }}
+          label={"Keep order in arrays? "+(keepOrderInArrays? "Yes": "No")}
+          checked={keepOrderInArrays}
+          onChange={handleSortArrayChange}
+        />
+        <Box sx={{
+          display: "flex",
+          height: "50vh",
+          gap: {
+            sm: "1rem",
+            md: "2rem"
+          }
+        }}>
+          <textarea
+            style={textareaStyle(mode)}
+            name="before"
+            placeholder="Before"
+            value={before}
+            onChange={(event) => setBefore(event.target.value)}
+          />
+          <textarea
+            style={textareaStyle(mode)}
+            name="after"
+            placeholder="After"
+            value={after}
+            onChange={(event) => setAfter(event.target.value)}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            marginTop: "2rem",
+            gap: "2rem"
+          }}
         >
-          Compare
-        </Button>
-      </Container>
-      <Container
-        sx={{
-          marginTop: "2rem",
-        }}
-      >
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            type="button"
+            onClick={compareJSON}
+          >
+            Compare
+          </Button>
+          <Button
+            variant="outlined"
+            fullWidth
+            type="button"
+            onClick={resetDiffResult}
+          >
+            Clear comparison result
+          </Button>
+        </Box>
         <Viewer
           diff={diffResult}
           indent={4}
@@ -141,7 +177,7 @@ export default function JSONCompare(): JSX.Element|null {
           highlightInlineDiff={true}
           style={diffViewerStyle(mode)}
         />
-      </Container>
+      </Box>
     </Paper>
   );
 }
