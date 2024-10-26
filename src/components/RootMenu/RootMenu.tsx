@@ -56,6 +56,10 @@ const routeList: RouteLink[] = [
   {
     link: "/json-sorter",
     title: "JSON Sorter"
+  },
+  {
+    link: "/json-compare",
+    title: "JSON Compare"
   }
 ];
 
