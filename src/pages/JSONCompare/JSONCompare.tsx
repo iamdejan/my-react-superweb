@@ -5,14 +5,14 @@ import { Viewer } from "json-diff-kit";
 import "json-diff-kit/dist/viewer.css";
 import useJSONCompare from "./hooks";
 
-function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
+function textareaStyle(mode: "light" | "dark" | "system"): CSSProperties {
   let properties: CSSProperties = {
     width: "50%",
     height: "100%",
     fontSize: "1rem"
   };
 
-  if(mode === "dark") {
+  if (mode === "dark") {
     properties = {
       ...properties,
       backgroundColor: "rgba(35,35,35,1)",
@@ -23,13 +23,13 @@ function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
   return properties;
 }
 
-function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
+function diffViewerStyle(mode: "light" | "dark" | "system"): CSSProperties {
   let properties: CSSProperties = {
     width: "100%",
     marginTop: "2rem"
   };
 
-  if(mode === "dark") {
+  if (mode === "dark") {
     properties = {
       ...properties,
       color: "black"
@@ -39,14 +39,16 @@ function diffViewerStyle(mode: "light"|"dark"|"system"): CSSProperties {
   return properties;
 }
 
-export default function JSONCompare(): JSX.Element|null {
+export default function JSONCompare(): JSX.Element | null {
   const {
     before,
     setBefore,
     after,
     setAfter,
     keepOrderInArrays,
+    hideUnchangedLines,
     handleKeepOrderChange,
+    handleHideUnchangedLinesChange,
     compareJSON,
     diffResult,
     resetDiffResult
@@ -93,9 +95,22 @@ export default function JSONCompare(): JSX.Element|null {
             display: "flex",
             marginBottom: 2
           }}
-          label={"Keep order in arrays? "+(keepOrderInArrays? "Yes": "No")}
+          label={"Keep elements' order in array? " + (keepOrderInArrays ? "Yes" : "No")}
           checked={keepOrderInArrays}
           onChange={handleKeepOrderChange}
+        />
+        <FormControlLabel
+          control={<Switch />}
+          sx={{
+            maxWidth: "fit-content",
+            marginX: "auto",
+            justifyContent: "center",
+            display: "flex",
+            marginBottom: 2
+          }}
+          label={"Hide unchanged lines? " + (hideUnchangedLines ? "Yes" : "No")}
+          checked={hideUnchangedLines}
+          onChange={handleHideUnchangedLinesChange}
         />
         <Box sx={{
           display: "flex",
@@ -137,7 +152,8 @@ export default function JSONCompare(): JSX.Element|null {
             Compare
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
+            color="error"
             fullWidth
             type="button"
             onClick={resetDiffResult}
@@ -150,6 +166,7 @@ export default function JSONCompare(): JSX.Element|null {
           indent={4}
           lineNumbers={true}
           highlightInlineDiff={true}
+          hideUnchangedLines={hideUnchangedLines}
           style={diffViewerStyle(mode)}
         />
       </Box>

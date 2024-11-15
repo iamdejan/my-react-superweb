@@ -7,8 +7,10 @@ type JSONCompareHookOutput = {
   after: string,
   setAfter: React.Dispatch<React.SetStateAction<string>>,
   keepOrderInArrays: boolean,
+  hideUnchangedLines: boolean,
   diffResult: readonly [DiffResult[], DiffResult[]],
   handleKeepOrderChange: () => void,
+  handleHideUnchangedLinesChange: () => void,
   compareJSON: () => void,
   resetDiffResult: () => void
 };
@@ -20,28 +22,30 @@ export default function useJSONCompare(): JSONCompareHookOutput {
   const [after, setAfter] = useState<string>("{\"c\": 0.2, \"b\": \"a\",\"numbers\":[1,2,3]}");
 
   const [keepOrderInArrays, setKeepOrderInArrays] = useState<boolean>(false);
+  const [hideUnchangedLines, setHideUnchangedLines] = useState<boolean>(false);
+
   const [diffResult, setDiffResult] = useState<readonly [DiffResult[], DiffResult[]]>(emptyDiffResult);
 
   const differ: Differ = useMemo<Differ>(() => {
     return new Differ({
       detectCircular: true,
       showModifications: true,
-      arrayDiffMethod: keepOrderInArrays? "lcs": "unorder-lcs",
-      recursiveEqual: true
+      arrayDiffMethod: keepOrderInArrays ? "lcs" : "unorder-lcs",
+      recursiveEqual: true,
     });
   }, [keepOrderInArrays]);
 
   function handleKeepOrderChange(): void {
     setKeepOrderInArrays(!keepOrderInArrays);
-    setDiffResult(emptyDiffResult);
+    resetDiffResult();
   }
 
   function compareJSON(): void {
-    if(!before || !after) {
+    if (!before || !after) {
       setDiffResult(emptyDiffResult);
       return;
     }
-    
+
     const beforeObject = JSON.parse(before) as unknown;
     const afterObject = JSON.parse(after) as unknown;
 
@@ -52,6 +56,10 @@ export default function useJSONCompare(): JSONCompareHookOutput {
     setDiffResult(emptyDiffResult);
   }
 
+  function handleHideUnchangedLinesChange(): void {
+    setHideUnchangedLines(!hideUnchangedLines);
+  }
+
   return {
     before,
     setBefore,
@@ -60,6 +68,8 @@ export default function useJSONCompare(): JSONCompareHookOutput {
     keepOrderInArrays,
     diffResult,
     handleKeepOrderChange,
+    hideUnchangedLines,
+    handleHideUnchangedLinesChange,
     compareJSON,
     resetDiffResult
   };
