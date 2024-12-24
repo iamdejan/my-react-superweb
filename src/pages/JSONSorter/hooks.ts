@@ -25,16 +25,16 @@ export default function useJSONSorter(): JSONSorterHookOutput {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const parsedData = JSON.parse(text);
 
-      if(sortArrays) {
+      if (sortArrays) {
         const sortKeysRecursive = (await import("sort-keys-recursive")).default;
         const sortedData = sortKeysRecursive(parsedData) as unknown;
-        setText(stringify(sortedData, {space: 4}));
+        setText(stringify(sortedData, { space: 4 }));
       } else {
-        setText(stringify(parsedData, {space: 4}));
+        setText(stringify(parsedData, { space: 4 }));
       }
-    } catch(e) {
+    } catch (e) {
       const errorMessage: string = e as string;
-      setText("Invalid JSON: "+errorMessage);
+      setText("Invalid JSON: " + errorMessage);
     }
   }
 

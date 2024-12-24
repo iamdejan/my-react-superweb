@@ -20,7 +20,7 @@ export default function BMICalculatorIndex(): JSX.Element {
 
   const [heightInput, setHeightInput] = useState<number>(0);
 
-  const {handleSubmit, register, formState: {errors}} = useForm<BMICalculation>({
+  const { handleSubmit, register, formState: { errors } } = useForm<BMICalculation>({
     resolver: zodResolver(BMICalculationSchema),
     mode: "onSubmit"
   });
@@ -34,30 +34,30 @@ export default function BMICalculatorIndex(): JSX.Element {
     setResultOpen(true);
 
     let newResultCategory = "";
-    if(newResult < 18.50) {
+    if (newResult < 18.50) {
       newResultCategory = "Underweight";
-    } else if(18.50 <= newResult && newResult <= 24.99) {
+    } else if (18.50 <= newResult && newResult <= 24.99) {
       newResultCategory = "Normal";
-    } else if(25.00 <= newResult && newResult <= 29.99) {
+    } else if (25.00 <= newResult && newResult <= 29.99) {
       newResultCategory = "Pre-obesity";
-    } else if(30.00 <= newResult && newResult <= 34.99) {
+    } else if (30.00 <= newResult && newResult <= 34.99) {
       newResultCategory = "Obesity class I";
-    } else if(35.00 <= newResult && newResult <= 39.99) {
+    } else if (35.00 <= newResult && newResult <= 39.99) {
       newResultCategory = "Obesity class II";
-    } else if(40.00 <= newResult) {
+    } else if (40.00 <= newResult) {
       newResultCategory = "Obesity class III";
     }
     setResultCategory(newResultCategory);
   }
 
   function onHeightChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    if(event.currentTarget.value === "") {
+    if (event.currentTarget.value === "") {
       setHeightInput(0);
       return;
     }
 
     const parsedNumber = Number.parseInt(event.currentTarget.value);
-    if(Number.isSafeInteger(parsedNumber)) {
+    if (Number.isSafeInteger(parsedNumber)) {
       setHeightInput(parsedNumber);
     }
   }
@@ -154,7 +154,7 @@ export default function BMICalculatorIndex(): JSX.Element {
             helperText={errors.weight?.message}
           />
           <Button type="submit" variant="contained" color="warning">Calculate</Button>
-          {result !== 0?
+          {result !== 0 ?
             <Collapse in={resultOpen}>
               <Alert
                 severity="info"
@@ -191,11 +191,8 @@ export default function BMICalculatorIndex(): JSX.Element {
         </Typography>
         <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
         <ButtonLink
-          variant="contained"
-          color="primary"
-          type="a"
-          href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
-          text="Find"
+          link={"/bmi-calculator/height/" + heightInput.toString() + "cm"}
+          title="Find"
         />
       </Stack>
     </Paper>

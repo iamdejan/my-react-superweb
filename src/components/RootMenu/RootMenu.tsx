@@ -72,21 +72,21 @@ const TanStackRouterDevtools =
       })),
     );
 
-export default function RootMenu(): JSX.Element|null {
+export default function RootMenu(): JSX.Element | null {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <CssBaseline />
       <ThemeProvider theme={theme} defaultMode="dark">
-        <AppBar position="static" sx={{margin:"0", padding:"0"}}>
+        <AppBar position="static" sx={{ margin: "0", padding: "0" }}>
           <Container maxWidth={false}>
             <Toolbar disableGutters>
               <Button color="inherit" onClick={() => setOpen(true)}>
                 <MenuIcon />
               </Button>
               <Typography variant="h5" component="div" sx={{ marginLeft: "auto" }}>
-                <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
+                <a href="/" style={{ textDecoration: "none", color: "inherit" }}>My React Superweb</a>
               </Typography>
             </Toolbar>
           </Container>
@@ -95,7 +95,7 @@ export default function RootMenu(): JSX.Element|null {
         <Drawer open={open} onClose={() => setOpen(false)}>
           <List>
             {routeList.map((route) => (
-              <DrawerLink key={route.link} title={route.title} to={route.link} />
+              <DrawerLink key={route.link} title={route.title} link={route.link} />
             ))}
           </List>
           <Divider />

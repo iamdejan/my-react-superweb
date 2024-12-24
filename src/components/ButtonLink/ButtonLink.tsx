@@ -1,19 +1,21 @@
-import { Button, ButtonProps } from "@mui/material";
-import { createLink, Link } from "@tanstack/react-router";
-import React from "react";
+import { JSX } from "react";
+import { Button } from "@mui/material";
+import { Link } from "@tanstack/react-router";
 
-const ButtonLink = createLink(
-  React.forwardRef((props: ButtonProps<"a"> & { text: string }, ref: React.ForwardedRef<HTMLAnchorElement>) => {
-    return (
-      <Button
-        {...props}
-        ref={ref}
-        component={Link}
-      >
-        {props.text}
-      </Button>
-    );
-  })
-);
+type ButtonLinkProps = {
+  link: string;
+  title: string;
+};
 
-export default ButtonLink;
+export default function ButtonLink(props: ButtonLinkProps): JSX.Element {
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      component={Link}
+      to={props.link}
+    >
+      {props.title}
+    </Button>
+  );
+}
