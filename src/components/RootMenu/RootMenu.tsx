@@ -1,5 +1,5 @@
 import { AppBar, Button, Container, Drawer, List, ListItem, Toolbar, Typography, Divider, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { FileRoutesByPath, Outlet } from "@tanstack/react-router";
+import { FileRoutesByPath, Link, Outlet } from "@tanstack/react-router";
 import { JSX, lazy, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ThemeSwitch from "../ThemeSwitch";
@@ -86,7 +86,7 @@ export default function RootMenu(): JSX.Element|null {
                 <MenuIcon />
               </Button>
               <Typography variant="h5" component="div" sx={{ marginLeft: "auto" }}>
-                <a href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</a>
+                <Link href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</Link>
               </Typography>
             </Toolbar>
           </Container>

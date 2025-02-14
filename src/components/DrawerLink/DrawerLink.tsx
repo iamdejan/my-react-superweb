@@ -1,17 +1,22 @@
-import { ListItem, ListItemProps, Typography } from "@mui/material";
+import { ListItem, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { createLink, Link } from "@tanstack/react-router";
-import React from "react";
+import { Link } from "@tanstack/react-router";
+import { JSX } from "react";
 
-const DrawerLink = createLink(
-  React.forwardRef((props: ListItemProps<"a"> & { title: string }, ref: React.ForwardedRef<HTMLAnchorElement>) => {
-    return (
+type DrawerLinkProps = {
+  title: string;
+  to: string;
+};
+
+export default function DrawerLink(props: DrawerLinkProps): JSX.Element {
+  return (
+    <Link to={props.to} style={{
+      textDecoration: "none",
+      color: "inherit",
+      boxShadow: "none",
+    }}>
       <ListItem
-        {...props}
         sx={(theme) => ({
-          textDecoration: "none",
-          boxShadow: "none",
-          color: "inherit",
           "&:hover": {
             backgroundColor: grey[200],
             ...theme.applyStyles("dark", {
@@ -19,15 +24,11 @@ const DrawerLink = createLink(
             })
           }
         })}
-        ref={ref}
-        component={Link}
       >
         <Typography>
           {props.title}
         </Typography>
       </ListItem>
-    );
-  })
-);
-
-export default DrawerLink;
+    </Link>
+  );
+}
