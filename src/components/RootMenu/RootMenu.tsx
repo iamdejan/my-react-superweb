@@ -72,21 +72,21 @@ const TanStackRouterDevtools =
       })),
     );
 
-export default function RootMenu(): JSX.Element|null {
+export default function RootMenu(): JSX.Element | null {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <CssBaseline />
       <ThemeProvider theme={theme} defaultMode="dark">
-        <AppBar position="static" sx={{margin:"0", padding:"0"}}>
+        <AppBar position="static" sx={{ margin: "0", padding: "0" }}>
           <Container maxWidth={false}>
             <Toolbar disableGutters>
               <Button color="inherit" onClick={() => setOpen(true)}>
                 <MenuIcon />
               </Button>
               <Typography variant="h5" component="div" sx={{ marginLeft: "auto" }}>
-                <Link href="/" style={{textDecoration: "none", color: "inherit"}}>My React Superweb</Link>
+                <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>My React Superweb</Link>
               </Typography>
             </Toolbar>
           </Container>
@@ -103,6 +103,10 @@ export default function RootMenu(): JSX.Element|null {
             <ListItem>
               <ThemeSwitch />
             </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <DrawerLink title="Date Time" to="https://date-time.overrated.lol" />
           </List>
         </Drawer>
         <TanStackRouterDevtools />

@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Link, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
+import { Alert, Link, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 
 const features: string[] = [
   "To-do list",
@@ -48,22 +48,32 @@ export default function Home(): JSX.Element {
     >
       <Typography variant="h4" paddingY={2} align="center">My React Superweb</Typography>
 
+      <Alert severity="info" variant="filled" sx={{
+        marginY: "2rem",
+      }}>
+        Check out my new website: <Link href="https://date-time.overrated.lol" style={{
+          textDecoration: "none",
+          fontWeight: "bold",
+          color: "inherit",
+        }}>SolidJS Date Time Utilities</Link>
+      </Alert>
+
       <Typography>
         This is a simple React website to fulfill my utilities, which are:
       </Typography>
       <List>
         {features.map(feature => (
           <ListItem key={feature}>
-            <ListItemText primary={"• "+feature} />
+            <ListItemText primary={"• " + feature} />
           </ListItem>
         ))}
       </List>
 
-      <Typography sx={{paddingBottom: 2}}>List of links for further references:</Typography>
+      <Typography sx={{ paddingBottom: 2 }}>List of links for further references:</Typography>
       {referenceList.map(item => (
         <div key={item.link}>
           <Link href={item.link}>
-            <Typography sx={{paddingBottom: 1}}>
+            <Typography sx={{ paddingBottom: 1 }}>
               {item.text}
             </Typography>
           </Link>
