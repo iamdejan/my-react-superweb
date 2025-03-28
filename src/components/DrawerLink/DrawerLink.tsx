@@ -10,24 +10,25 @@ type DrawerLinkProps = {
 
 export default function DrawerLink(props: DrawerLinkProps): JSX.Element {
   return (
-    <Link to={props.to} style={{
-      textDecoration: "none",
-      color: "inherit",
-      boxShadow: "none",
-    }}>
+    <Link
+      to={props.to}
+      style={{
+        textDecoration: "none",
+        color: "inherit",
+        boxShadow: "none",
+      }}
+    >
       <ListItem
         sx={(theme) => ({
           "&:hover": {
             backgroundColor: grey[200],
             ...theme.applyStyles("dark", {
               backgroundColor: grey[900],
-            })
-          }
+            }),
+          },
         })}
       >
-        <Typography>
-          {props.title}
-        </Typography>
+        <Typography>{props.title}</Typography>
       </ListItem>
     </Link>
   );

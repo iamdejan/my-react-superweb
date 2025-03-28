@@ -1,4 +1,14 @@
-import { Container, FormControl, FormControlLabel, Paper, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import {
+  Container,
+  FormControl,
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { JSX } from "react";
 import { useDistanceCalculator } from "./hooks";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
@@ -14,7 +24,7 @@ export default function DistanceCalculator(): JSX.Element {
     nauticalMileInput,
     setNauticalMileInput,
     selection,
-    onUnitChanged
+    onUnitChanged,
   } = useDistanceCalculator();
 
   useDocumentTitle("Distance Calculator");
@@ -23,23 +33,27 @@ export default function DistanceCalculator(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
         margin: "0",
-        paddingBottom: "5rem"
+        paddingBottom: "5rem",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         Distance Calculator
       </Typography>
-      <Container sx={{
-        textAlign: "center"
-      }}>
+      <Container
+        sx={{
+          textAlign: "center",
+        }}
+      >
         <FormControl>
           <Typography variant="h6" align="center" marginTop={3}>
             Chosen unit for input
@@ -48,10 +62,10 @@ export default function DistanceCalculator(): JSX.Element {
             <FormControlLabel
               value={DistanceUnit.Kilometer.toString()}
               checked={selection === DistanceUnit.Kilometer}
-              control={<Radio />} 
+              control={<Radio />}
               label="Kilometer"
             />
-            <FormControlLabel 
+            <FormControlLabel
               value={DistanceUnit.Mile.toString()}
               checked={selection === DistanceUnit.Mile}
               control={<Radio />}
@@ -72,7 +86,7 @@ export default function DistanceCalculator(): JSX.Element {
           gap: 2,
           maxWidth: {
             sm: "80%",
-            md: "60%"
+            md: "60%",
           },
           marginX: "auto",
         }}

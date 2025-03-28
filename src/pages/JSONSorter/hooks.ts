@@ -16,7 +16,9 @@ export default function useJSONSorter(): JSONSorterHookOutput {
   const [text, setText] = useState<string>("");
   const [sortArrays, setSortArrays] = useState<boolean>(false);
 
-  function handleTextAreaChanged(e: React.ChangeEvent<HTMLTextAreaElement>): void {
+  function handleTextAreaChanged(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void {
     setText(e.target.value);
   }
 
@@ -25,16 +27,22 @@ export default function useJSONSorter(): JSONSorterHookOutput {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const parsedData = JSON.parse(text);
 
-      if(sortArrays) {
+      if (sortArrays) {
         const sortKeysRecursive = (await import("sort-keys-recursive")).default;
         const sortedData = sortKeysRecursive(parsedData) as unknown;
-        setText(stringify(sortedData, {space: 4}));
+        const sortedDataString = stringify(sortedData, { space: 4 });
+        if (sortedDataString) {
+          setText(sortedDataString);
+        }
       } else {
-        setText(stringify(parsedData, {space: 4}));
+        const parsedDataString = stringify(parsedData, { space: 4 });
+        if (parsedDataString) {
+          setText(parsedDataString);
+        }
       }
-    } catch(e) {
+    } catch (e) {
       const errorMessage: string = e as string;
-      setText("Invalid JSON: "+errorMessage);
+      setText("Invalid JSON: " + errorMessage);
     }
   }
 
@@ -48,6 +56,6 @@ export default function useJSONSorter(): JSONSorterHookOutput {
     sortArrays,
     handleTextAreaChanged,
     handleSortButtonClicked,
-    handleSortArraysSwitchChanged
+    handleSortArraysSwitchChanged,
   };
 }

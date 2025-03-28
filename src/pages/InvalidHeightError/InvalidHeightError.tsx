@@ -20,32 +20,37 @@ export default function InvalidHeightError(): JSX.Element {
         }),
       })}
     >
-      <Alert severity="error" sx={{
-        maxWidth: {
-          sm: "75vw",
-          md: "60vw",
-          lg: "45vw",
-        },
-        marginX: "auto",
-        fontSize: {
-          sm: "12pt",
-          md: "14pt",
-          lg: "15pt",
-        },
-        fontWeight: 650,
-      }}>
+      <Alert
+        severity="error"
+        sx={{
+          maxWidth: {
+            sm: "75vw",
+            md: "60vw",
+            lg: "45vw",
+          },
+          marginX: "auto",
+          fontSize: {
+            sm: "12pt",
+            md: "14pt",
+            lg: "15pt",
+          },
+          fontWeight: 650,
+        }}
+      >
         <AlertTitle
           sx={{
             fontSize: {
               sm: "14pt",
               md: "16pt",
               lg: "17pt",
-            }
+            },
           }}
         >
           <b>Error!</b>
         </AlertTitle>
-        Invalid height of {height}. It should be in the format of: number + "cm".<br />
+        Invalid height of {height}. It should be in the format of: number +
+        "cm".
+        <br />
         Example: 165cm.
       </Alert>
     </Paper>

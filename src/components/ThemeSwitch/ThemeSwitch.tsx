@@ -1,7 +1,7 @@
 import { Switch, useColorScheme } from "@mui/material";
 import { JSX } from "react";
 
-export default function ThemeSwitch(): JSX.Element|null {
+export default function ThemeSwitch(): JSX.Element | null {
   const { mode, setMode } = useColorScheme();
   if (!mode) {
     return null;
@@ -10,7 +10,7 @@ export default function ThemeSwitch(): JSX.Element|null {
   function handleThemeChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const target = event.target as HTMLInputElement;
     const checked = target.checked;
-    if(checked) {
+    if (checked) {
       setMode("dark");
     } else {
       setMode("light");
@@ -21,7 +21,8 @@ export default function ThemeSwitch(): JSX.Element|null {
 
   return (
     <>
-      <Switch onChange={handleThemeChange} checked={mode === "dark"} /> {modeDisplay}
+      <Switch onChange={handleThemeChange} checked={mode === "dark"} />{" "}
+      {modeDisplay}
     </>
   );
 }

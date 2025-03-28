@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 type BMICalculatorHookOutput = {
-  result: number,
-  setResult: React.Dispatch<React.SetStateAction<number>>,
+  result: number;
+  setResult: React.Dispatch<React.SetStateAction<number>>;
 
-  resultCategory: string,
-  setResultCategory: React.Dispatch<React.SetStateAction<string>>,
+  resultCategory: string;
+  setResultCategory: React.Dispatch<React.SetStateAction<string>>;
 
-  resultOpen: boolean,
-  setResultOpen: React.Dispatch<React.SetStateAction<boolean>>
+  resultOpen: boolean;
+  setResultOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function useBMICalculator(): BMICalculatorHookOutput {
@@ -22,6 +22,6 @@ export default function useBMICalculator(): BMICalculatorHookOutput {
     resultCategory,
     setResultCategory,
     resultOpen,
-    setResultOpen
+    setResultOpen,
   };
 }

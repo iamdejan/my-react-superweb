@@ -25,8 +25,10 @@ export default function useUUIDGenerator(): UUIDGeneratorHookOutput {
     setCount(value as number);
   }
 
-  function handleTextFieldUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
-    if(event.target.value === "") {
+  function handleTextFieldUpdate(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void {
+    if (event.target.value === "") {
       setCount(0);
       return;
     }
@@ -36,7 +38,7 @@ export default function useUUIDGenerator(): UUIDGeneratorHookOutput {
 
   function onGenerateButtonClick(): void {
     const generatedUUIDs: string[] = [];
-    for(let i = 1; i <= count; i++) {
+    for (let i = 1; i <= count; i++) {
       generatedUUIDs.push(crypto.randomUUID());
     }
     setUUIDList(generatedUUIDs);

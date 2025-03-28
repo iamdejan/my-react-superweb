@@ -18,8 +18,8 @@ export default function useCalculator(): CalculatorHookOutput {
   const [isError, setIsError] = useState<boolean>(false);
 
   function calculate(): void {
-    for(const c of display) {
-      if(!validCharacterSet.has(c)) {
+    for (const c of display) {
+      if (!validCharacterSet.has(c)) {
         setDisplay("Invalid input");
         setIsError(true);
         return;
@@ -29,31 +29,31 @@ export default function useCalculator(): CalculatorHookOutput {
     try {
       const result: unknown = eval(display);
       setDisplay(result as string);
-    } catch(error: unknown) {
+    } catch (error: unknown) {
       setDisplay(`Error: ${error as string}`);
       setIsError(true);
     }
   }
 
   function handleButtonClicked(value: string): void {
-    switch(value) {
-    case "C": {
-      setDisplay("");
-      break;
-    }
-    case "=": {
-      calculate();
-      break;
-    }
-    default: {
-      if(isError) {
-        setIsError(false);
-        setDisplay(value);
-      } else {
-        setDisplay(display + value);
+    switch (value) {
+      case "C": {
+        setDisplay("");
+        break;
       }
-      break;
-    }
+      case "=": {
+        calculate();
+        break;
+      }
+      default: {
+        if (isError) {
+          setIsError(false);
+          setDisplay(value);
+        } else {
+          setDisplay(display + value);
+        }
+        break;
+      }
     }
   }
 

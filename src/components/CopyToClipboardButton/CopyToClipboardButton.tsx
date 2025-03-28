@@ -3,7 +3,9 @@ import { useCopyToClipboard } from "@uidotdev/usehooks";
 import { JSX } from "react";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-export default function CopyToClipboardButton(props: {input: string}): JSX.Element {
+export default function CopyToClipboardButton(props: {
+  input: string;
+}): JSX.Element {
   const [, copyToClipboard] = useCopyToClipboard();
 
   return (

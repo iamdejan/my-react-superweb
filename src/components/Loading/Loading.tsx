@@ -6,10 +6,12 @@ export default function Loading(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,243,250,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",

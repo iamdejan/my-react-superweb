@@ -3,8 +3,8 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 type PaperData = {
-  title: string,
-  text: string
+  title: string;
+  text: string;
 };
 
 const paperList: PaperData[] = [
@@ -33,10 +33,12 @@ export default function About(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,255,237,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(255,255,237,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
@@ -53,7 +55,7 @@ export default function About(): JSX.Element {
           gridTemplateColumns: {
             xs: "repeat(1, 1fr)",
             sm: "repeat(2, 1fr)",
-            md: "repeat(4, 1fr)"
+            md: "repeat(4, 1fr)",
           },
           gap: {
             xs: "0.8rem",

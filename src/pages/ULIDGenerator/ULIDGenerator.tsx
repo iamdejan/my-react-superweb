@@ -1,4 +1,19 @@
-import { Alert, AlertTitle, Button, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Paper,
+  Slider,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { JSX } from "react";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 import useULIDGenerator, { maxULIDCount } from "./hooks";
@@ -9,21 +24,23 @@ export default function ULIDGenerator(): JSX.Element {
     ulidList,
     handleScaleUpdate,
     handleTextFieldUpdate,
-    refreshSeed
+    refreshSeed,
   } = useULIDGenerator();
 
-  return(
+  return (
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
-        paddingBottom: "5rem"
+        paddingBottom: "5rem",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
@@ -39,28 +56,41 @@ export default function ULIDGenerator(): JSX.Element {
           },
           marginX: "auto",
           marginTop: 2,
-          marginBottom: 7
+          marginBottom: 7,
         }}
       >
-        <AlertTitle><b>What is ULID?</b></AlertTitle>
-        ULID (Universally Unique Lexicographically Sortable Identifier) is a 26-character string (128 bits)
-        consisting of a timestamp component and a random component, both base32 encoded.
-        The timestamp component provides millisecond precision,
-        while the random component ensures uniqueness.
+        <AlertTitle>
+          <b>What is ULID?</b>
+        </AlertTitle>
+        ULID (Universally Unique Lexicographically Sortable Identifier) is a
+        26-character string (128 bits) consisting of a timestamp component and a
+        random component, both base32 encoded. The timestamp component provides
+        millisecond precision, while the random component ensures uniqueness.
         Unlike traditional UUIDs, ULIDs can be monotonically ordered and sorted,
-        making them particularly useful in applications where data needs to be sorted by time.
+        making them particularly useful in applications where data needs to be
+        sorted by time.
       </Alert>
       <Stack
         gap={3}
         sx={{
           maxWidth: {
-            lg: "50vw"
+            lg: "50vw",
           },
           marginX: "auto",
         }}
       >
-        <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
-          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxULIDCount} />
+        <Stack
+          direction="row"
+          justifyItems="center"
+          alignItems="center"
+          gap={2}
+        >
+          <Slider
+            valueLabelDisplay="off"
+            value={count}
+            onChange={handleScaleUpdate}
+            max={maxULIDCount}
+          />
           <TextField
             type="number"
             label="Count"
@@ -81,15 +111,15 @@ export default function ULIDGenerator(): JSX.Element {
           sx={{
             marginTop: 3,
             maxHeight: {
-              sm: "60vh"
+              sm: "60vh",
             },
             maxWidth: {
               xs: "80vw",
               sm: "65vw",
               md: "50vw",
-              lg: "40vw"
+              lg: "40vw",
             },
-            marginX: "auto"
+            marginX: "auto",
           }}
         >
           <Table stickyHeader size="small">
@@ -113,7 +143,7 @@ export default function ULIDGenerator(): JSX.Element {
                     fontWeight: "650",
                     maxWidth: {
                       sm: "40vw",
-                      lg: "5vw"
+                      lg: "5vw",
                     },
                   }}
                 >
@@ -131,7 +161,7 @@ export default function ULIDGenerator(): JSX.Element {
                         sm: "0.85rem",
                         md: "0.9rem",
                         lg: "1rem",
-                      }
+                      },
                     }}
                   >
                     {ulidValue}

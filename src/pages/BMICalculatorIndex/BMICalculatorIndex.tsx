@@ -1,7 +1,20 @@
-import { Alert, AlertTitle, Button, Collapse, IconButton, Paper, Stack, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Collapse,
+  IconButton,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { JSX, useState } from "react";
 import { useForm } from "react-hook-form";
-import { BMICalculation, BMICalculationSchema } from "../../schema/BMICalculationSchema";
+import {
+  BMICalculation,
+  BMICalculationSchema,
+} from "../../schema/BMICalculationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
 import useBMICalculator from "./hooks";
@@ -20,9 +33,13 @@ export default function BMICalculatorIndex(): JSX.Element {
 
   const [heightInput, setHeightInput] = useState<number>(0);
 
-  const {handleSubmit, register, formState: {errors}} = useForm<BMICalculation>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<BMICalculation>({
     resolver: zodResolver(BMICalculationSchema),
-    mode: "onSubmit"
+    mode: "onSubmit",
   });
 
   useDocumentTitle("BMI Calculator");
@@ -34,30 +51,32 @@ export default function BMICalculatorIndex(): JSX.Element {
     setResultOpen(true);
 
     let newResultCategory = "";
-    if(newResult < 18.50) {
+    if (newResult < 18.5) {
       newResultCategory = "Underweight";
-    } else if(18.50 <= newResult && newResult <= 24.99) {
+    } else if (18.5 <= newResult && newResult <= 24.99) {
       newResultCategory = "Normal";
-    } else if(25.00 <= newResult && newResult <= 29.99) {
+    } else if (25.0 <= newResult && newResult <= 29.99) {
       newResultCategory = "Pre-obesity";
-    } else if(30.00 <= newResult && newResult <= 34.99) {
+    } else if (30.0 <= newResult && newResult <= 34.99) {
       newResultCategory = "Obesity class I";
-    } else if(35.00 <= newResult && newResult <= 39.99) {
+    } else if (35.0 <= newResult && newResult <= 39.99) {
       newResultCategory = "Obesity class II";
-    } else if(40.00 <= newResult) {
+    } else if (40.0 <= newResult) {
       newResultCategory = "Obesity class III";
     }
     setResultCategory(newResultCategory);
   }
 
-  function onHeightChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    if(event.currentTarget.value === "") {
+  function onHeightChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void {
+    if (event.currentTarget.value === "") {
       setHeightInput(0);
       return;
     }
 
     const parsedNumber = Number.parseInt(event.currentTarget.value);
-    if(Number.isSafeInteger(parsedNumber)) {
+    if (Number.isSafeInteger(parsedNumber)) {
       setHeightInput(parsedNumber);
     }
   }
@@ -66,22 +85,19 @@ export default function BMICalculatorIndex(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
-        paddingBottom: "5rem"
+        paddingBottom: "5rem",
       })}
     >
-      <Typography
-        variant="h4"
-        align="center"
-        paddingBottom={3}
-        paddingTop={2}
-      >
+      <Typography variant="h4" align="center" paddingBottom={3} paddingTop={2}>
         Body Mass Index (BMI) Calculator
       </Typography>
       <Alert
@@ -94,11 +110,12 @@ export default function BMICalculatorIndex(): JSX.Element {
             lg: "40vw",
           },
           marginX: "auto",
-          marginY: 2
+          marginY: 2,
         }}
       >
         <AlertTitle>Info</AlertTitle>
-        Body Mass Index is age-independent and applies to all genders of adult people.
+        Body Mass Index is age-independent and applies to all genders of adult
+        people.
       </Alert>
       <Alert
         severity="warning"
@@ -110,17 +127,19 @@ export default function BMICalculatorIndex(): JSX.Element {
             lg: "40vw",
           },
           marginX: "auto",
-          marginY: 2
+          marginY: 2,
         }}
       >
         <AlertTitle>Warning</AlertTitle>
         BMI for children and teenagers uses a different formula.
       </Alert>
 
-      <form onSubmit={(event: React.FormEvent<HTMLElement>) => {
-        event.preventDefault();
-        void handleSubmit(onSubmit)(event);
-      }}>
+      <form
+        onSubmit={(event: React.FormEvent<HTMLElement>) => {
+          event.preventDefault();
+          void handleSubmit(onSubmit)(event);
+        }}
+      >
         <Stack
           sx={{
             gap: 2,
@@ -136,7 +155,7 @@ export default function BMICalculatorIndex(): JSX.Element {
           <Typography
             variant="h5"
             sx={{
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             Count your BMI
@@ -153,13 +172,18 @@ export default function BMICalculatorIndex(): JSX.Element {
             error={!!errors.weight}
             helperText={errors.weight?.message}
           />
-          <Button type="submit" variant="contained" color="warning">Calculate</Button>
-          {result !== 0?
+          <Button type="submit" variant="contained" color="warning">
+            Calculate
+          </Button>
+          {result !== 0 ? (
             <Collapse in={resultOpen}>
               <Alert
                 severity="info"
                 action={
-                  <IconButton color="inherit" onClick={() => setResultOpen(false)}>
+                  <IconButton
+                    color="inherit"
+                    onClick={() => setResultOpen(false)}
+                  >
                     <CloseIcon fontSize="inherit" />
                   </IconButton>
                 }
@@ -168,8 +192,9 @@ export default function BMICalculatorIndex(): JSX.Element {
                 Your BMI result: <b>{result.toFixed(3)}</b> ({resultCategory})
               </Alert>
             </Collapse>
-            : <></>
-          }
+          ) : (
+            <></>
+          )}
         </Stack>
       </form>
 
@@ -189,12 +214,16 @@ export default function BMICalculatorIndex(): JSX.Element {
         <Typography variant="h5" textAlign="center">
           Or, find the ideal weight
         </Typography>
-        <TextField label="Height (in cm)" value={heightInput} onChange={onHeightChange} />
+        <TextField
+          label="Height (in cm)"
+          value={heightInput}
+          onChange={onHeightChange}
+        />
         <ButtonLink
           variant="contained"
           color="primary"
           type="a"
-          href={"/bmi-calculator/height/"+heightInput.toString()+"cm"}
+          to={"/bmi-calculator/height/" + heightInput.toString() + "cm"}
           text="Find"
         />
       </Stack>

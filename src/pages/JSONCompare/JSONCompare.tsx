@@ -1,4 +1,12 @@
-import { Box, Button, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Paper,
+  Switch,
+  Typography,
+  useColorScheme,
+} from "@mui/material";
 import { CSSProperties, JSX } from "react";
 import { Viewer } from "json-diff-kit";
 
@@ -9,14 +17,14 @@ function textareaStyle(mode: "light" | "dark" | "system"): CSSProperties {
   let properties: CSSProperties = {
     width: "50%",
     height: "100%",
-    fontSize: "1rem"
+    fontSize: "1rem",
   };
 
   if (mode === "dark") {
     properties = {
       ...properties,
       backgroundColor: "rgba(35,35,35,1)",
-      color: "yellow"
+      color: "yellow",
     };
   }
 
@@ -26,13 +34,13 @@ function textareaStyle(mode: "light" | "dark" | "system"): CSSProperties {
 function diffViewerStyle(mode: "light" | "dark" | "system"): CSSProperties {
   let properties: CSSProperties = {
     width: "100%",
-    marginTop: "2rem"
+    marginTop: "2rem",
   };
 
   if (mode === "dark") {
     properties = {
       ...properties,
-      color: "black"
+      color: "black",
     };
   }
 
@@ -51,7 +59,7 @@ export default function JSONCompare(): JSX.Element | null {
     handleHideUnchangedLinesChange,
     compareJSON,
     diffResult,
-    resetDiffResult
+    resetDiffResult,
   } = useJSONCompare();
 
   const { mode } = useColorScheme();
@@ -80,10 +88,10 @@ export default function JSONCompare(): JSX.Element | null {
           maxWidth: {
             xs: "95%",
             sm: "90%",
-            md: "75%"
+            md: "75%",
           },
           marginX: "auto",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <FormControlLabel
@@ -93,9 +101,12 @@ export default function JSONCompare(): JSX.Element | null {
             marginX: "auto",
             justifyContent: "center",
             display: "flex",
-            marginBottom: 2
+            marginBottom: 2,
           }}
-          label={"Keep elements' order in array? " + (keepOrderInArrays ? "Yes" : "No")}
+          label={
+            "Keep elements' order in array? " +
+            (keepOrderInArrays ? "Yes" : "No")
+          }
           checked={keepOrderInArrays}
           onChange={handleKeepOrderChange}
         />
@@ -106,20 +117,22 @@ export default function JSONCompare(): JSX.Element | null {
             marginX: "auto",
             justifyContent: "center",
             display: "flex",
-            marginBottom: 2
+            marginBottom: 2,
           }}
           label={"Hide unchanged lines? " + (hideUnchangedLines ? "Yes" : "No")}
           checked={hideUnchangedLines}
           onChange={handleHideUnchangedLinesChange}
         />
-        <Box sx={{
-          display: "flex",
-          height: "50vh",
-          gap: {
-            sm: "1rem",
-            md: "2rem"
-          }
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            height: "50vh",
+            gap: {
+              sm: "1rem",
+              md: "2rem",
+            },
+          }}
+        >
           <textarea
             style={textareaStyle(mode)}
             name="before"
@@ -139,7 +152,7 @@ export default function JSONCompare(): JSX.Element | null {
           sx={{
             display: "flex",
             marginTop: "2rem",
-            gap: "2rem"
+            gap: "2rem",
           }}
         >
           <Button

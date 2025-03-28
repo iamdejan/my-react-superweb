@@ -1,4 +1,19 @@
-import { Alert, AlertTitle, Button, Checkbox, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Checkbox,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { JSX } from "react";
 import { useForm } from "react-hook-form";
 import { ToDoItem, ToDoItemSchema } from "../../schema/ToDoItemSchema";
@@ -6,7 +21,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDocumentTitle, useLocalStorage } from "@uidotdev/usehooks";
 
 export default function ToDoList(): JSX.Element {
-  const { register, handleSubmit, formState: { errors } } = useForm<ToDoItem>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ToDoItem>({
     resolver: zodResolver(ToDoItemSchema),
     mode: "all",
   });
@@ -28,10 +47,12 @@ export default function ToDoList(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(234,255,234,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
@@ -50,20 +71,22 @@ export default function ToDoList(): JSX.Element {
           maxWidth: {
             sm: "70%",
             md: "50%",
-          }
+          },
         }}
       >
         <AlertTitle>Be Aware</AlertTitle>
-        This to-do list stores the list of to-do activities locally.
-        Currently, there's no plan to integrate this feature with database.
+        This to-do list stores the list of to-do activities locally. Currently,
+        there's no plan to integrate this feature with database.
       </Alert>
 
       {/* recommended approach without editing `eslint.config.js`
       ref: https://github.com/orgs/react-hook-form/discussions/8622#discussioncomment-6305393 */}
-      <form onSubmit={(event: React.FormEvent<HTMLElement>) => {
-        event.preventDefault();
-        void handleSubmit(onSubmit)(event);
-      }}>
+      <form
+        onSubmit={(event: React.FormEvent<HTMLElement>) => {
+          event.preventDefault();
+          void handleSubmit(onSubmit)(event);
+        }}
+      >
         <Stack
           elevation={2}
           component={Paper}
@@ -88,12 +111,14 @@ export default function ToDoList(): JSX.Element {
             helperText={errors.title?.message}
           />
           <TextField
-            {...register("description")} 
+            {...register("description")}
             label="Description"
             error={!!errors.description}
             helperText={errors.description?.message}
           />
-          <Button type="submit" variant="contained">Add</Button>
+          <Button type="submit" variant="contained">
+            Add
+          </Button>
         </Stack>
       </form>
 
@@ -125,7 +150,13 @@ export default function ToDoList(): JSX.Element {
               <TableRow key={index}>
                 <TableCell>{todoItem.title}</TableCell>
                 <TableCell>{todoItem.description}</TableCell>
-                <TableCell><Checkbox name={index.toString()} checked={todoItem.completed} onChange={onCheckChanged} /></TableCell>
+                <TableCell>
+                  <Checkbox
+                    name={index.toString()}
+                    checked={todoItem.completed}
+                    onChange={onCheckChanged}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

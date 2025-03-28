@@ -19,7 +19,7 @@ export default function useULIDGenerator(): ULIDGeneratorHookOutput {
 
   const ulidList: string[] = useMemo<string[]>(() => {
     const generatedULIDs: string[] = [];
-    for(let i = 1; i <= count; i++) {
+    for (let i = 1; i <= count; i++) {
       const generatedULID = ulid(seed);
       generatedULIDs.push(generatedULID);
     }
@@ -30,8 +30,10 @@ export default function useULIDGenerator(): ULIDGeneratorHookOutput {
     setCount(value as number);
   }
 
-  function handleTextFieldUpdate(event: React.ChangeEvent<HTMLInputElement>): void {
-    if(event.target.value === "") {
+  function handleTextFieldUpdate(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void {
+    if (event.target.value === "") {
       setCount(0);
       return;
     }
@@ -48,6 +50,6 @@ export default function useULIDGenerator(): ULIDGeneratorHookOutput {
     ulidList,
     handleScaleUpdate,
     handleTextFieldUpdate,
-    refreshSeed
+    refreshSeed,
   };
 }

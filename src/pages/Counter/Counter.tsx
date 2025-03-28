@@ -9,17 +9,19 @@ export default function Counter(): JSX.Element {
   useDocumentTitle("Counter");
 
   function onClick(): void {
-    setCount((count) => count+1);
+    setCount((count) => count + 1);
     hasClickedButton.current = true;
   }
 
-  console.log(`Has clicked increment button? ${hasClickedButton.current.toString()}`);
+  console.log(
+    `Has clicked increment button? ${hasClickedButton.current.toString()}`,
+  );
 
-  if(count % 15 === 0) {
+  if (count % 15 === 0) {
     console.log(`Current count ${count.toString()} is FizzBuzz.`);
-  } else if(count % 5 === 0) {
+  } else if (count % 5 === 0) {
     console.log(`Current count ${count.toString()} is Buzz.`);
-  } else if(count % 3 === 0) {
+  } else if (count % 3 === 0) {
     console.log(`Current count ${count.toString()} is Fizz.`);
   } else {
     console.log(`Current count: ${count.toString()}`);
@@ -29,10 +31,12 @@ export default function Counter(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(220,255,254,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
@@ -40,7 +44,9 @@ export default function Counter(): JSX.Element {
         padding: "0",
       })}
     >
-      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>Counter</Typography>
+      <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
+        Counter
+      </Typography>
       <Stack gap={2} alignItems="center">
         <Button variant="contained" onClick={onClick}>
           count is {count}

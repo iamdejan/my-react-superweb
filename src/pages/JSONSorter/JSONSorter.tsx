@@ -1,27 +1,41 @@
-import { Button, Container, FormControlLabel, Paper, Switch, Typography, useColorScheme } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControlLabel,
+  Paper,
+  Switch,
+  Typography,
+  useColorScheme,
+} from "@mui/material";
 import { CSSProperties, JSX } from "react";
 import useJSONSorter from "./hooks";
 
-function textareaStyle(mode: "light"|"dark"|"system"): CSSProperties {
+function textareaStyle(mode: "light" | "dark" | "system"): CSSProperties {
   let properties: CSSProperties = {
     width: "100%",
     height: "100%",
-    fontSize: "1rem"
+    fontSize: "1rem",
   };
 
-  if(mode === "dark") {
+  if (mode === "dark") {
     properties = {
       ...properties,
       backgroundColor: "rgba(35,35,35,1)",
-      color: "yellow"
+      color: "yellow",
     };
   }
 
   return properties;
 }
 
-export default function JSONSorter(): JSX.Element|null {
-  const { text, sortArrays, handleTextAreaChanged, handleSortButtonClicked, handleSortArraysSwitchChanged } = useJSONSorter();
+export default function JSONSorter(): JSX.Element | null {
+  const {
+    text,
+    sortArrays,
+    handleTextAreaChanged,
+    handleSortButtonClicked,
+    handleSortArraysSwitchChanged,
+  } = useJSONSorter();
   const { mode } = useColorScheme();
   if (!mode) {
     return null;
@@ -43,11 +57,13 @@ export default function JSONSorter(): JSX.Element|null {
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
         JSON Recursive Sorter
       </Typography>
-      <Container sx={{
-        width: "90vw",
-        height: "50vh",
-        marginX: "auto"
-      }}>
+      <Container
+        sx={{
+          width: "90vw",
+          height: "50vh",
+          marginX: "auto",
+        }}
+      >
         <FormControlLabel
           control={<Switch />}
           sx={{
@@ -55,7 +71,7 @@ export default function JSONSorter(): JSX.Element|null {
             marginX: "auto",
             justifyContent: "center",
             display: "flex",
-            marginBottom: 2
+            marginBottom: 2,
           }}
           label="Sort arrays"
           checked={sortArrays}
@@ -73,7 +89,7 @@ export default function JSONSorter(): JSX.Element|null {
           onClick={() => void handleSortButtonClicked()}
           type="button"
           sx={{
-            marginTop: "2rem"
+            marginTop: "2rem",
           }}
         >
           Sort

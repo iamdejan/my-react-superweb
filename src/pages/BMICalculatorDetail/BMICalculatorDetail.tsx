@@ -1,6 +1,18 @@
 import { JSX } from "react";
 import { getRouteApi } from "@tanstack/react-router";
-import { List, ListItem, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 
 const digits = 3;
@@ -22,14 +34,16 @@ export default function BMICalculatorDetail(): JSX.Element {
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(126,233,255,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
-        paddingBottom: "5rem"
+        paddingBottom: "5rem",
       })}
     >
       <Typography variant="h5" align="center" paddingTop={2} paddingBottom={3}>
@@ -50,18 +64,26 @@ export default function BMICalculatorDetail(): JSX.Element {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell width="70%" sx={{fontWeight: "650"}}>Description</TableCell>
-              <TableCell width="30%" sx={{fontWeight: "650"}}>Ideal Weight</TableCell>
+              <TableCell width="70%" sx={{ fontWeight: "650" }}>
+                Description
+              </TableCell>
+              <TableCell width="30%" sx={{ fontWeight: "650" }}>
+                Ideal Weight
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
               <TableCell>Lower Bound</TableCell>
-              <TableCell>{calculateLowerBound(height).toFixed(digits)} kg</TableCell>
+              <TableCell>
+                {calculateLowerBound(height).toFixed(digits)} kg
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Upper Bound</TableCell>
-              <TableCell>{calculateUpperBound(height).toFixed(digits)} kg</TableCell>
+              <TableCell>
+                {calculateUpperBound(height).toFixed(digits)} kg
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

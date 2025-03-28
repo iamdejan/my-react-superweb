@@ -4,5 +4,5 @@ import InvalidHeightError from "../../../pages/InvalidHeightError";
 
 export const Route = createLazyFileRoute("/bmi-calculator/height/$height")({
   component: BMICalculatorDetail,
-  errorComponent: InvalidHeightError
+  errorComponent: InvalidHeightError,
 });

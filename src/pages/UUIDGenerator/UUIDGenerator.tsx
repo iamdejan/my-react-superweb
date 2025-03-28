@@ -1,11 +1,25 @@
-import { Alert, Button, Paper, Slider, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Paper,
+  Slider,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { JSX } from "react";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 import { useDocumentTitle } from "@uidotdev/usehooks";
 import useUUIDGenerator, { maxUUIDCount } from "./hooks";
 
 export default function UUIDGenerator(): JSX.Element {
-  const { 
+  const {
     uuid,
     count,
     uuidList,
@@ -16,18 +30,20 @@ export default function UUIDGenerator(): JSX.Element {
 
   useDocumentTitle("UUID Generator");
 
-  return(
+  return (
     <Paper
       sx={(theme) => ({
         backgroundColor: "rgba(230,230,230,1)",
-        background: "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
+        background:
+          "linear-gradient(180deg, rgba(230,230,230,1) 0%, rgba(227,224,255,1) 100%)",
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
-          background: "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(23,22,23,1) 100%)",
         }),
         minHeight: "100vh",
         minWidth: "100%",
-        paddingBottom: "5rem"
+        paddingBottom: "5rem",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
@@ -41,8 +57,9 @@ export default function UUIDGenerator(): JSX.Element {
             md: "50%",
             lg: "40%",
           },
-          marginX: "auto"
-        }}>
+          marginX: "auto",
+        }}
+      >
         <Paper
           elevation={1}
           sx={{
@@ -66,15 +83,18 @@ export default function UUIDGenerator(): JSX.Element {
           </Stack>
         </Paper>
         <Alert severity="info">
-          Refresh page to generate new UUID value.<p />
-          <Button variant="contained" onClick={() => window.location.reload()}>Refresh page</Button>
+          Refresh page to generate new UUID value.
+          <p />
+          <Button variant="contained" onClick={() => window.location.reload()}>
+            Refresh page
+          </Button>
         </Alert>
       </Stack>
       <Stack
         gap={3}
         sx={{
           maxWidth: {
-            lg: "50%"
+            lg: "50%",
           },
           marginX: "auto",
         }}
@@ -82,8 +102,18 @@ export default function UUIDGenerator(): JSX.Element {
         <Typography variant="h5" textAlign="center" marginTop={10}>
           Or, generate multiple UUIDs at the same time
         </Typography>
-        <Stack direction="row" justifyItems="center" alignItems="center" gap={2}>
-          <Slider valueLabelDisplay="off" value={count} onChange={handleScaleUpdate} max={maxUUIDCount} />
+        <Stack
+          direction="row"
+          justifyItems="center"
+          alignItems="center"
+          gap={2}
+        >
+          <Slider
+            valueLabelDisplay="off"
+            value={count}
+            onChange={handleScaleUpdate}
+            max={maxUUIDCount}
+          />
           <TextField
             type="number"
             label="Count"
@@ -105,21 +135,18 @@ export default function UUIDGenerator(): JSX.Element {
           sx={{
             marginTop: 3,
             maxHeight: {
-              sm: "60vh"
+              sm: "60vh",
             },
             maxWidth: {
               xs: "80vw",
               sm: "65vw",
               md: "50vw",
-              lg: "40vw"
+              lg: "40vw",
             },
-            marginX: "auto"
+            marginX: "auto",
           }}
         >
-          <Table
-            stickyHeader
-            size="small"
-          >
+          <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
                 <TableCell
@@ -140,7 +167,7 @@ export default function UUIDGenerator(): JSX.Element {
                     fontWeight: "650",
                     maxWidth: {
                       sm: "40vw",
-                      lg: "5vw"
+                      lg: "5vw",
                     },
                   }}
                 >
@@ -158,7 +185,7 @@ export default function UUIDGenerator(): JSX.Element {
                         sm: "0.8rem",
                         md: "0.9rem",
                         lg: "1rem",
-                      }
+                      },
                     }}
                   >
                     {uuidValue}

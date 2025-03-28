@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": false,
+    "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -13,6 +13,9 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": [
+      "node"
+    ],
 
     /* Linting */
     "strict": true,
