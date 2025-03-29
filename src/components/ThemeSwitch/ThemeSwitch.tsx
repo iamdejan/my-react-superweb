@@ -11,9 +11,9 @@ export default function ThemeSwitch(): JSX.Element | null {
     const target = event.target as HTMLInputElement;
     const checked = target.checked;
     if (checked) {
-      setMode("dark");
-    } else {
       setMode("light");
+    } else {
+      setMode("dark");
     }
   }
 
@@ -21,7 +21,7 @@ export default function ThemeSwitch(): JSX.Element | null {
 
   return (
     <>
-      <Switch onChange={handleThemeChange} checked={mode === "dark"} />{" "}
+      <Switch onChange={handleThemeChange} checked={mode === "light"} />{" "}
       {modeDisplay}
     </>
   );
