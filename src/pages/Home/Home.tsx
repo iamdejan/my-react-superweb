@@ -54,6 +54,7 @@ export default function Home(): JSX.Element {
         minWidth: "100%",
         margin: 0,
         padding: 1,
+        borderRadius: "0",
       })}
     >
       <Typography variant="h4" paddingY={2} align="center">
@@ -65,6 +66,12 @@ export default function Home(): JSX.Element {
         variant="filled"
         sx={{
           marginY: "2rem",
+          marginX: "auto",
+          maxWidth: {
+            sm: "70vw",
+            md: "50vw",
+            lg: "40vw",
+          },
         }}
       >
         Check out my new website:{" "}
@@ -76,7 +83,7 @@ export default function Home(): JSX.Element {
             color: "inherit",
           }}
         >
-          SolidJS Date Time Utilities
+          Date Time Utilities
         </Link>
       </Alert>
 

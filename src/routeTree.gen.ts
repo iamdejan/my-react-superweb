@@ -18,7 +18,6 @@ import { Route as PasswordGeneratorImport } from './routes/password-generator'
 import { Route as JsonSorterImport } from './routes/json-sorter'
 import { Route as JsonCompareImport } from './routes/json-compare'
 import { Route as DistanceCalculatorImport } from './routes/distance-calculator'
-import { Route as CounterImport } from './routes/counter'
 import { Route as CalculatorImport } from './routes/calculator'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
@@ -77,12 +76,6 @@ const DistanceCalculatorRoute = DistanceCalculatorImport.update({
   import('./routes/distance-calculator.lazy').then((d) => d.Route),
 )
 
-const CounterRoute = CounterImport.update({
-  id: '/counter',
-  path: '/counter',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/counter.lazy').then((d) => d.Route))
-
 const CalculatorRoute = CalculatorImport.update({
   id: '/calculator',
   path: '/calculator',
@@ -140,13 +133,6 @@ declare module '@tanstack/react-router' {
       path: '/calculator'
       fullPath: '/calculator'
       preLoaderRoute: typeof CalculatorImport
-      parentRoute: typeof rootRoute
-    }
-    '/counter': {
-      id: '/counter'
-      path: '/counter'
-      fullPath: '/counter'
-      preLoaderRoute: typeof CounterImport
       parentRoute: typeof rootRoute
     }
     '/distance-calculator': {
@@ -221,7 +207,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calculator': typeof CalculatorRoute
-  '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
   '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
@@ -237,7 +222,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calculator': typeof CalculatorRoute
-  '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
   '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
@@ -254,7 +238,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calculator': typeof CalculatorRoute
-  '/counter': typeof CounterRoute
   '/distance-calculator': typeof DistanceCalculatorRoute
   '/json-compare': typeof JsonCompareRoute
   '/json-sorter': typeof JsonSorterRoute
@@ -272,7 +255,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calculator'
-    | '/counter'
     | '/distance-calculator'
     | '/json-compare'
     | '/json-sorter'
@@ -287,7 +269,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calculator'
-    | '/counter'
     | '/distance-calculator'
     | '/json-compare'
     | '/json-sorter'
@@ -302,7 +283,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calculator'
-    | '/counter'
     | '/distance-calculator'
     | '/json-compare'
     | '/json-sorter'
@@ -319,7 +299,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CalculatorRoute: typeof CalculatorRoute
-  CounterRoute: typeof CounterRoute
   DistanceCalculatorRoute: typeof DistanceCalculatorRoute
   JsonCompareRoute: typeof JsonCompareRoute
   JsonSorterRoute: typeof JsonSorterRoute
@@ -335,7 +314,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CalculatorRoute: CalculatorRoute,
-  CounterRoute: CounterRoute,
   DistanceCalculatorRoute: DistanceCalculatorRoute,
   JsonCompareRoute: JsonCompareRoute,
   JsonSorterRoute: JsonSorterRoute,
@@ -360,7 +338,6 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/calculator",
-        "/counter",
         "/distance-calculator",
         "/json-compare",
         "/json-sorter",
@@ -380,9 +357,6 @@ export const routeTree = rootRoute
     },
     "/calculator": {
       "filePath": "calculator.tsx"
-    },
-    "/counter": {
-      "filePath": "counter.tsx"
     },
     "/distance-calculator": {
       "filePath": "distance-calculator.tsx"

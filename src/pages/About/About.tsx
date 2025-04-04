@@ -44,6 +44,7 @@ export default function About(): JSX.Element {
         minWidth: "100%",
         margin: "0",
         padding: "0",
+        borderRadius: "0",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>

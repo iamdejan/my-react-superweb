@@ -44,6 +44,7 @@ export default function BMICalculatorDetail(): JSX.Element {
         minHeight: "100vh",
         minWidth: "100%",
         paddingBottom: "5rem",
+        borderRadius: "0",
       })}
     >
       <Typography variant="h5" align="center" paddingTop={2} paddingBottom={3}>

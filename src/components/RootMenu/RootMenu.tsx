@@ -35,10 +35,6 @@ const routeList: RouteLink[] = [
     title: "About",
   },
   {
-    link: "/counter",
-    title: "Counter",
-  },
-  {
     link: "/to-do-list",
     title: "To-Do List",
   },

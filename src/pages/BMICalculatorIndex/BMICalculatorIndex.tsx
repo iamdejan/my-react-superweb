@@ -111,6 +111,7 @@ export default function BMICalculatorIndex(): JSX.Element {
           },
           marginX: "auto",
           marginY: 2,
+          borderRadius: "0",
         }}
       >
         <AlertTitle>Info</AlertTitle>

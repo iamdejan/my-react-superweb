@@ -58,6 +58,7 @@ export default function ToDoList(): JSX.Element {
         minWidth: "100%",
         margin: "0",
         paddingBottom: "5rem",
+        borderRadius: "0",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>
@@ -76,7 +77,8 @@ export default function ToDoList(): JSX.Element {
       >
         <AlertTitle>Be Aware</AlertTitle>
         This to-do list stores the list of to-do activities locally. Currently,
-        there's no plan to integrate this feature with database.
+        there's no plan to integrate this feature with any backend / cloud
+        database.
       </Alert>
 
       {/* recommended approach without editing `eslint.config.js`
@@ -148,7 +150,13 @@ export default function ToDoList(): JSX.Element {
           <TableBody>
             {todoList.map((todoItem, index) => (
               <TableRow key={index}>
-                <TableCell>{todoItem.title}</TableCell>
+                <TableCell>
+                  {todoItem.completed ? (
+                    <s>{todoItem.title}</s>
+                  ) : (
+                    todoItem.title
+                  )}
+                </TableCell>
                 <TableCell>{todoItem.description}</TableCell>
                 <TableCell>
                   <Checkbox

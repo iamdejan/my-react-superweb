@@ -52,6 +52,7 @@ export default function JSONSorter(): JSX.Element | null {
         minWidth: "100%",
         margin: "0",
         paddingBottom: "5rem",
+        borderRadius: "0",
       })}
     >
       <Typography variant="h4" align="center" paddingTop={2} paddingBottom={3}>

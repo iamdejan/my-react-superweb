@@ -18,6 +18,7 @@ export default function InvalidHeightError(): JSX.Element {
         ...theme.applyStyles("dark", {
           backgroundColor: "rgba(17,17,17,1)",
         }),
+        borderRadius: "0",
       })}
     >
       <Alert
