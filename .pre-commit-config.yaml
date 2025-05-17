@@ -11,12 +11,12 @@ repos:
       - id: install-rimraf
         name: Install rimraf
         language: system
-        entry: npm i -g rimraf@6.0.1
+        entry: npm install --global rimraf@6.0.1
         pass_filenames: false
       - id: install-pnpm
         name: Install pnpm
         language: system
-        entry: npm i -g pnpm@10.7.0
+        entry: npm install --global pnpm@10.11.0
         pass_filenames: false
       - id: install-dependencies
         name: Install dependencies
