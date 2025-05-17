@@ -1,8 +1,18 @@
 import { Switch, useColorScheme } from "@mui/material";
-import { JSX } from "react";
+import { JSX, useEffect } from "react";
 
 export default function ThemeSwitch(): JSX.Element | null {
   const { mode, setMode } = useColorScheme();
+
+  useEffect(() => {
+    window
+      .matchMedia(`(prefers-color-scheme: dark)`)
+      .addEventListener("change", (ev: MediaQueryListEvent) => {
+        const newColorScheme = ev.matches ? "dark" : "light";
+        setMode(newColorScheme);
+      });
+  }, [mode, setMode]);
+
   if (!mode) {
     return null;
   }

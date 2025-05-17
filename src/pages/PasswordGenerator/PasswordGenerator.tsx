@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   Collapse,
   FormControlLabel,
@@ -26,6 +27,7 @@ export default function PasswordGenerator(): JSX.Element {
     handleUpperCaseUpdate,
     handleNumbersUpdate,
     handleSymbolsUpdate,
+    regeneratePassword,
   } = usePasswordGenerator();
 
   return (
@@ -121,6 +123,12 @@ export default function PasswordGenerator(): JSX.Element {
           onChange={handleSymbolsUpdate}
           label="Symbols"
         />
+
+        {passwordLength > 0 && (
+          <Button type="button" variant="outlined" onClick={regeneratePassword}>
+            Generate
+          </Button>
+        )}
       </Stack>
 
       <Stack

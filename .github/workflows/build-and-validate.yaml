@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-22.04', 'ubuntu-24.04']
-        node_version: ['18.20.4', '20.18.0', '22.11.0']
+        node_version: ['20.18.0', '22.15.0']
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup Node
@@ -25,6 +25,6 @@ jobs:
       - name: Setup Python 3
         uses: actions/setup-python@v5.2.0
         with:
-          python-version: '3.13.0'
+          python-version: '3.13.2'
       - name: Pre-commit
         uses: pre-commit/action@v3.0.1
