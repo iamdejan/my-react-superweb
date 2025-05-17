@@ -63,6 +63,7 @@ type PasswordGeneratorHookOutput = {
   handleUpperCaseUpdate: () => void;
   handleNumbersUpdate: () => void;
   handleSymbolsUpdate: () => void;
+  regeneratePassword: () => void;
 };
 
 export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
@@ -74,6 +75,9 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
   const [withUpperCase, setWithUpperCase] = useState<boolean>(true);
   const [withNumbers, setWithNumbers] = useState<boolean>(true);
   const [withSymbols, setWithSymbols] = useState<boolean>(true);
+
+  // seed
+  const [seed, setSeed] = useState<number>(Date.now());
 
   const generatedPassword: string = useMemo<string>(() => {
     let characters: string[] = [];
@@ -102,7 +106,14 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     }
 
     return pwd;
-  }, [passwordLength, withLowerCase, withNumbers, withSymbols, withUpperCase]);
+  }, [
+    passwordLength,
+    withLowerCase,
+    withNumbers,
+    withSymbols,
+    withUpperCase,
+    seed,
+  ]);
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setPasswordLength(value as number);
@@ -133,6 +144,10 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     setWithSymbols(!withSymbols);
   }
 
+  function regeneratePassword(): void {
+    setSeed(Date.now());
+  }
+
   return {
     passwordLength,
     generatedPassword,
@@ -146,5 +161,6 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     handleUpperCaseUpdate,
     handleNumbersUpdate,
     handleSymbolsUpdate,
+    regeneratePassword,
   };
 }
