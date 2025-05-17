@@ -87,7 +87,7 @@ export default function RootMenu(): JSX.Element | null {
   return (
     <>
       <CssBaseline />
-      <ThemeProvider theme={theme} defaultMode="dark">
+      <ThemeProvider theme={theme} defaultMode="system">
         <AppBar position="static" sx={{ margin: "0", padding: "0" }}>
           <Container maxWidth={false}>
             <Toolbar disableGutters>
