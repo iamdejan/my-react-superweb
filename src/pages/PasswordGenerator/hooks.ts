@@ -106,6 +106,8 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     }
 
     return pwd;
+    // force re-generate password through seed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     passwordLength,
     withLowerCase,
