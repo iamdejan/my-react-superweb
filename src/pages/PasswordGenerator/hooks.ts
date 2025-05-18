@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export const maxPasswordLength = 30;
 
@@ -50,12 +50,12 @@ const symbolCharacters = [
 
 type PasswordGeneratorHookOutput = {
   passwordLength: number;
-  generatedPassword: string;
-
   withLowerCase: boolean;
   withUpperCase: boolean;
   withNumbers: boolean;
   withSymbols: boolean;
+
+  password: string;
 
   handleScaleUpdate: (_e: Event, value: number | number[]) => void;
   handleTextFieldUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -76,10 +76,10 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
   const [withNumbers, setWithNumbers] = useState<boolean>(true);
   const [withSymbols, setWithSymbols] = useState<boolean>(true);
 
-  // seed
-  const [seed, setSeed] = useState<number>(Date.now());
+  // result
+  const [password, setPassword] = useState<string>("");
 
-  const generatedPassword: string = useMemo<string>(() => {
+  function generatePassword(): string {
     let characters: string[] = [];
     if (withLowerCase) {
       characters = characters.concat(lowerCaseAlphabet);
@@ -106,19 +106,11 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
     }
 
     return pwd;
-    // force re-generate password through seed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    passwordLength,
-    withLowerCase,
-    withNumbers,
-    withSymbols,
-    withUpperCase,
-    seed,
-  ]);
+  }
 
   function handleScaleUpdate(_e: Event, value: number | number[]): void {
     setPasswordLength(value as number);
+    setPassword(generatePassword());
   }
 
   function handleTextFieldUpdate(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -127,36 +119,41 @@ export default function usePasswordGenerator(): PasswordGeneratorHookOutput {
       setPasswordLength(0);
     } else {
       setPasswordLength(Math.min(value, maxPasswordLength));
+      setPassword(generatePassword());
     }
   }
 
   function handleLowerCaseUpdate(): void {
     setWithLowerCase(!withLowerCase);
+    setPassword(generatePassword());
   }
 
   function handleUpperCaseUpdate(): void {
     setWithUpperCase(!withUpperCase);
+    setPassword(generatePassword());
   }
 
   function handleNumbersUpdate(): void {
     setWithNumbers(!withNumbers);
+    setPassword(generatePassword());
   }
 
   function handleSymbolsUpdate(): void {
     setWithSymbols(!withSymbols);
+    setPassword(generatePassword());
   }
 
   function regeneratePassword(): void {
-    setSeed(Date.now());
+    setPassword(generatePassword());
   }
 
   return {
     passwordLength,
-    generatedPassword,
     withLowerCase,
     withUpperCase,
     withNumbers,
     withSymbols,
+    password,
     handleScaleUpdate,
     handleTextFieldUpdate,
     handleLowerCaseUpdate,

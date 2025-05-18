@@ -16,11 +16,11 @@ import usePasswordGenerator, { maxPasswordLength } from "./hooks";
 export default function PasswordGenerator(): JSX.Element {
   const {
     passwordLength,
-    generatedPassword,
     withLowerCase,
     withUpperCase,
     withNumbers,
     withSymbols,
+    password,
     handleScaleUpdate,
     handleTextFieldUpdate,
     handleLowerCaseUpdate,
@@ -143,7 +143,7 @@ export default function PasswordGenerator(): JSX.Element {
           marginX: "auto",
         }}
       >
-        <Collapse in={generatedPassword !== ""}>
+        <Collapse in={password !== ""}>
           <Paper
             sx={{
               paddingY: 2,
@@ -157,8 +157,8 @@ export default function PasswordGenerator(): JSX.Element {
               Generated Password
             </Typography>
             <Stack direction="row" marginX="auto" maxWidth="90%">
-              <TextField disabled value={generatedPassword} fullWidth />
-              <CopyToClipboardButton input={generatedPassword} />
+              <TextField disabled value={password} fullWidth />
+              <CopyToClipboardButton input={password} />
             </Stack>
           </Paper>
         </Collapse>
